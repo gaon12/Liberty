@@ -22,6 +22,34 @@ class LibertyTemplate extends BaseTemplate
 			<div class="nav-wrapper navbar-fixed-top">
 				<?php $this->navMenu(); ?>
 			</div>
+			<!--Progress Bar-->
+			<div class="progress-bar"></div>
+			<style>
+					.progress-bar {
+      background-color: #2196f3;
+      bottom: 0;
+      position: fixed;
+      height: 7px;
+      left: 0;
+    }
+			</style>
+			<script src="/w/skins/Liberty/js/scrollProgress.js"></script>
+			<script>
+		window.addEventListener('load', function() {
+
+      setTimeout(function() {
+        var progressBar = document.querySelector('.progress-bar');
+
+        function onProgress(x, y) {
+          console.log(x, y)
+          progressBar.style.width = y * 100 + '%';
+        }
+
+        self.progressObserver = new ScrollProgress(onProgress);
+      }, 100)
+    });
+	</script>
+			
 		</header>
 		<section>
 			<div class="content-wrapper">
