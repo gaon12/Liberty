@@ -6,6 +6,11 @@ class LibertyHooks extends Hooks {
 	 * @param Preferences &$preferences preferences
 	 */
 	public static function onGetPreferences( $user, &$preferences ) {
+		global $wgLibertyAdSetting, $wgLibertyAdGroup;
+		$service = MediaWiki\MediaWikiServices::getInstance();
+		$usergroupemanager = $service->getUserGroupManager();
+		$userGroups = $usergroupemanager->getUserGroups( $user );
+
 		$preferences['liberty-layout-width'] = [
 			'type' => 'select',
 			'label-message' => 'liberty-pref-layout-width',
@@ -40,6 +45,15 @@ class LibertyHooks extends Hooks {
 			'label-message' => 'liberty-pref-layout-controlbar',
 			'section' => 'liberty/layout',
 		];
+
+		if ( isset( $wgLibertyAdSetting['below'] ) && $wgLibertyAdSetting['below']
+		&& isset( $wgLibertyAdGroup ) && $wgLibertyAdGroup == 'differ' && in_array( 'sysop', $userGroups ) ) {
+			$preferences['liberty-layout-morearticle'] = [
+				'type' => 'toggle',
+				'label-message' => 'liberty-pref-layout-morearticle',
+				'section' => 'liberty/layout',
+			];
+		}
 
 		$preferences['liberty-color-main'] = [
 			'type' => 'text',
