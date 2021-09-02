@@ -19,9 +19,8 @@ class LibertyTemplate extends BaseTemplate {
 		<header>
 			<div class="nav-wrapper navbar-fixed-top">
 				<?php $this->navMenu(); ?>
-			</div>
-			
-			<!--Progress Bar-->
+					
+					<!--Progress Bar-->
 			<div class="progress-bar"></div>
 			<style>
 					.progress-bar {
@@ -48,6 +47,8 @@ class LibertyTemplate extends BaseTemplate {
       }, 100)
     });
 	</script>
+					
+			</div>
 		</header>
 		<section>
 			<div class="content-wrapper">
