@@ -6,6 +6,10 @@
   outline: none;
 }
 
+div.mascot_wrap {
+  visivility: none;
+}
+
 input:hover,
 button:hover,
 select:hover {
