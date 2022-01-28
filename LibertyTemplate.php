@@ -23,6 +23,10 @@ class LibertyTemplate extends BaseTemplate {
 			<div class="nav-wrapper navbar-fixed-top">
 				<?php $this->navMenu(); ?>
 			</div>
+			<!--Progress Bar-->
+			<link rel="stylesheet" href="https://common.gaon.xyz/css/progressbar/progressbar.css">
+			<script src="https://common.gaon.xyz/js/progressbar/scrollProgress.js"></script>
+			<script src="https://common.gaon.xyz/js/progressbar/Progress_persent.js"></script>
 		</header>
 		<section>
 			<div class="content-wrapper">
