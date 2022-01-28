@@ -6,6 +6,10 @@
   outline: none;
 }
 
+.mascot_wrap {
+  display: none !important;
+}
+
 input:hover,
 button:hover,
 select:hover {
