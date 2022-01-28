@@ -1,17 +1,15 @@
-$( function () {
-	'use strict';
-	var width, rightAds;
-	width = $( window ).width();
-	if ( width < 1024 ) {
-		rightAds = $( '.right-ads' ).html();
-		$( '.bottom-ads' ).html( rightAds );
-		$( '.right-ads' ).remove();
-		$( '.adsbygoogle' ).each( function () {
-			( window.adsbygoogle = window.adsbygoogle || [] ).push( {} );
-		} );
-	} else {
-		$( '.adsbygoogle' ).each( function () {
-			( window.adsbygoogle = window.adsbygoogle || [] ).push( {} );
-		} );
-	}
-} );
+$(function () {
+    "use strict";
+    var width, rightAds;
+    if ($(".mobile-ads") !== undefined) {
+        width = $(window).width();
+        if (width < 1024) {
+            rightAds = $(".right-ads").html();
+            $(".mobile-ads").html(rightAds);
+            $(".right-ads").remove();
+        }
+    }
+    $(".adsbygoogle").each(function () {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+    });
+});

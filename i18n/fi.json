@@ -4,6 +4,7 @@
 			"01miki10",
 			"Actuallyisjoha",
 			"Jack Phoenix",
+			"MITO",
 			"Nike"
 		]
 	},
@@ -14,16 +15,6 @@
 	"liberty-dark-light": "Älä huomioi ja aktivoi vaalea tila",
 	"liberty-feed-new": "[Uusi]",
 	"liberty-font-name-default": "oletus",
-	"liberty-font-name-noto-sans-kr": "Noto Sans KR",
-	"liberty-font-name-noto-serif-kr": "Noto Serif KR",
-	"liberty-font-name-spoqa-han-sans": "Spoqa Han Sans",
-	"liberty-font-name-nanum-gothic": "Nanum Gothic",
-	"liberty-font-name-nanum-myeongjo": "Nanum Myeongjo",
-	"liberty-font-name-dokdo": "Dokdo",
-	"liberty-font-name-gaegu": "Gaegu",
-	"liberty-font-name-hankc": "Hankc",
-	"liberty-font-name-youth": "Youth",
-	"liberty-font-name-malgun-gothic": "Malgun Gothic",
 	"liberty-forgot-pw": "Unohditko salasanasi?",
 	"liberty-layout-select-1000": "1000px",
 	"liberty-layout-select-1100": "1100px",
@@ -48,6 +39,7 @@
 	"prefs-liberty": "Vapaus-ulkoasu",
 	"prefs-color": "Väriasetus",
 	"prefs-layout": "Asetteluasetukset",
+	"prefs-ads": "Mainosasetukset",
 	"liberty-pref-layout-sidebar": "Poista oikea sivupalkki",
 	"liberty-pref-layout-width": "Staattinen leveys",
 	"liberty-pref-color-main": "Pääväri",
@@ -59,5 +51,11 @@
 	"liberty-pref-fonts-helplabel": "Ohje",
 	"liberty-pref-fonts-help": "Fontti ladataan Googlen palvelimilta, poikkeuksena Malgun Gothic.",
 	"liberty-pref-dark": "Huomioidaanko järjestelmän tumman tilan asetus?",
-	"liberty-pref-dark-help": "Valitse, noudatetaanko järjestelmän asetuksia tumman tilan aktivointiin."
+	"liberty-pref-dark-help": "Valitse, noudatetaanko järjestelmän asetuksia tumman tilan aktivointiin.",
+	"liberty-pref-ads-header": "Poista yläpalkin mainokset.",
+	"liberty-pref-ads-bottom": "Poista mainokset alapalkista.",
+	"liberty-pref-ads-belowarticle": "Poista mainokset alla olevasta artikkelista.",
+	"right-blockads-header": "Voi poistaa mainokset Liberty-ulkoasun yläpalkista.",
+	"right-blockads-belowarticle": "Voi poistaa mainokset Liberty-ulkoasun artikkelista.",
+	"right-blockads-bottom": "Voi poistaa mainokset Liberty-ulkoasun alapalkista."
 }

@@ -1,58 +1,32 @@
 <?php // @codingStandardsIgnoreLine
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionRecord;
 
 class LibertyTemplate extends BaseTemplate {
 	/**
 	 * execute() Method
 	 */
 	public function execute() {
-		global $wgLibertyAdSetting, $wgLibertyUserSidebarSettings;
+		global $wgLibertyAdSetting, $wgLibertyMobileReplaceAd;
 
 		$skin = $this->getSkin();
+		$user = $skin->getUser();
 		$request = $skin->getRequest();
 		$action = $request->getVal( 'action', 'view' );
 		$title = $skin->getTitle();
+		$LibertyUserSidebarSettings = $user->getOption( 'liberty-layout-sidebar' );
 
 		$this->html( 'headelement' );
 ?>
 		<header>
 			<div class="nav-wrapper navbar-fixed-top">
 				<?php $this->navMenu(); ?>
-					
-					<!--Progress Bar-->
-			<div class="progress-bar"></div>
-			<style>
-					.progress-bar {
-      background-color: #2196f3;
-      bottom: 0;
-      position: fixed;
-      height: 7px;
-      left: 0;
-    }
-			</style>
-			<script src="/w/skins/Liberty/js/scrollProgress.js"></script>
-			<script>
-		window.addEventListener('load', function() {
-
-      setTimeout(function() {
-        var progressBar = document.querySelector('.progress-bar');
-
-        function onProgress(x, y) {
-          console.log(x, y)
-          progressBar.style.width = y * 100 + '%';
-        }
-
-        self.progressObserver = new ScrollProgress(onProgress);
-      }, 100)
-    });
-	</script>
-					
 			</div>
 		</header>
 		<section>
 			<div class="content-wrapper">
-				<?php if ( $wgLibertyUserSidebarSettings == false ) { ?>
+				<?php if ( $LibertyUserSidebarSettings == false ) { ?>
 					<aside>
 						<div class="liberty-sidebar">
 							<div class="live-recent-wrapper">
@@ -115,10 +89,13 @@ class LibertyTemplate extends BaseTemplate {
 								$this->html( 'dataAfterContent' );
 							}
 							?>
-						<?php if ( isset( $wgLibertyAdSetting['footer'] ) && $wgLibertyAdSetting['footer'] ) {
-							$this->buildAd( 'footer' );
-						} ?>
-							<div class="bottom-ads"></div>
+						<?php if ( isset( $wgLibertyAdSetting['bottom'] ) && $wgLibertyAdSetting['bottom'] ) {
+							$this->buildAd( 'bottom' );
+						}
+						if ( isset( $wgLibertyMobileReplaceAd ) && $wgLibertyMobileReplaceAd &&
+						isset( $wgLibertyAdSetting[ 'right' ] ) && $wgLibertyAdSetting[ 'right' ] ) { ?>
+							<div class="mobile-ads"></div>
+						<?php } ?>
 							<?php $this->footer(); ?>
 						</div>
 					</footer>
@@ -227,7 +204,7 @@ class LibertyTemplate extends BaseTemplate {
 		<div class="navbar-login">
 			<?php
 			// If the user is logged in...
-			if ( $user->isLoggedIn() ) {
+			if ( $user->isRegistered() ) {
 				$personalTools = $this->getPersonalTools();
 				// ...and Gravatar is enabled in site config...
 				if ( $wgLibertyUseGravatar ) {
@@ -362,7 +339,7 @@ class LibertyTemplate extends BaseTemplate {
 
 		// Probably no point in rendering a login window for the users who are
 		// already logged in?
-		if ( $skin->getUser()->isLoggedIn() ) {
+		if ( $skin->getUser()->isRegistered() ) {
 			return;
 		}
 
@@ -488,9 +465,10 @@ class LibertyTemplate extends BaseTemplate {
 	protected function contentsToolbox() {
 		$skin = $this->getSkin();
 		$user = $skin->getUser();
+		$watchlistManager = MediaWikiServices::getInstance()->getWatchlistManager();
 		$title = $skin->getTitle();
 		$revid = $skin->getRequest()->getText( 'oldid' );
-		$watched = $user->isWatched( $skin->getRelevantTitle() ) ? 'unwatch' : 'watch';
+		$watched = $watchlistManager->isWatchedIgnoringRights( $user, $skin->getRelevantTitle() ) ? 'unwatch' : 'watch';
 		$editable = isset( $this->data['content_navigation']['views']['edit'] );
 		$action = $skin->getRequest()->getVal( 'action', 'view' );
 		$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
@@ -499,32 +477,32 @@ class LibertyTemplate extends BaseTemplate {
 		?>
 			<div class="content-tools">
 				<div class="btn-group" role="group" aria-label="content-tools">
-					<?php
-					if ( $action != 'edit' ) {
-						$editIcon = $editable ? '<i class="fa fa-edit"></i> ' : '<i class="fa fa-lock"></i> ';
-						echo Linker::linkKnown(
-							$title,
-							$editIcon . $skin->msg( 'edit' )->plain(),
-							[
-								'class' => 'btn btn-secondary tools-btn',
-								'id' => 'ca-edit',
-								'title' => Linker::titleAttrib( 'ca-edit', 'withaccess' ),
-								'accesskey' => Linker::accesskey( 'ca-edit' )
-							],
-							$revid ? [ 'action' => 'edit', 'oldid' => $revid ] : [ 'action' => 'edit' ]
-						);
-					}
-					if ( $action == 'edit' || $action == 'history' ) {
-						echo Linker::linkKnown(
-							$title,
-							$titlename = $skin->msg( 'article' )->plain(),
-							[
-								'class' => 'btn btn-secondary tools-btn',
-								'title' => Linker::titleAttrib( 'ca-nstab-main', 'withaccess' ),
-								'accesskey' => Linker::accesskey( 'ca-nstab-main' )
-							],
-						);
-					}
+				<?php
+				if ( $action != 'edit' ) {
+					$editIcon = $editable ? '<i class="fa fa-edit"></i> ' : '<i class="fa fa-lock"></i> ';
+					echo Linker::linkKnown(
+						$title,
+						$editIcon . $skin->msg( 'edit' )->plain(),
+						[
+							'class' => 'btn btn-secondary tools-btn',
+							'id' => 'ca-edit',
+							'title' => Linker::titleAttrib( 'ca-edit', 'withaccess' ),
+							'accesskey' => Linker::accesskey( 'ca-edit' )
+						],
+						$revid ? [ 'action' => 'edit', 'oldid' => $revid ] : [ 'action' => 'edit' ]
+					);
+				}
+				if ( $action == 'edit' || $action == 'history' ) {
+					echo Linker::linkKnown(
+						$title,
+						$titlename = $skin->msg( 'article' )->plain(),
+						[
+							'class' => 'btn btn-secondary tools-btn',
+							'title' => Linker::titleAttrib( 'ca-nstab-main', 'withaccess' ),
+							'accesskey' => Linker::accesskey( 'ca-nstab-main' )
+						]
+					);
+				}
 					if ( $companionTitle && $action != 'edit' ) {
 						if ( $title->isTalkPage() && $action != 'history' ) {
 							$titlename = $skin->msg( 'nstab-main' )->plain();
@@ -688,7 +666,7 @@ class LibertyTemplate extends BaseTemplate {
 			</ul>
 		<?php
 		}
-		$footericons = $this->getFooterIcons( 'icononly' );
+		$footericons = $this->get( 'footericons' );
 		if ( count( $footericons ) ) {
 		?>
 			<ul class="footer-icons">
@@ -709,8 +687,8 @@ class LibertyTemplate extends BaseTemplate {
 					<a href="//librewiki.net">
 						<?php // @codingStandardsIgnoreLine 
 						?>
-						<img src="<?php echo $this->getSkin()->getSkinStylePath('img/designedbylibre.png'); //phpcs:ignore 
-									?>" style="height:31px" alt="Designed by Librewiki">
+						<img src="<?php echo $this->getSkin()->getConfig()->get( 'StylePath' ); //phpcs:ignore 
+									?>/Liberty/img/designedbylibre.png" style="height:31px" alt="Designed by Librewiki">
 					</a>
 				</li>
 			</ul>
@@ -743,8 +721,10 @@ class LibertyTemplate extends BaseTemplate {
 	 * @param array $contents Menu data that will made by parseNavbar function.
 	 */
 	protected function renderPortal( $contents ) {
-		$userGroup = $this->getSkin()->getUser()->getGroups();
-		$userRights = $this->getSkin()->getUser()->getRights();
+		$skin = $this->getSkin();
+		$user = $skin->getUser();
+		$userGroup = $user->getGroups();
+		$userRights = MediaWikiServices::getInstance()->getPermissionManager()->getUserPermissions( $user );
 
 		foreach ( $contents as $content ) {
 			if ( !$content ) {
@@ -895,13 +875,13 @@ class LibertyTemplate extends BaseTemplate {
 		$userLang = $this->getSkin()->getLanguage()->mCode;
 		$globalData = ContentHandler::getContentText( WikiPage::factory(
 			Title::newFromText( 'Liberty-Navbar', NS_MEDIAWIKI )
-		)->getContent( Revision::RAW ) );
+		)->getContent( RevisionRecord::RAW ) );
 		$globalLangData = ContentHandler::getContentText( WikiPage::factory(
 			Title::newFromText( 'Liberty-Navbar/' . $userLang, NS_MEDIAWIKI )
-		)->getContent( Revision::RAW ) );
+		)->getContent( RevisionRecord::RAW ) );
 		$userData = ContentHandler::getContentText( WikiPage::factory(
 			Title::newFromText( $userName . '/Liberty-Navbar', NS_USER )
-		)->getContent( Revision::RAW ) );
+		)->getContent( RevisionRecord::RAW ) );
 		if ( !empty( $userData ) ) {
 			$data = $userData;
 		} elseif ( !empty( $globalLangData ) ) {
