@@ -5,10 +5,13 @@
 [리브레 위키](https://librewiki.net)의 기본 스킨입니다. 위키 엔진 '리버티'의 기본 레이아웃입니다.
 
 ## 개발
-
 원본 소스는 [GitLab.com](https://gitlab.com/librewiki/Liberty-MW-Skin)에 존재하며, 버그 리포팅은 [bbs.librewiki.net](https://bbs.librewiki.net/)에서, 패치는 GitLab.com 에서만 받고 있습니다. 이 외의 호스팅에서 발견되는 코드는 모두 미러링이며, 코드의 최신성을 보증하지 않습니다.
 
 보안 취약점은 이메일 (dev(골뱅이!)librewiki.net) 로 보고해 주세요.
+
+본 저장소는 [가온 위키](https://www.gaonwiki.com)에서 사용할 목적으로 만든 개조판입니다. 물론 다른 위키에서도 사용하실 수 있습니다. 하드코딩된 부분이 있을 수 있기 때문에, 오류가 발생한다면 이슈 트래커로 알려주시거나, 하드코딩된 부분을 수정해 주시기 바랍니다.
+
+현재 1.37 버전만 사용 가능합니다. 만약 1.35 버전에서 사용하기를 원하신다면, [27e3989](https://github.com/gaon12/Liberty/commit/27e3989ba00399ffa7acbc057d308e0de5557a85) 커밋을 사용해 주시기 바랍니다. 가온위키도 해당 커밋을 사용중입니다.
 
 ## 설치
 * 미디어위키 Skins 폴더에 압축을 풀거나 git clone을 수행하세요. 압축해제된 폴더의 이름은 `Liberty` 이어야 합니다.
