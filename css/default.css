@@ -763,7 +763,7 @@ strike {
   border-right: 1px solid #e1e8ed;
   background-color: #fff;
   padding: 1rem;
-  overflow: hidden;
+  overflow: visible;
   line-height: 1.6rem;
 }
 /* Content End */
