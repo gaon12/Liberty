@@ -2,13 +2,26 @@
 
 [English](.github/README.en.md)
 
-[리브레 위키](https://librewiki.net)의 기본 스킨입니다. 위키 엔진 '리버티'의 기본 레이아웃입니다.
+[리브레 위키](https://librewiki.net)의 기본 스킨입니다. 위키 엔진 '리버티'의 기본 레이아웃입니다. 미디어위키, XE의 스킨의 라이선스는 GPL3.0이며, 리버티 엔진의 라이선스는 MIT입니다.
 
 ## 개발
+본 저장소는 리브레 위키의 [Liberty 스킨 저장소](https://github.com/librewiki/liberty-skin)를 포크하여 개발하고 있습니다. 따라서 버그 리포팅은 [bbs.librewiki.net](https://bbs.librewiki.net/)에서 해주시길 바랍니다. 보안 취약점은 이메일 (dev(골뱅이!)librewiki.net) 로 보고해 주세요.
 
-원본 소스는 [GitHub.com](https://github.com/librewiki/liberty-skin)에 존재하며, 버그 리포팅은 [bbs.librewiki.net](https://bbs.librewiki.net/)에서, 패치는 GitHub.com 에서만 받고 있습니다. 이 외의 호스팅에서 발견되는 코드는 모두 미러링이며, 코드의 최신성을 보증하지 않습니다.
+본 저장소는 원본 저장소의 내용을 비정기적으로 가져와 개발하기 때문에, 최신 코드가 아닐 수 있습니다. 참고하시기 바랍니다.
 
-보안 취약점은 이메일 (dev(골뱅이!)librewiki.net) 로 보고해 주세요.
+본 저장소는 [가온 위키](https://www.gaonwiki.com)에서 사용할 목적으로 만든 개조판입니다. 물론 다른 위키에서도 사용하실 수 있습니다. 하드코딩된 부분이 있을 수 있기 때문에, 오류가 발생한다면 이슈 트래커로 알려주시거나, 하드코딩된 부분을 수정해 주시기 바랍니다.
+
+## 원본과 다른 점
+1. 얼만큼 스크롤이 되었는지 알려주는 인디케이터가 하단에 표시됩니다. [simple-scroll-progress](https://github.com/merlinwarage/simple-scroll-progress)(GPL 3)을 사용하였습니다. 이제 메인 색상(`$wgLibertyMainColor`)에 따라 인디케이터의 색상이 바뀝니다.
+
+`simple-scroll-progress`의 js 파일은 로컬에서 불러오는 것이 아닌 [가온 공통 저장소](https://common.gaon.xyz)에서 불러옵니다.
+
+2. 개발자 도구에서 오류로 표시되던 share-api-polyfill.js.map 파일 404 오류를 해결했습니다.
+3. 리버티 스킨에서 이젠 `$wgLogo`를 통해 로고를 설정할 수 있게 되었지만, 원래 로고 크기와 일치하지 않으면 이미지가 짤리는 문제가 있었습니다. 이를 해결했습니다.
+4. 특히 모바일에서 가로로 긴 표가 짤리는데도 불구하고 스크롤이 되지 않는 문제를 해결했습니다.
+
+## 원본 저장소
+원본 저장소의 최신 코드를 가져오는데 덮어씌우면 기여자 목록이 반영되지 않기에, `Merge`로 가져올 예정입니다.
 
 ## 설치
 * 미디어위키 Skins 폴더에 압축을 풀거나 git clone을 수행하세요. 압축해제된 폴더의 이름은 `Liberty` 이어야 합니다.

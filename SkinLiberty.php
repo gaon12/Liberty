@@ -151,6 +151,7 @@ class SkinLiberty extends SkinTemplate {
 			$out->addInlineStyle(
 				".Liberty .nav-wrapper .navbar .navbar-brand {
 					background: transparent url($wgLibertyNavBarLogoImage) no-repeat scroll left center/auto 1.9rem;
+					background-size: contain;
 				}
 				@media screen and (max-width: 397px){
 					.Liberty .nav-wrapper .navbar .navbar-brand {
@@ -309,7 +310,7 @@ class SkinLiberty extends SkinTemplate {
 		$out->addHeadItem(
 			'share-api-polyfill',
 			// @codingStandardsIgnoreLine
-			'<script async src="https://unpkg.com/share-api-polyfill/dist/share-min.js"></script>'
+			'<script async src="https://unpkg.com/share-api-polyfill@1.1.1/dist/share-min.js"></script>'
 		);
 		$out->addModuleStyles( [ 'skins.liberty.styles' ] );
 	}

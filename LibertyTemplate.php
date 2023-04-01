@@ -8,7 +8,7 @@ class LibertyTemplate extends BaseTemplate {
 	 * execute() Method
 	 */
 	public function execute() {
-		global $wgLibertyAdSetting, $wgLibertyMobileReplaceAd;
+		global $wgLibertyAdSetting, $wgLibertyMobileReplaceAd, $wgLibertyMainColor;
 
 		$skin = $this->getSkin();
 		$user = $skin->getUser();
@@ -19,6 +19,14 @@ class LibertyTemplate extends BaseTemplate {
 		$LibertyUserSidebarSettings = MediaWikiServices::getInstance()->getUserOptionsLookup()->getOption( $user, 'liberty-layout-sidebar' );
 		// @codingStandardsIgnoreEnd
 ?>
+
+		<!--Progress Bar-->
+		<script src="https://common.gaon.xyz/js/progressbar/scroll-progress-min.js" foregroundColor="#00BCD4" backgroundColor="transparent" barHeight="10"></script>
+		<style>
+			.progress-bar {
+				background-color: <?php echo $wgLibertyMainColor; ?>!important;
+			}
+		</style>
 		<header>
 			<div class="nav-wrapper navbar-fixed-top">
 				<?php $this->navMenu(); ?>
