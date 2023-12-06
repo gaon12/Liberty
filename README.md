@@ -12,9 +12,11 @@
 본 저장소는 [가온 위키](https://www.gaonwiki.com)에서 사용할 목적으로 만든 개조판입니다. 물론 다른 위키에서도 사용하실 수 있습니다. 하드코딩된 부분이 있을 수 있기 때문에, 오류가 발생한다면 이슈 트래커로 알려주시거나, 하드코딩된 부분을 수정해 주시기 바랍니다.
 
 ## 원본과 다른 점
-1. 얼만큼 스크롤이 되었는지 알려주는 인디케이터가 하단에 표시됩니다. [simple-scroll-progress](https://github.com/merlinwarage/simple-scroll-progress)(GPL 3)을 사용하였습니다. 이제 메인 색상(`$wgLibertyMainColor`)에 따라 인디케이터의 색상이 바뀝니다.
+1. ~~얼만큼 스크롤이 되었는지 알려주는 인디케이터가 하단에 표시됩니다. [simple-scroll-progress](https://github.com/merlinwarage/simple-scroll-progress)(GPL 3)을 사용하였습니다. 이제 메인 색상(`$wgLibertyMainColor`)에 따라 인디케이터의 색상이 바뀝니다.~~
 
-`simple-scroll-progress`의 js 파일은 로컬에서 불러오는 것이 아닌 [가온 공통 저장소](https://common.gaon.xyz)에서 불러옵니다.
+~~`simple-scroll-progress`의 js 파일은 로컬에서 불러오는 것이 아닌 [가온 공통 저장소](https://common.gaon.xyz)에서 불러옵니다.~~
+
+별도의 확장기능으로 구현하여 제거합니다. 확장기능은 별도로 공개하도록 하겠습니다.
 
 2. 개발자 도구에서 오류로 표시되던 share-api-polyfill.js.map 파일 404 오류를 해결했습니다.
 3. 리버티 스킨에서 이젠 `$wgLogo`를 통해 로고를 설정할 수 있게 되었지만, 원래 로고 크기와 일치하지 않으면 이미지가 짤리는 문제가 있었습니다. 이를 해결했습니다.
@@ -64,7 +66,7 @@ LocalSettings.php 파일에 아래와 같이 작성해주세요.
 * 단축키를 설정할 때는 미디어위키에서 제공하는 기본 단축키와 겹치지 않도록 주의해 주세요.
 * 커스텀 클래스는 `,`로 구분하여 작성해 주세요. (예시: `classA, classB`를 적어서 `classA`와 `classB` 클래스 추가)
 
-예시는 [리브레 위키](https://librewiki.net/wiki/MediaWiki:Liberty-Navbar)에서 확인할 수 있습니다.
+예시는 [가온 위키](https://www.gaonwiki.com/w/MediaWiki:Liberty-Navbar)나 [리브레 위키](https://librewiki.net/wiki/MediaWiki:Liberty-Navbar)에서 확인할 수 있습니다.
 
 ## 권한
 권한별 광고 차등화를 구현하기 위해 아래와 같이 네 가지 권한이 추가됩니다. 만약 $wgLibertyAdGroup이 'differ'로 설정되어 있다면 아래 권한에 따라 환경설정에 광고 커스터마이징 옵션이 나타납니다.
