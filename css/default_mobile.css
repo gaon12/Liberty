@@ -175,7 +175,7 @@
 	.Liberty .nav-wrapper .navbar .navbar-brand {
 		width: 5rem;
 		background: transparent url( ../img/logo.png ) no-repeat scroll left center/contain 1.5rem;
-		background-size: contain;
+		background-size: contain!important;
 		margin-right: 10px;
 	}
 
