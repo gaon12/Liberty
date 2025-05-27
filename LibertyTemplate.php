@@ -1,6 +1,7 @@
 <?php // @codingStandardsIgnoreLine
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Permissions\RestrictionStore;
 use MediaWiki\Revision\RevisionRecord;
 
 class LibertyTemplate extends BaseTemplate {
@@ -622,7 +623,7 @@ class LibertyTemplate extends BaseTemplate {
 							<div class="dropdown-divider"></div>
 							<?php
 							// different labels depending on whether the page is or isn't protected
-							$protectionMsg = $title->isProtected() ? 'unprotect' : 'protect';
+							$protectionMsg = $this->isProtectedTitle( $title ) ? 'unprotect' : 'protect';
 							echo $linkRenderer->makeKnownLink(
 								$title,
 								$skin->msg( $protectionMsg )->plain(),
@@ -726,8 +727,10 @@ class LibertyTemplate extends BaseTemplate {
 	protected function renderPortal( $contents ) {
 		$skin = $this->getSkin();
 		$user = $skin->getUser();
-		$userGroup = $user->getGroups();
-		$userRights = MediaWikiServices::getInstance()->getPermissionManager()->getUserPermissions( $user );
+		$services = MediaWikiServices::getInstance();
+		$userGroupManager = $services->getUserGroupManager();
+		$userGroup = $userGroupManager->getUserGroups( $user );
+		$userRights = $services->getPermissionManager()->getUserPermissions( $user );
 
 		foreach ( $contents as $content ) {
 			if ( !$content ) {
@@ -880,15 +883,15 @@ class LibertyTemplate extends BaseTemplate {
 		$skin = $this->getSkin();
 		$userName = $skin->getUser()->getName();
 		$userLang = $skin->getLanguage()->mCode;
-		$globalData = ContentHandler::getContentText( WikiPage::factory(
+		$globalData = $this->getContentText( $this->getContentOfTitle(
 			Title::newFromText( 'Liberty-Navbar', NS_MEDIAWIKI )
-		)->getContent( RevisionRecord::RAW ) );
-		$globalLangData = ContentHandler::getContentText( WikiPage::factory(
+		) );
+		$globalLangData = $this->getContentText( $this->getContentOfTitle(
 			Title::newFromText( 'Liberty-Navbar/' . $userLang, NS_MEDIAWIKI )
-		)->getContent( RevisionRecord::RAW ) );
-		$userData = ContentHandler::getContentText( WikiPage::factory(
+		) );
+		$userData = $this->getContentText( $this->getContentOfTitle(
 			Title::newFromText( $userName . '/Liberty-Navbar', NS_USER )
-		)->getContent( RevisionRecord::RAW ) );
+		) );
 		if ( !empty( $userData ) ) {
 			$data = $userData;
 		} elseif ( !empty( $globalLangData ) ) {
@@ -921,7 +924,8 @@ class LibertyTemplate extends BaseTemplate {
 				foreach ( $split as $key => $value ) {
 					$valueArr = explode( '=', trim( $value ) );
 					if ( isset( $valueArr[1] ) ) {
-						$data[$valueArr[0]] = $valueArr[1];
+						$newValue = implode( '=', array_slice( $valueArr, 1 ) );
+						$data[$valueArr[0]] = $newValue;
 					} else {
 						$data[$types[$key]] = trim( $value );
 					}
@@ -943,7 +947,9 @@ class LibertyTemplate extends BaseTemplate {
 				if ( isset( $data['display'] ) ) {
 					$textObj = $skin->msg( $data['display'] );
 					if ( $textObj->isDisabled() ) {
-						$text = htmlentities( $data['display'], ENT_QUOTES, 'UTF-8' );
+						if ( array_key_exists( 'link', $data ) ) {
+							$href = $data['link'];
+						}
 					} else {
 						$text = $textObj->text();
 					}
@@ -952,7 +958,7 @@ class LibertyTemplate extends BaseTemplate {
 				}
 
 				// If icon and text both empty
-				if ( empty( $icon ) && empty( $text ) ) {
+				if ( ( !isset( $icon ) && !isset( $text ) ) || ( empty( $icon ) && empty( $text ) ) ) {
 					continue;
 				}
 
@@ -965,7 +971,9 @@ class LibertyTemplate extends BaseTemplate {
 						$title = $titleObj->text();
 					}
 				} else {
-					$title = $text;
+					if ( isset( $text ) ) {
+						$title = $text;
+					}
 				}
 
 				// Link href
@@ -997,17 +1005,18 @@ class LibertyTemplate extends BaseTemplate {
 				} else {
 					$classes = [];
 				}
-
+				// @codingStandardsIgnoreStart
 				$item = [
 					'access' => $access,
 					'classes' => $classes,
 					'href' => $href,
-					'icon' => $icon,
-					'text' => $text,
+					'icon' => @$icon,
+					'text' => @$text,
 					'title' => $title,
 					'group' => $group,
 					'right' => $right
 				];
+				// @codingStandardsIgnoreEnd
 				$level2Children = &$item['children'];
 				$headings[] = $item;
 				continue;
@@ -1236,4 +1245,45 @@ class LibertyTemplate extends BaseTemplate {
 		</div>
 <?php
 	}
+
+	/**
+	 * Helper function for parseNavbar() to not trigger deprecation warnings on MW 1.37+ and to continue
+	 * functioning on MW 1.43+.
+	 *
+	 * @param Content|null $content
+	 * @return string|null Textual form of the content, if available.
+	 */
+	private function getContentText( ?Content $content = null ) {
+		if ( $content === null ) {
+			return '';
+		}
+
+		if ( $content instanceof TextContent ) {
+			return $content->getText();
+		}
+
+		return null;
+	}
+
+	private function getContentOfTitle( Title $title ): ?Content {
+		$page = null;
+
+		if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
+			$wikiPageFactory = MediaWikiServices::getInstance()->getWikiPageFactory();
+			$page = $wikiPageFactory->newFromTitle( $title );
+		} else {
+			$page = WikiPage::factory( $title );
+		}
+
+		return $page->getContent( RevisionRecord::RAW );
+	}
+
+	private function isProtectedTitle( Title $title ): bool {
+		if ( method_exists( RestrictionStore::class, 'isProtected' ) ) {
+			return MediaWikiServices::getInstance()->getRestrictionStore()->isProtected( $title );
+		} else {
+			return $title->isProtected();
+		}
+	}
 }
+
