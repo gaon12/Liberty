@@ -12,11 +12,11 @@
 본 저장소는 [가온 위키](https://www.gaonwiki.com)에서 사용할 목적으로 만든 개조판입니다. 물론 다른 위키에서도 사용하실 수 있습니다. 하드코딩된 부분이 있을 수 있기 때문에, 오류가 발생한다면 이슈 트래커로 알려주시거나, 하드코딩된 부분을 수정해 주시기 바랍니다.
 
 ## 원본과 다른 점
-1. ~~얼만큼 스크롤이 되었는지 알려주는 인디케이터가 하단에 표시됩니다. [simple-scroll-progress](https://github.com/merlinwarage/simple-scroll-progress)(GPL 3)을 사용하였습니다. 이제 메인 색상(`$wgLibertyMainColor`)에 따라 인디케이터의 색상이 바뀝니다.~~
+1. 미디어위키:Liberty-Navbar의 형식과 맞지 않게 Navbar가 출력되는 문제를 해결했습니다. 1.43 기준으로
 
-~~`simple-scroll-progress`의 js 파일은 로컬에서 불러오는 것이 아닌 [가온 공통 저장소](https://common.gaon.xyz)에서 불러옵니다.~~
+![navbar error screenshot image](README/navbar_error.png)
 
-별도의 확장기능으로 구현하여 제거합니다. 확장기능은 별도로 공개하도록 하겠습니다.
+각 드롭다운 메뉴의 마지막 항목이 다음 드롭다운 타이틀로 적용되는 문제가 있습니다. 이 문제를 해결했습니다.
 
 2. 개발자 도구에서 오류로 표시되던 share-api-polyfill.js.map 파일 404 오류를 해결했습니다.
 3. 리버티 스킨에서 이젠 `$wgLogo`를 통해 로고를 설정할 수 있게 되었지만, 원래 로고 크기와 일치하지 않으면 이미지가 짤리는 문제가 있었습니다. 이를 해결했습니다.
