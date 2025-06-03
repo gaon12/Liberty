@@ -1,11 +1,13 @@
-$( function () {
+document.addEventListener( 'DOMContentLoaded', function () {
 	'use strict';
 	var articleNamespaces, talkNamespaces, isArticleTab, limit;
 
-	articleNamespaces = $( '.live-recent' ).attr( 'data-article-ns' );
-	talkNamespaces = $( '.live-recent' ).attr( 'data-talk-ns' );
+        var recent = document.querySelector( '.live-recent' );
+        articleNamespaces = recent ? recent.getAttribute( 'data-article-ns' ) : '';
+        talkNamespaces = recent ? recent.getAttribute( 'data-talk-ns' ) : '';
 	isArticleTab = true;
-	limit = $( '#live-recent-list' )[ 0 ].childElementCount;
+        var list = document.getElementById( 'live-recent-list' );
+        limit = list ? list.childElementCount : 0;
 
 	function timeFormat( time ) {
 		var aDayAgo, hour, minute, second;
@@ -32,9 +34,10 @@ $( function () {
 	function refreshLiveRecent() {
 		var getParameter;
 
-		if ( !$( '#live-recent-list' ).length || $( '#live-recent-list' ).is( ':hidden' ) ) {
-			return;
-		}
+                var listEl = document.getElementById( 'live-recent-list' );
+                if ( !listEl || listEl.offsetParent === null ) {
+                        return;
+                }
 
 		getParameter = {
 			action: 'query',
@@ -70,25 +73,25 @@ $( function () {
 					line += '</a></li>';
 					return line;
 				} ).join( '\n' );
-				$( '#live-recent-list' ).html( html );
+                                document.getElementById( 'live-recent-list' ).innerHTML = html;
 			} )
 			.catch( function () {} );
 		});
 	}
 
-	$( '#liberty-recent-tab1' ).click( function () {
-		$( this ).addClass( 'active' );
-		$( '#liberty-recent-tab2' ).removeClass( 'active' );
-		isArticleTab = true;
-		refreshLiveRecent();
-	} );
+        document.getElementById( 'liberty-recent-tab1' ).addEventListener( 'click', function () {
+                this.classList.add( 'active' );
+                document.getElementById( 'liberty-recent-tab2' ).classList.remove( 'active' );
+                isArticleTab = true;
+                refreshLiveRecent();
+        } );
 
-	$( '#liberty-recent-tab2' ).click( function () {
-		$( this ).addClass( 'active' );
-		$( '#liberty-recent-tab1' ).removeClass( 'active' );
-		isArticleTab = false;
-		refreshLiveRecent();
-	} );
+        document.getElementById( 'liberty-recent-tab2' ).addEventListener( 'click', function () {
+                this.classList.add( 'active' );
+                document.getElementById( 'liberty-recent-tab1' ).classList.remove( 'active' );
+                isArticleTab = false;
+                refreshLiveRecent();
+        } );
 
 	setInterval( refreshLiveRecent, 5 * 60 * 1000 );
 	refreshLiveRecent();

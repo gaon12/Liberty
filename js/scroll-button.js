@@ -1,11 +1,18 @@
-$( function () {
-	$( '#liberty-scrollup' ).click( function () {
-		$( 'html, body' ).animate( { scrollTop: 0 }, 400 );
-		return false;
-	} );
+document.addEventListener( 'DOMContentLoaded', function () {
+        var up = document.getElementById( 'liberty-scrollup' );
+        var down = document.getElementById( 'liberty-scrolldown' );
 
-	$( '#liberty-scrolldown' ).click( function () {
-		$( 'html, body' ).animate( { scrollTop: $( document ).height() }, 400 );
-		return false;
-	} );
+        if ( up ) {
+                up.addEventListener( 'click', function ( e ) {
+                        window.scrollTo( { top: 0, behavior: 'smooth' } );
+                        e.preventDefault();
+                } );
+        }
+
+        if ( down ) {
+                down.addEventListener( 'click', function ( e ) {
+                        window.scrollTo( { top: document.documentElement.scrollHeight, behavior: 'smooth' } );
+                        e.preventDefault();
+                } );
+        }
 } );

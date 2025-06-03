@@ -1,15 +1,19 @@
-$( function () {
-	'use strict';
-	var width, rightAds;
-	if ( $( '.mobile-ads' ) !== undefined ) {
-		width = $( window ).width();
-		if ( width < 1024 ) {
-			rightAds = $( '.right-ads' ).html();
-			$( '.mobile-ads' ).html( rightAds );
-			$( '.right-ads' ).remove();
-		}
-	}
-	$( '.adsbygoogle' ).each( function () {
-		( window.adsbygoogle = window.adsbygoogle || [] ).push( {} );
-	} );
+document.addEventListener( 'DOMContentLoaded', function () {
+        'use strict';
+        var mobileAds = document.querySelector( '.mobile-ads' ),
+                rightAds;
+
+        if ( mobileAds ) {
+                if ( window.innerWidth < 1024 ) {
+                        rightAds = document.querySelector( '.right-ads' );
+                        if ( rightAds ) {
+                                mobileAds.innerHTML = rightAds.innerHTML;
+                                rightAds.remove();
+                        }
+                }
+        }
+
+        document.querySelectorAll( '.adsbygoogle' ).forEach( function () {
+                ( window.adsbygoogle = window.adsbygoogle || [] ).push( {} );
+        } );
 } );
