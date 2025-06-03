@@ -118,8 +118,7 @@
 		},
 		"skins.liberty.bootstrap": {
 			"scripts": [
-				"js/lib/jquery.ba-throttle-debounce.js",
-				"js/lib/bootstrap.min.js"
+            "bootstrap/js/bootstrap.bundle.min.js"
 			]
 		},
 		"skins.liberty.layoutjs": {

@@ -45,10 +45,8 @@ class LibertyTemplate extends BaseTemplate {
 							$this->data['sitenotice'] &&
 							!$request->getCookie( 'disable-notice' )
 						) { ?>
-							<div class="alert alert-dismissible fade in alert-info liberty-notice" role="alert">
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
+							<div class="alert alert-dismissible fade show alert-info liberty-notice" role="alert">
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 								<?php $this->html( 'sitenotice' ); ?>
 							</div>
 						<?php } ?>
@@ -176,17 +174,15 @@ class LibertyTemplate extends BaseTemplate {
 			<input type="hidden" name="title" value="<?php $this->text( 'searchtitle' ); ?>" />
 			<div class="input-group">
 				<?php echo $this->makeSearchInput( [ 'class' => 'form-control', 'id' => 'searchInput' ] ); ?>
-				<span class="input-group-btn">
-					<?php
-					// @codingStandardsIgnoreStart 
-					?>
-					<button type="submit" name="go" value="<?php echo $skin->msg( 'go' )->escaped() ?>"id="searchGoButton" class="btn btn-secondary" type="button"><span class="fa fa-eye"></span></button>
-					<button type="submit" name="fulltext" value="<?php echo $skin->msg( 'searchbutton' )->escaped() ?>"id="mw-searchButton" class="btn btn-secondary" type="button">
-						<span class="fa fa-search"></span></button>
-					<?php
-					// @codingStandardsIgnoreEnd
-					?>
-				</span>
+				<?php
+				// @codingStandardsIgnoreStart
+				?>
+				<button type="submit" name="go" value="<?php echo $skin->msg( 'go' )->escaped() ?>"id="searchGoButton" class="btn btn-secondary" type="button"><span class="fa fa-eye"></span></button>
+				<button type="submit" name="fulltext" value="<?php echo $skin->msg( 'searchbutton' )->escaped() ?>"id="mw-searchButton" class="btn btn-secondary" type="button">
+					<span class="fa fa-search"></span></button>
+				<?php
+				// @codingStandardsIgnoreEnd
+				?>
 			</div>
 		</form>
 	<?php
@@ -236,10 +232,10 @@ class LibertyTemplate extends BaseTemplate {
 			?>
 				<div class="dropdown login-menu">
 					<a class="dropdown-toggle" type="button" id="login-menu" 
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<?php echo $avatar; ?>
 					</a>
-					<div class="dropdown-menu dropdown-menu-right login-dropdown-menu" 
+					<div class="dropdown-menu dropdown-menu-end login-dropdown-menu"
 						aria-labelledby="login-menu">
 						<?php echo $linkRenderer->makeKnownLink(
 							Title::makeTitle( NS_USER, $user->getName() ),
@@ -323,7 +319,7 @@ class LibertyTemplate extends BaseTemplate {
 					title="<?php echo Linker::titleAttrib( 'pt-logout', 'withaccess' ); ?>">
 					<span class="fa fa-sign-out"></span></a>
 			<?php } else { ?>
-				<a href="#" class="none-outline" data-toggle="modal" data-target="#login-modal">
+				<a href="#" class="none-outline" data-bs-toggle="modal" data-bs-target="#login-modal">
 					<span class="fa fa-sign-in"></span>
 				</a>
 			<?php } ?>
@@ -353,9 +349,7 @@ class LibertyTemplate extends BaseTemplate {
 			<div class="modal-dialog modal-sm" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						<h4 class="modal-title"><?php echo $skin->msg( 'liberty-login' )->escaped() ?></h4>
 					</div>
 					<div class="modal-body">
@@ -550,13 +544,13 @@ class LibertyTemplate extends BaseTemplate {
 				}
 				// @codingStandardsIgnoreStart 
 					?>
-					<button type="button" class="btn btn-secondary tools-btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+					<button type="button" class="btn btn-secondary tools-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 						<span class="caret"></span>
 					</button>
 					<?php
 					// @codingStandardsIgnoreEnd
 					?>
-					<div class="dropdown-menu dropdown-menu-right" role="menu">
+					<div class="dropdown-menu dropdown-menu-end" role="menu">
 						<?php
 						if ( $title->inNamespaces( NS_USER, NS_USER_TALK ) ) {
 							// "User contributions" link on user and user talk pages
@@ -755,7 +749,7 @@ class LibertyTemplate extends BaseTemplate {
 
 			echo Html::openElement( 'a', [
 				'class' => $content['classes'],
-				'data-toggle' => is_array( $content['children'] ) &&
+				'data-bs-toggle' => is_array( $content['children'] ) &&
 					count( $content['children'] ) > 1 ? 'dropdown' : '',
 				'role' => 'button',
 				'aria-haspopup' => 'true',
