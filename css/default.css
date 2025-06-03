@@ -242,7 +242,7 @@ strike {
 
 .Liberty .nav-wrapper .navbar .form-inline {
 	padding: 0.4rem 0;
-	float: right;
+	/* float: right; was removed */
 }
 
 .Liberty .nav-wrapper .navbar .form-inline .form-control {
@@ -276,7 +276,7 @@ strike {
 }
 
 .Liberty .nav-wrapper .navbar .navbar-login {
-	float: right;
+	/* float: right; was removed */
 	padding-left: 0.8rem;
 }
 

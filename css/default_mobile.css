@@ -5,14 +5,16 @@
 	}
 
 	.Liberty .nav-wrapper .navbar .form-inline {
-		float: left;
+		/* float: left; was removed */
 		padding: 0;
 		padding-top: 0.25rem;
 		padding-bottom: 0.5rem;
+		/* width: 100%; might be needed if it should span full width in mobile collapsed nav */
+		/* This can be tested. For now, just remove float. */
 	}
 
 	.Liberty .nav-wrapper .navbar .form-inline .input-group {
-		display: table;
+		/* display: table; was removed. Let flexbox manage it. */
 		width: 100%;
 	}
 

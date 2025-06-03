@@ -127,39 +127,44 @@ class LibertyTemplate extends BaseTemplate {
 		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 		$skin = $this->getSkin();
 	?>
-		<nav class="navbar navbar-dark">
+		<nav class="navbar navbar-expand-lg navbar-dark">
 			<a class="navbar-brand" href="<?php echo Title::newMainPage()->getLocalURL(); ?>"></a>
-			<ul class="nav navbar-nav">
-				<li class="nav-item">
-					<?php echo $linkRenderer->makeKnownLink(
-						new TitleValue( NS_SPECIAL, 'Recentchanges' ),
-						// @codingStandardsIgnoreStart
-						new HtmlArmor( '<span class="fas fa-sync"></span><span class="hide-title">' . $skin->msg( 'recentchanges' )->plain() . '</span>' ),
-						// @codingStandardsIgnoreEnd )
-						[
-							'class' => 'nav-link',
-							'title' => Linker::titleAttrib( 'n-recentchanges', 'withaccess' ),
-							'accesskey' => Linker::accesskey( 'n-recentchanges' )
-						] );?>
-				</li>
-				<li class="nav-item">
-					<?php echo $linkRenderer->makeKnownLink(
-						new TitleValue( NS_SPECIAL, 'Randompage' ),
-						// @codingStandardsIgnoreStart
-						new HtmlArmor( '<span class="fa fa-random"></span><span class="hide-title">' . $skin->msg( 'randompage' )->plain() . '</span>' ),
-						// @codingStandardsIgnoreEnd
-						[
-							'class' => 'nav-link',
-							'title' => Linker::titleAttrib( 'n-randompage', 'withaccess' ),
-							'accesskey' => Linker::accesskey( 'n-randompage' )
-						]
-					); ?>
-				</li>
-				<?php echo $this->renderPortal( $this->parseNavbar() ); ?>
-			</ul>
-			<?php $this->loginBox(); ?>
-			<?php $this->getNotification(); ?>
-			<?php $this->searchBox(); ?>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#libertyNavbarContent" aria-controls="libertyNavbarContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="libertyNavbarContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<?php echo $linkRenderer->makeKnownLink(
+							new TitleValue( NS_SPECIAL, 'Recentchanges' ),
+							// @codingStandardsIgnoreStart
+							new HtmlArmor( '<span class="fas fa-sync"></span><span class="hide-title">' . $skin->msg( 'recentchanges' )->plain() . '</span>' ),
+							// @codingStandardsIgnoreEnd )
+							[
+								'class' => 'nav-link',
+								'title' => Linker::titleAttrib( 'n-recentchanges', 'withaccess' ),
+								'accesskey' => Linker::accesskey( 'n-recentchanges' )
+							] );?>
+					</li>
+					<li class="nav-item">
+						<?php echo $linkRenderer->makeKnownLink(
+							new TitleValue( NS_SPECIAL, 'Randompage' ),
+							// @codingStandardsIgnoreStart
+							new HtmlArmor( '<span class="fa fa-random"></span><span class="hide-title">' . $skin->msg( 'randompage' )->plain() . '</span>' ),
+							// @codingStandardsIgnoreEnd
+							[
+								'class' => 'nav-link',
+								'title' => Linker::titleAttrib( 'n-randompage', 'withaccess' ),
+								'accesskey' => Linker::accesskey( 'n-randompage' )
+							]
+						); ?>
+					</li>
+					<?php echo $this->renderPortal( $this->parseNavbar() ); ?>
+				</ul>
+				<?php $this->searchBox(); ?>
+				<?php $this->loginBox(); ?>
+				<?php $this->getNotification(); ?>
+			</div>
 		</nav>
 	<?php
 	}
