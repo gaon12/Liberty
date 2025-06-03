@@ -353,6 +353,7 @@ strike {
 	float: right;
 	width: 15rem;
 	position: relative;
+	margin-left: 1rem; /* Added for explicit gap */
 }
 
 .Liberty .content-wrapper .liberty-sidebar .live-recent-wrapper {
@@ -426,6 +427,7 @@ strike {
 
 .Liberty .content-wrapper .liberty-sidebar .live-recent-wrapper .live-recent .live-recent-content .live-recent-list {
 	list-style: none;
+	min-height: 15rem; /* Added to prevent collapse when empty */
 }
 
 .Liberty .content-wrapper .liberty-sidebar .live-recent-wrapper .live-recent .live-recent-content .live-recent-list li {
@@ -477,7 +479,7 @@ strike {
 /* Content */
 .Liberty .content-wrapper {
 	margin-top: 3.33rem;
-	z-index: -1;
+	/* z-index: -1; removed */
 }
 
 .Liberty .content-wrapper .liberty-content {
