@@ -110,6 +110,9 @@
 				},
 				"css/print.css": {
 					"media": "print"
+				},
+				"css/custom-modals.css": {
+					"media": "all"
 				}
 			}
 		},
@@ -142,6 +145,16 @@
 		"skins.liberty.loginjs": {
 			"scripts": "js/login-request.js",
 			"dependencies": "mediawiki.util"
+		},
+		"skins.liberty.footnotehandler": {
+			"scripts": [
+				"js/footnote-handler.js"
+			],
+			"dependencies": [
+				"skins.liberty.bootstrap"
+			],
+			"messages": [],
+			"position": "bottom"
 		}
 	},
 	"ResourceFileModulePaths": {

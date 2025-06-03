@@ -112,6 +112,14 @@ p {
 	overflow-wrap: break-word;
 }
 
+a {
+    text-decoration: none; /* No underline by default */
+}
+
+a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
 ul {
 	list-style-image: url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20width%3D%225%22%20height%3D%2213%22%3E%0A%3Ccircle%20cx%3D%222.5%22%20cy%3D%229.5%22%20r%3D%222.5%22%20fill%3D%22%23373a3c%22%2F%3E%0A%3C%2Fsvg%3E%0A);
 }
@@ -463,6 +471,8 @@ strike {
 	padding: 0.4rem;
 	font-size: 0.8rem;
 	font-weight: 400;
+	border-radius: 0.25rem; /* Added for rounded corners */
+	display: inline-block; /* Ensures padding and border-radius apply correctly to a span */
 }
 
 .Liberty .content-wrapper .liberty-sidebar .live-recent-wrapper .live-recent .live-recent-footer .label:hover {

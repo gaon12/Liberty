@@ -115,6 +115,22 @@ class LibertyTemplate extends BaseTemplate {
 
 		$this->loginModal();
 
+?>
+<!-- Footnote Modal -->
+<div class="modal fade liberty-footnote-modal" id="footnoteModal" tabindex="-1" aria-labelledby="footnoteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="footnoteModalLabel">Footnote</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="footnoteModalBody">
+        <!-- Footnote content will be injected here by js/footnote-handler.js -->
+      </div>
+    </div>
+  </div>
+</div>
+<?php
 		$this->html( 'debughtml' );
 
 		echo "\n";
