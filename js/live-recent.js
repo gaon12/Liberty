@@ -51,14 +51,14 @@ $( function () {
 		mw.loader.using( 'mediawiki.api' ).then( function () {
 			var api = new mw.Api();
 			api.get( getParameter ).then( function ( data ) {
-				var recentChanges, html, time, line, text;
-				recentChanges = data.query.recentchanges;
-				html = recentChanges.map( function ( item ) {
-					time = new Date( item.timestamp );
-					line = '<li><a class="recent-item" href="' + mw.util.getUrl( item.title ) + '" title="' + item.title + '">[' + timeFormat( time ) + '] ';
-					text = '';
-					if ( item.type === 'new' ) {
-						text += '[New]';
+                                var recentChanges, html, time, line, text, fillerCount, i;
+                                recentChanges = data.query.recentchanges;
+                                html = recentChanges.map( function ( item ) {
+                                        time = new Date( item.timestamp );
+                                        line = '<li><a class="recent-item" href="' + mw.util.getUrl( item.title ) + '" title="' + item.title + '">[' + timeFormat( time ) + '] ';
+                                        text = '';
+                                        if ( item.type === 'new' ) {
+                                                text += '[New]';
 					}
 					text += item.title;
 					if ( text.length > 13 ) {
@@ -66,11 +66,16 @@ $( function () {
 						text += '...';
 					}
 					text = text.replace( '[New]', '<span class="new">' + mw.msg( 'liberty-feed-new' ) + ' </span>' );
-					line += text;
-					line += '</a></li>';
-					return line;
-				} ).join( '\n' );
-				$( '#live-recent-list' ).html( html );
+                                        line += text;
+                                        line += '</a></li>';
+                                        return line;
+                                } ).join( '\n' );
+
+                                fillerCount = limit - recentChanges.length;
+                                for ( i = 0; i < fillerCount; i++ ) {
+                                        html += '\n<li><span class="recent-item">&nbsp;</span></li>';
+                                }
+                                $( '#live-recent-list' ).html( html );
 			} )
 			.catch( function () {} );
 		});
