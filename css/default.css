@@ -513,10 +513,11 @@ strike {
 }
 
 .Liberty .content-wrapper .liberty-content .liberty-content-header {
-	border: 1px solid #e1e8ed;
-	border-radius: 0.35rem 0.35rem 0 0;
-	background-color: #f5f8fa;
-	max-width: 960px;
+        border: 1px solid #e1e8ed;
+        border-radius: 0.35rem 0.35rem 0 0;
+        background-color: #f5f8fa;
+        width: 100%;
+        max-width: none;
 }
 
 /* 광고 관련 문제 해결(header 부분에 있는 광고가 넘어가는 문제) */
@@ -604,10 +605,11 @@ ins.adsbygoogle {
 
 /* Footer */
 .Liberty .content-wrapper .liberty-footer {
-	border: 1px solid #e1e8ed;
-	border-radius: 0 0 0.35rem 0.35rem;
-	background-color: #f5f8fa;
-	padding: 1rem;
+        border: 1px solid #e1e8ed;
+        border-radius: 0 0 0.35rem 0.35rem;
+        background-color: #f5f8fa;
+        width: 100%;
+        padding: 1rem;
 }
 
 .Liberty .content-wrapper .liberty-footer ul {

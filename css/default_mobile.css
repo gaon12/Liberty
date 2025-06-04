@@ -34,10 +34,15 @@
 		display: none;
 	}
 
-	.Liberty .content-wrapper .liberty-content {
-		margin-right: auto;
-		padding-bottom: 0.5rem;
-	}
+        .Liberty .content-wrapper .liberty-content {
+                margin-right: auto;
+                padding-bottom: 0.5rem;
+        }
+
+        .Liberty .content-wrapper .liberty-content .liberty-content-header,
+        .Liberty .content-wrapper .liberty-footer {
+                width: 100%;
+        }
 
 	.Liberty .content-wrapper .liberty-content .liberty-content-header .liberty-notice {
 		margin: 0.5rem;
