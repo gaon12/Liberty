@@ -151,6 +151,7 @@
 
     .Liberty .nav-wrapper .navbar .navbar-collapse #searchform .input-group {
         width: 100%; /* Ensure the input group itself spans the full width */
+        flex-wrap: nowrap; /* Add this to ensure buttons and input stay on one line */
     }
 
     /* Make login and notification appear after search, pushed to the right */
