@@ -185,6 +185,54 @@
     }
 }
 
+@media screen and (max-width: 575.98px) {
+    /* Force navbar items to be visible and wrap, hide toggler */
+    .Liberty .navbar-collapse {
+        display: flex !important;
+        flex-basis: auto !important;
+        flex-wrap: wrap !important;
+    }
+
+    .Liberty .navbar-toggler {
+        display: none !important;
+    }
+
+    /* Line 1 Elements - Copied from (min-width: 576px) and (max-width: 991.98px) block */
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-brand {
+        /* margin-right: 1rem; */ /* Retain comments or original styling */
+    }
+
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-nav {
+        flex-shrink: 1; /* Retain original styling */
+    }
+
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-user-actions {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Line 2: Search Form - Copied from (min-width: 576px) and (max-width: 991.98px) block */
+    .Liberty .nav-wrapper .navbar .navbar-collapse #searchform {
+        width: 100%;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        order: 1;
+    }
+
+    .Liberty .nav-wrapper .navbar .navbar-collapse #searchform .input-group {
+        width: 100%;
+        flex-wrap: nowrap;
+    }
+
+    /* Copied cleanup rules */
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-login,
+    .Liberty .nav-wrapper .navbar .navbar-collapse #pt-notifications-alert,
+    .Liberty .nav-wrapper .navbar .navbar-collapse #pt-notifications-notice {
+        width: auto;
+        margin-left: 0;
+    }
+}
+
 /* Max-width: 520px Under tablet */
 @media screen and (max-width: 520px) {
 	.Liberty .nav-wrapper .navbar .navbar-nav .nav-item .nav-link {
