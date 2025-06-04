@@ -140,6 +140,114 @@
 	}
 
 }
+
+@media screen and (min-width: 576px) and (max-width: 991.98px) {
+    /* .Liberty .nav-wrapper .navbar .navbar-collapse has flex-wrap: wrap from element class */
+    /* align-items: center; is default for .navbar in Bootstrap */
+
+    /* Line 1 Elements */
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-brand {
+        /* margin-right: 1rem; /* Optional space after brand if needed */
+    }
+
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-nav {
+        /* ul.navbar-nav has .me-auto class from PHP, which pushes subsequent items to the right. */
+        /* flex-shrink ensures it makes space if .navbar-brand + .navbar-user-actions are too wide. */
+        flex-shrink: 1;
+    }
+
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-user-actions {
+        display: flex; /* To keep loginBox and getNotification inline */
+        align-items: center;
+        /* This group will be positioned to the right of .navbar-nav because of .navbar-nav's .me-auto */
+    }
+
+    /* Line 2: Search Form */
+    .Liberty .nav-wrapper .navbar .navbar-collapse #searchform {
+        width: 100%; /* Makes the search form take full width, ensuring it wraps */
+        margin-top: 0.5rem; /* Adds space above the search form */
+        margin-bottom: 0.5rem; /* Optional space below */
+        order: 1; /* Ensures search form comes after items with order 0 (the first line items) */
+    }
+
+    .Liberty .nav-wrapper .navbar .navbar-collapse #searchform .input-group {
+        width: 100%; /* Makes the input group take full width */
+        flex-wrap: nowrap; /* Keeps search input and buttons on the same line */
+    }
+
+    /* Cleanup for login/notification if they were previously styled for full width or pushed */
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-login,
+    .Liberty .nav-wrapper .navbar .navbar-collapse #pt-notifications-alert,
+    .Liberty .nav-wrapper .navbar .navbar-collapse #pt-notifications-notice {
+        width: auto; /* Override if previously set to 100% for a solo line */
+        margin-left: 0; /* Override if previously margin-left: auto was for being pushed to end of a line by itself */
+        /* Spacing between items within .navbar-user-actions can be handled by their own component styles or by adding specific margins here if needed */
+    }
+}
+
+@media screen and (max-width: 575.98px) {
+    /* Force navbar items to be visible and wrap, hide toggler */
+    .Liberty .navbar-collapse {
+        display: flex !important;
+        flex-basis: auto !important;
+        flex-wrap: wrap !important;
+    }
+
+    .Liberty .navbar-toggler {
+        display: none !important;
+    }
+
+    /* Line 1 Elements - Copied from (min-width: 576px) and (max-width: 991.98px) block */
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-brand {
+        /* margin-right: 1rem; */ /* Retain comments or original styling */
+    }
+
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-nav {
+        display: flex;          /* Make .navbar-nav a flex container */
+        flex-direction: row;    /* Arrange its children (menu items) in a row */
+        flex-wrap: nowrap;      /* Prevent menu items from wrapping to a new line if space is tight (adjust if needed) */
+        align-items: center;    /* Align items vertically in the center of the .navbar-nav container */
+        flex-shrink: 1; /* Retain original styling */
+        /* Potentially remove any margin causing vertical stacking if present, e.g., margin-bottom on .nav-item */
+    }
+
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-nav .nav-item {
+        /* Ensure items don't take full width if that was a prior style causing vertical stacking */
+        width: auto;
+        /* Adjust padding/margin if needed for horizontal spacing */
+        margin-right: 0.5rem; /* Example spacing between menu items */
+    }
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-nav .nav-item:last-child {
+        margin-right: 0; /* No margin for the last item */
+    }
+
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-user-actions {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Line 2: Search Form - Copied from (min-width: 576px) and (max-width: 991.98px) block */
+    .Liberty .nav-wrapper .navbar .navbar-collapse #searchform {
+        width: 100%;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        order: 1;
+    }
+
+    .Liberty .nav-wrapper .navbar .navbar-collapse #searchform .input-group {
+        width: 100%;
+        flex-wrap: nowrap;
+    }
+
+    /* Copied cleanup rules */
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-login,
+    .Liberty .nav-wrapper .navbar .navbar-collapse #pt-notifications-alert,
+    .Liberty .nav-wrapper .navbar .navbar-collapse #pt-notifications-notice {
+        width: auto;
+        margin-left: 0;
+    }
+}
+
 /* Max-width: 520px Under tablet */
 @media screen and (max-width: 520px) {
 	.Liberty .nav-wrapper .navbar .navbar-nav .nav-item .nav-link {

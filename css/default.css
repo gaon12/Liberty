@@ -248,6 +248,7 @@ strike {
 .Liberty .nav-wrapper .navbar .navbar-nav .nav-item .nav-link:hover,
 .Liberty .nav-wrapper .navbar .navbar-nav .nav-item .nav-link:focus {
 	transition: 0.3s;
+	text-decoration: none;
 }
 
 .Liberty .nav-wrapper .navbar .navbar-nav .nav-item .dropdown-menu {
@@ -857,4 +858,71 @@ ins.adsbygoogle {
 	color: inherit;
 	white-space: inherit;
 	line-height: inherit;
+}
+
+@media screen and (min-width: 992px) {
+    /* Ensure the main navbar container is flex if not already by Bootstrap defaults */
+    .Liberty .nav-wrapper .navbar {
+        display: flex; /* Or ensure navbar-expand-lg is doing its job */
+        flex-wrap: nowrap; /* Prevent wrapping on PC */
+        align-items: center; /* Align items vertically */
+    }
+
+    /* If Bootstrap's .navbar-collapse is the primary flex container for these items */
+    .Liberty .nav-wrapper .navbar .navbar-collapse {
+        display: flex !important; /* Override if it's collapsing */
+        flex-basis: auto !important; /* Ensure it takes space */
+        width: 100%; /* Allow it to span full width to arrange children */
+        align-items: center; /* Align items vertically */
+    }
+
+    /* Apply order to the navbar elements */
+    .Liberty .nav-wrapper .navbar .navbar-brand {
+        order: 1;
+        /* Reset Bootstrap's margin if it pushes others away, like me-auto */
+        margin-right: 1rem; /* Example spacing, adjust as needed */
+    }
+
+    .Liberty .nav-wrapper .navbar .navbar-nav {
+        order: 2;
+        /* Remove me-auto if it exists and interferes with custom order */
+        margin-right: auto; /* This will push subsequent items to the right, may need adjustment */
+    }
+
+    .Liberty .nav-wrapper .navbar #searchform {
+        order: 3;
+        /* Adjust width if it's taking too much or too little space */
+        width: auto; /* Or a specific width if needed */
+        margin-left: 1rem; /* Example spacing */
+        margin-right: 1rem; /* Example spacing */
+    }
+
+    /* Grouping login and notification items for ordering */
+    /* This assumes .navbar-user-actions wraps .navbar-login, #pt-notifications-alert, etc. */
+    /* If not, individual ordering or a new wrapper in HTML might be needed. */
+    /* For now, let's assume .navbar-user-actions can be targeted or we target them individually. */
+
+    /* Option 1: If there's a .navbar-user-actions wrapper */
+    .Liberty .nav-wrapper .navbar .navbar-user-actions {
+        order: 4;
+        display: flex; /* To keep its own children (login, notifications) inline */
+        align-items: center;
+    }
+
+    /* Option 2: If no wrapper, order them individually (might be tricky if not siblings of others) */
+    /* This part is more speculative without seeing the exact HTML structure for desktop */
+    .Liberty .nav-wrapper .navbar .navbar-login {
+        order: 4; /* All user items get the same order to appear together, then rely on source order */
+    }
+    .Liberty .nav-wrapper .navbar #pt-notifications-alert {
+        order: 4;
+    }
+    .Liberty .nav-wrapper .navbar #pt-notifications-notice {
+        order: 4;
+    }
+
+    /* Ensure search form input group is not breaking */
+    .Liberty .nav-wrapper .navbar #searchform .input-group {
+         width: auto; /* Or a specific width, prevent it from taking 100% if not desired */
+    }
 }
