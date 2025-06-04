@@ -244,10 +244,10 @@ class SkinLiberty extends SkinTemplate {
 			}
 		}
 
-		$LibertyDarkCss = "body, .Liberty, .dropdown-menu, .dropdown-item, .Liberty .nav-wrapper .navbar .form-inline .btn, .Liberty .content-wrapper .liberty-sidebar .live-recent-wrapper .live-recent .live-recent-header .nav .nav-item .nav-link.active, .Liberty .content-wrapper .liberty-content .liberty-content-main table.wikitable tr > th, .Liberty .content-wrapper .liberty-content .liberty-content-main table.wikitable tr > td, table.mw_metadata th, .Liberty .content-wrapper .liberty-content .liberty-content-main table.infobox th, #preferences fieldset:not(.prefsection), #preferences div.mw-prefs-buttons, .navbox, .navbox-subgroup, .navbox > tbody > tr:nth-child(even) > .navbox-list {
-			background-color: #000;
-			color: #DDD;
-		}
+                $LibertyDarkCss = "body, .Liberty, .dropdown-menu, .dropdown-item, .Liberty .nav-wrapper .navbar .form-inline .btn, .Liberty .content-wrapper .liberty-sidebar .live-recent-wrapper .live-recent .live-recent-header .nav .nav-item .nav-link.active, .Liberty .content-wrapper .liberty-content .liberty-content-main table.wikitable tr > th, .Liberty .content-wrapper .liberty-content .liberty-content-main table.wikitable tr > td, table.mw_metadata th, .Liberty .content-wrapper .liberty-content .liberty-content-main table.infobox th, #preferences fieldset:not(.prefsection), #preferences div.mw-prefs-buttons, .navbox, .navbox-subgroup, .navbox > tbody > tr:nth-child(even) > .navbox-list {
+                        background-color: #000;
+                        color: #DDD;
+                }
 
 		.liberty-content-header, .liberty-footer, .Liberty .content-wrapper .liberty-sidebar .live-recent-wrapper .live-recent .live-recent-footer, .Liberty .content-wrapper .liberty-sidebar .live-recent-wrapper .live-recent .live-recent-header .nav .nav-item, .Liberty .content-wrapper .liberty-content .liberty-content-header, .Liberty .content-wrapper .liberty-footer, .editOptions, html .wikiEditor-ui-toolbar, #pagehistory li.selected, .mw-datatable td, .Liberty .content-wrapper .liberty-content .liberty-content-main table.wikitable tr > td, table.mw_metadata td, .Liberty .content-wrapper .liberty-content .liberty-content-main table.wikitable, .Liberty .content-wrapper .liberty-content .liberty-content-main table.infobox, #preferences, .navbox-list, .dropdown-divider {
 			background-color: #1F2023;
@@ -270,14 +270,27 @@ class SkinLiberty extends SkinTemplate {
 		.flow-topic-titlebar { color: #000; }
 		.flow-ui-navigationWidget { color: #FFF; }
 		.Liberty .content-wrapper .liberty-content .liberty-content-main .toccolours, .Liberty .content-wrapper .liberty-content .liberty-content-main .toc ul, .Liberty .content-wrapper .liberty-content .liberty-content-main .toc li { background-color: #000; }
-		.Liberty .content-wrapper .liberty-content .liberty-content-main .toc .toctitle { background-color: #1F2023; }";
+                .Liberty .content-wrapper .liberty-content .liberty-content-main .toc .toctitle { background-color: #1F2023; }";
 
-		$LibertyUserDarkSetting = $userOptionsLookup->getOption( $user, 'liberty-dark' );
-		if ( $LibertyUserDarkSetting === 'dark' ) {
-			$out->addInlineStyle( $LibertyDarkCss );
-		} elseif ( $LibertyUserDarkSetting === null ) {
-			$out->addInlineStyle( "@media (prefers-color-scheme: dark) { $LibertyDarkCss }" );
-		}
+                $LibertyLightCss = "#searchGoButton, #mw-searchButton, .btn-group .btn {
+                        background-color: #fff;
+                        border-color: $mainColor;
+                }
+
+                .btn-group .btn:hover,
+                .btn-group a:hover {
+                        text-decoration: none;
+                }";
+
+                $LibertyUserDarkSetting = $userOptionsLookup->getOption( $user, 'liberty-dark' );
+                if ( $LibertyUserDarkSetting === 'dark' ) {
+                        $out->addInlineStyle( $LibertyDarkCss );
+                } elseif ( $LibertyUserDarkSetting === 'light' ) {
+                        $out->addInlineStyle( $LibertyLightCss );
+                } elseif ( $LibertyUserDarkSetting === null ) {
+                        $out->addInlineStyle( "@media (prefers-color-scheme: dark) { $LibertyDarkCss }" );
+                        $out->addInlineStyle( "@media (prefers-color-scheme: light) { $LibertyLightCss }" );
+                }
 
 		// @codingStandardsIgnoreEnd
 		$this->setupCss( $out );
