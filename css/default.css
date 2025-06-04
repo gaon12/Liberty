@@ -248,6 +248,7 @@ strike {
 .Liberty .nav-wrapper .navbar .navbar-nav .nav-item .nav-link:hover,
 .Liberty .nav-wrapper .navbar .navbar-nav .nav-item .nav-link:focus {
 	transition: 0.3s;
+	text-decoration: none;
 }
 
 .Liberty .nav-wrapper .navbar .navbar-nav .nav-item .dropdown-menu {

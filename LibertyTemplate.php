@@ -143,7 +143,7 @@ class LibertyTemplate extends BaseTemplate {
 		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 		$skin = $this->getSkin();
 	?>
-		<nav class="navbar navbar-expand-lg navbar-dark">
+		<nav class="navbar navbar-expand-sm navbar-dark">
 			<a class="navbar-brand" href="<?php echo Title::newMainPage()->getLocalURL(); ?>"></a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#libertyNavbarContent" aria-controls="libertyNavbarContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
