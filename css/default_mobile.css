@@ -142,23 +142,46 @@
 }
 
 @media screen and (min-width: 576px) and (max-width: 991.98px) {
-    /* Style the search form to take full width on its new line */
+    /* .Liberty .nav-wrapper .navbar .navbar-collapse has flex-wrap: wrap from element class */
+    /* align-items: center; is default for .navbar in Bootstrap */
+
+    /* Line 1 Elements */
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-brand {
+        /* margin-right: 1rem; /* Optional space after brand if needed */
+    }
+
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-nav {
+        /* ul.navbar-nav has .me-auto class from PHP, which pushes subsequent items to the right. */
+        /* flex-shrink ensures it makes space if .navbar-brand + .navbar-user-actions are too wide. */
+        flex-shrink: 1;
+    }
+
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-user-actions {
+        display: flex; /* To keep loginBox and getNotification inline */
+        align-items: center;
+        /* This group will be positioned to the right of .navbar-nav because of .navbar-nav's .me-auto */
+    }
+
+    /* Line 2: Search Form */
     .Liberty .nav-wrapper .navbar .navbar-collapse #searchform {
-        width: 100%;
-        margin-top: 8px; /* approx 0.5rem */
-        margin-bottom: 8px; /* approx 0.5rem */
+        width: 100%; /* Makes the search form take full width, ensuring it wraps */
+        margin-top: 0.5rem; /* Adds space above the search form */
+        margin-bottom: 0.5rem; /* Optional space below */
+        order: 1; /* Ensures search form comes after items with order 0 (the first line items) */
     }
 
     .Liberty .nav-wrapper .navbar .navbar-collapse #searchform .input-group {
-        width: 100%; /* Ensure the input group itself spans the full width */
-        flex-wrap: nowrap; /* Add this to ensure buttons and input stay on one line */
+        width: 100%; /* Makes the input group take full width */
+        flex-wrap: nowrap; /* Keeps search input and buttons on the same line */
     }
 
-    /* Make login and notification appear after search, pushed to the right */
+    /* Cleanup for login/notification if they were previously styled for full width or pushed */
     .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-login,
     .Liberty .nav-wrapper .navbar .navbar-collapse #pt-notifications-alert,
     .Liberty .nav-wrapper .navbar .navbar-collapse #pt-notifications-notice {
-        margin-left: auto; /* Push to the end of the line */
+        width: auto; /* Override if previously set to 100% for a solo line */
+        margin-left: 0; /* Override if previously margin-left: auto was for being pushed to end of a line by itself */
+        /* Spacing between items within .navbar-user-actions can be handled by their own component styles or by adding specific margins here if needed */
     }
 }
 

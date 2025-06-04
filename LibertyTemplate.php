@@ -144,12 +144,12 @@ class LibertyTemplate extends BaseTemplate {
 		$skin = $this->getSkin();
 	?>
 		<nav class="navbar navbar-expand-sm navbar-dark">
-			<a class="navbar-brand" href="<?php echo Title::newMainPage()->getLocalURL(); ?>"></a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#libertyNavbarContent" aria-controls="libertyNavbarContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse flex-wrap" id="libertyNavbarContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100">
+				<a class="navbar-brand" href="<?php echo Title::newMainPage()->getLocalURL(); ?>"></a>
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
 						<?php echo $linkRenderer->makeKnownLink(
 							new TitleValue( NS_SPECIAL, 'Recentchanges' ),
@@ -177,9 +177,11 @@ class LibertyTemplate extends BaseTemplate {
 					</li>
 					<?php echo $this->renderPortal( $this->parseNavbar() ); ?>
 				</ul>
+				<div class="navbar-user-actions d-flex">
+					<?php $this->loginBox(); ?>
+					<?php $this->getNotification(); ?>
+				</div>
 				<?php $this->searchBox(); ?>
-				<?php $this->loginBox(); ?>
-				<?php $this->getNotification(); ?>
 			</div>
 		</nav>
 	<?php
