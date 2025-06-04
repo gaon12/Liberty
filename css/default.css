@@ -116,8 +116,15 @@ a {
     text-decoration: none; /* No underline by default */
 }
 
+
 a:hover {
     text-decoration: underline; /* Underline on hover */
+}
+
+/* Use the secondary button background as the text color inside .btn-group */
+.btn-group .btn,
+.btn-group a {
+    color: var(--bs-btn-bg, #6c757d);
 }
 
 .btn-group .btn:hover,
