@@ -366,33 +366,33 @@ class LibertyTemplate extends BaseTemplate {
 		// perfectly acceptable in this particular context
 		// @codingStandardsIgnoreStart
 	?>
-		<div class="modal fade login-modal" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-sm" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						<h4 class="modal-title"><?php echo $skin->msg( 'liberty-login' )->escaped() ?></h4>
-					</div>
-					<div class="modal-body">
-						<div id="modal-login-alert" class="alert alert-hidden alert-danger" role="alert">
-						</div>
-						<form id="modal-loginform" name="userlogin" class="modal-loginform" method="post">
-							<input class="loginText form-control" id="wpName1" tabindex="1" placeholder="<?php echo $skin->msg( 'userlogin-yourname-ph' )->escaped() ?>" value="" name="lgname">
-							<label for="inputPassword" class="sr-only"><?php echo $skin->msg( 'userlogin-yourpassword' )->escaped() ?></label>
-							<input class="loginPassword form-control" id="wpPassword1" tabindex="2" placeholder="<?php echo $skin->msg( 'userlogin-yourpassword-ph' )->escaped() ?>" type="password" name="lgpassword">
-							<div class="modal-checkbox">
-								<input name="lgremember" type="checkbox" value="1" id="lgremember" tabindex="3">
-								<label for="lgremember"><?php echo $skin->msg( 'liberty-remember' )->escaped() ?></label>
-							</div>
-							<input class="btn btn-success btn-block" type="submit" value="<?php echo $skin->msg( 'liberty-login-btn' )->escaped() ?>" tabindex="4">
-							<?php echo $linkRenderer->makeKnownLink(
-								SpecialPage::getTitleFor( 'Userlogin' ),
-								$skin->msg( 'userlogin-joinproject' ),
-								[
-									'class' => 'btn btn-primary btn-block',
-									'tabindex' => 5,
-									'type' => 'submit'
-								],
+               <div class="modal fade login-modal" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true">
+                       <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                               <div class="modal-content">
+                                       <div class="modal-header">
+                                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                               <h4 class="modal-title" id="login-modalLabel"><?php echo $skin->msg( 'liberty-login' )->escaped() ?></h4>
+                                       </div>
+                                       <div class="modal-body">
+                                               <div id="modal-login-alert" class="alert alert-hidden alert-danger" role="alert">
+                                               </div>
+                                               <form id="modal-loginform" name="userlogin" class="modal-loginform" method="post">
+                                                       <input class="loginText form-control" id="wpName1" tabindex="1" placeholder="<?php echo $skin->msg( 'userlogin-yourname-ph' )->escaped() ?>" value="" name="lgname">
+                                                       <label for="wpPassword1" class="sr-only"><?php echo $skin->msg( 'userlogin-yourpassword' )->escaped() ?></label>
+                                                       <input class="loginPassword form-control" id="wpPassword1" tabindex="2" placeholder="<?php echo $skin->msg( 'userlogin-yourpassword-ph' )->escaped() ?>" type="password" name="lgpassword">
+                                                       <div class="modal-checkbox">
+                                                               <input name="lgremember" type="checkbox" value="1" id="lgremember" tabindex="3">
+                                                               <label for="lgremember"><?php echo $skin->msg( 'liberty-remember' )->escaped() ?></label>
+                                                       </div>
+                                                       <input class="btn btn-success w-100" type="submit" value="<?php echo $skin->msg( 'liberty-login-btn' )->escaped() ?>" tabindex="4">
+                                                       <?php echo $linkRenderer->makeKnownLink(
+                                                               SpecialPage::getTitleFor( 'Userlogin' ),
+                                                               $skin->msg( 'userlogin-joinproject' ),
+                                                               [
+                                                                       'class' => 'btn btn-primary w-100',
+                                                                       'tabindex' => 5,
+                                                                       'type' => 'submit'
+                                                               ],
 								[
 									'type' => 'signup',
 									'returnto' => $title
