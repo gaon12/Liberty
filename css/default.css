@@ -505,22 +505,10 @@ strike {
 }
 
 /* 광고 관련 문제 해결(header 부분에 있는 광고가 넘어가는 문제) */
-/* iframe 부모 컨테이너 */
-div.liberty-content-header .adsbygoogle,
-div.liberty-content-header #aswift_1_host {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: hidden !important;
-    display: block !important;
-    box-sizing: border-box;
-}
-
-/* iframe 자체도 100%로 */
-div.liberty-content-header iframe {
-    width: 100% !important;
-    height: auto !important;
-    max-width: 100% !important;
-    display: block;
+/* 광고 가운데 정렬 */
+ins.adsbygoogle {
+	display: flex;
+  	justify-content: flex-start;
 }
 
 .header-ads {
