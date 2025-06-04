@@ -369,10 +369,17 @@ class LibertyTemplate extends BaseTemplate {
                <div class="modal fade login-modal" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true">
                        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                                <div class="modal-content">
-                                       <div class="modal-header">
-                                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                               <h4 class="modal-title" id="login-modalLabel"><?php echo $skin->msg( 'liberty-login' )->escaped() ?></h4>
-                                       </div>
+                                       <div class="modal-header d-flex justify-content-between align-items-center">
+										<div class="flex-fill text-start"></div> <!-- 왼쪽 빈 칸 -->
+
+									   <h4 class="modal-title text-center flex-fill m-0" id="login-modalLabel">
+									       <?php echo $skin->msg( 'liberty-login' )->escaped(); ?>
+									   </h4> <!-- 가운데 로그인 -->
+
+									       <div class="flex-fill text-end">
+										        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!-- 오른쪽 닫기 버튼 -->
+									       </div>
+									   </div>
                                        <div class="modal-body">
                                                <div id="modal-login-alert" class="alert alert-hidden alert-danger" role="alert">
                                                </div>
