@@ -203,7 +203,22 @@
     }
 
     .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-nav {
+        display: flex;          /* Make .navbar-nav a flex container */
+        flex-direction: row;    /* Arrange its children (menu items) in a row */
+        flex-wrap: nowrap;      /* Prevent menu items from wrapping to a new line if space is tight (adjust if needed) */
+        align-items: center;    /* Align items vertically in the center of the .navbar-nav container */
         flex-shrink: 1; /* Retain original styling */
+        /* Potentially remove any margin causing vertical stacking if present, e.g., margin-bottom on .nav-item */
+    }
+
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-nav .nav-item {
+        /* Ensure items don't take full width if that was a prior style causing vertical stacking */
+        width: auto;
+        /* Adjust padding/margin if needed for horizontal spacing */
+        margin-right: 0.5rem; /* Example spacing between menu items */
+    }
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-nav .nav-item:last-child {
+        margin-right: 0; /* No margin for the last item */
     }
 
     .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-user-actions {
