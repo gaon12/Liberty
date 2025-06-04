@@ -148,8 +148,8 @@ class LibertyTemplate extends BaseTemplate {
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#libertyNavbarContent" aria-controls="libertyNavbarContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="libertyNavbarContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			<div class="collapse navbar-collapse flex-wrap" id="libertyNavbarContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100">
 					<li class="nav-item">
 						<?php echo $linkRenderer->makeKnownLink(
 							new TitleValue( NS_SPECIAL, 'Recentchanges' ),

@@ -140,6 +140,27 @@
 	}
 
 }
+
+@media screen and (min-width: 576px) and (max-width: 991.98px) {
+    /* Style the search form to take full width on its new line */
+    .Liberty .nav-wrapper .navbar .navbar-collapse #searchform {
+        width: 100%;
+        margin-top: 8px; /* approx 0.5rem */
+        margin-bottom: 8px; /* approx 0.5rem */
+    }
+
+    .Liberty .nav-wrapper .navbar .navbar-collapse #searchform .input-group {
+        width: 100%; /* Ensure the input group itself spans the full width */
+    }
+
+    /* Make login and notification appear after search, pushed to the right */
+    .Liberty .nav-wrapper .navbar .navbar-collapse .navbar-login,
+    .Liberty .nav-wrapper .navbar .navbar-collapse #pt-notifications-alert,
+    .Liberty .nav-wrapper .navbar .navbar-collapse #pt-notifications-notice {
+        margin-left: auto; /* Push to the end of the line */
+    }
+}
+
 /* Max-width: 520px Under tablet */
 @media screen and (max-width: 520px) {
 	.Liberty .nav-wrapper .navbar .navbar-nav .nav-item .nav-link {
