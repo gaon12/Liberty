@@ -926,12 +926,3 @@ ins.adsbygoogle {
          width: auto; /* Or a specific width, prevent it from taking 100% if not desired */
     }
 }
-
-/* PC 버전에서 header와 footer의 width가 main과 다른 문제 수정 */
-.liberty-content-header {
-	overflow: auto;
-}
-
-.liberty-content-footer {
-	max-width: calc(100% - 240px);
-}
