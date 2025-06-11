@@ -1,25 +1,22 @@
 (function () {
-  const REF_SELECTOR = 'sup.reference, a[href^="#cite_note"]';
+  // 참조 링크는 sup.reference 안의 a[href^="#cite_note"]
+  const REF_SELECTOR = 'sup.reference > a[href^="#cite_note"], a[href^="#cite_note"]';
   const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-  let desktopTooltip = null;
-  let hideTimer = null;
-  let modalOverlay = null;
+  let desktopTooltip = null, hideTimer = null, modalOverlay = null;
 
-  // -- 공통: 원본 <li>에서 불필요한 부분 제거하고 HTML 꺼내기
+  // 원본 <li> 복제 후 id·백링크 제거, innerHTML 반환
   function extractContent(refNode) {
-    refNode = refNode.cloneNode(true);
-    // ID, 백링크(↑) 제거
-    refNode.removeAttribute('id');
-    refNode.querySelectorAll('.mw-cite-backlink').forEach(el => el.remove());
-    // 이제 남은 innerHTML 리턴
-    return refNode.innerHTML;
+    const clone = refNode.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.querySelectorAll('.mw-cite-backlink').forEach(el => el.remove());
+    return clone.innerHTML;
   }
 
-  // -- PC용 툴팁 보여주기
+  // — PC 툴팁
   function showDesktopTooltip(link) {
     clearTimeout(hideTimer);
-    hideDesktopTooltip();
+    if (desktopTooltip) return;  // 이미 떠 있으면 재생성 안 함
 
     const refId = link.getAttribute('href').slice(1);
     const refNode = document.getElementById(refId);
@@ -30,7 +27,7 @@
     tip.className = 'mw-ref-tooltip';
     tip.innerHTML = html;
 
-    // 인라인 스타일
+    // 스타일 (인라인)
     Object.assign(tip.style, {
       position:      'absolute',
       maxWidth:      '300px',
@@ -55,34 +52,35 @@
     tip.style.top  = (rect.bottom + scrollY + 5) + 'px';
     tip.style.left = (rect.left) + 'px';
 
-    // 툴팁에 올라가도 유지되도록 이벤트
+    // 툴팁에 마우스 올라가면 사라지지 않도록
     tip.addEventListener('mouseenter', () => clearTimeout(hideTimer));
-    tip.addEventListener('mouseleave', hideDesktopTooltip);
+    tip.addEventListener('mouseleave', scheduleHide);
   }
-
   function scheduleHide() {
+    clearTimeout(hideTimer);
     hideTimer = setTimeout(hideDesktopTooltip, 150);
   }
-
   function hideDesktopTooltip() {
+    clearTimeout(hideTimer);
     if (desktopTooltip) {
       desktopTooltip.remove();
       desktopTooltip = null;
     }
   }
 
-  // -- 모바일용 모달 보여주기
+  // — 모바일 모달
   function showMobileModal(link) {
+    if (modalOverlay) return;
     const refId = link.getAttribute('href').slice(1);
     const refNode = document.getElementById(refId);
     if (!refNode) return;
 
-    // 오버레이
+    // 배경 오버레이
     const overlay = document.createElement('div');
     Object.assign(overlay.style, {
-      position:   'fixed', top: 0, left: 0, right: 0, bottom: 0,
-      background: 'rgba(0,0,0,0.5)', zIndex: 9998,
-      display:    'flex', justifyContent: 'center', alignItems: 'center'
+      position:   'fixed', top:0, left:0, right:0, bottom:0,
+      background: 'rgba(0,0,0,0.5)', zIndex:9998,
+      display:    'flex', alignItems:'center', justifyContent:'center'
     });
     document.body.appendChild(overlay);
     modalOverlay = overlay;
@@ -91,25 +89,23 @@
     const modal = document.createElement('div');
     modal.className = 'mw-ref-modal';
     const html = extractContent(refNode);
-    modal.innerHTML = `
-      <button class="mw-ref-modal-close">닫기</button>
-      <div class="mw-ref-modal-content">${html}</div>
-    `;
+    modal.innerHTML = `<button class="mw-ref-modal-close">닫기</button>
+                       <div class="mw-ref-modal-content">${html}</div>`;
     Object.assign(modal.style, {
-      background:    '#fff',
-      color:         '#111',
-      borderRadius:  '0.5rem',
-      maxWidth:      '90vw',
-      maxHeight:     '80vh',
-      overflowY:     'auto',
-      padding:       '1rem',
-      position:      'relative',
-      boxShadow:     '0 6px 16px rgba(0,0,0,0.2)',
-      boxSizing:     'border-box'
+      background:   '#fff',
+      color:        '#111',
+      borderRadius: '0.5rem',
+      maxWidth:     '90vw',
+      maxHeight:    '80vh',
+      overflowY:    'auto',
+      padding:      '1rem',
+      position:     'relative',
+      boxShadow:    '0 6px 16px rgba(0,0,0,0.2)',
+      boxSizing:    'border-box'
     });
     overlay.appendChild(modal);
 
-    // 닫기 버튼 스타일
+    // 닫기 버튼
     const btn = modal.querySelector('.mw-ref-modal-close');
     Object.assign(btn.style, {
       position:   'absolute',
@@ -120,14 +116,11 @@
       fontSize:   '1rem',
       cursor:     'pointer'
     });
-
-    // 닫기 로직
     btn.addEventListener('click', hideMobileModal);
     overlay.addEventListener('click', e => {
       if (e.target === overlay) hideMobileModal();
     });
   }
-
   function hideMobileModal() {
     if (modalOverlay) {
       modalOverlay.remove();
@@ -135,8 +128,11 @@
     }
   }
 
-  // -- 링크에 이벤트 붙이기
+  // — 링크 바인딩 (중복 방지)
   function bindLink(link) {
+    if (link.dataset.refTooltipBound) return;
+    link.dataset.refTooltipBound = '1';
+
     if (isTouch) {
       link.addEventListener('click', e => {
         e.preventDefault();
@@ -148,10 +144,15 @@
     }
   }
 
-  // -- 초기화 & 무한 스크롤 대응
-  mw.hook('wikipage.content').add($content => {
+  // — 초기화 & 무한스크롤 대응
+  mw.hook('wikipage.content').add(function ($content) {
     hideDesktopTooltip();
     hideMobileModal();
-    $content.querySelectorAll(REF_SELECTOR).forEach(bindLink);
+
+    // $content 가 jQuery 객체면 [0] 사용
+    const root = $content[0] || $content;
+    if (!root.querySelectorAll) return;
+
+    root.querySelectorAll(REF_SELECTOR).forEach(bindLink);
   });
 })();
