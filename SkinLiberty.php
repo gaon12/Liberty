@@ -81,10 +81,11 @@ class SkinLiberty extends SkinTemplate {
 			$out->addMeta( 'twitter:creator', "@$wgTwitterAccount" );
 		}
 
-		$modules = [
-			'skins.liberty.bootstrap',
-			'skins.liberty.layoutjs'
-		];
+                $modules = [
+                        'skins.liberty.bootstrap',
+                        'skins.liberty.layoutjs',
+                        'skins.liberty.footnotehandler'
+                ];
 
 		// Only load ad-related JS if ads are enabled in site configuration
 		if ( isset( $wgLibertyAdSetting['client'] ) && $wgLibertyAdSetting['client'] ) {

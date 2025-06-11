@@ -11,10 +11,11 @@
             return;
         }
 
-        if (typeof bootstrap === 'undefined' || typeof bootstrap.Modal === 'undefined') {
-            console.error('Bootstrap Modal class not found. Footnote handler will not work.');
+        if (typeof bootstrap === 'undefined' || typeof bootstrap.Modal === 'undefined' || typeof bootstrap.Tooltip === 'undefined') {
+            console.error('Bootstrap Modal or Tooltip class not found. Footnote handler will not work.');
             return;
         }
+
         // Initialize modal instance once
         const footnoteModalInstance = new bootstrap.Modal(footnoteModalElement);
         const modalBody = footnoteModalElement.querySelector('#footnoteModalBody');
@@ -25,8 +26,35 @@
             return;
         }
 
-        let hideModalTimer = null;
-        const HOVER_DELAY = 200; // milliseconds before hiding modal
+        // Update bootstrap theme according to prefers-color-scheme
+        const themeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+        function applyTheme() {
+            const theme = themeQuery.matches ? 'dark' : 'light';
+            document.body.setAttribute('data-bs-theme', theme);
+            footnoteModalElement.setAttribute('data-bs-theme', theme);
+        }
+
+        applyTheme();
+        themeQuery.addEventListener('change', applyTheme);
+
+        function getFootnoteHtml(targetFootnoteId) {
+            const footnoteElement = document.getElementById(targetFootnoteId);
+            if (!footnoteElement) {
+                console.warn('Footnote element with ID ' + targetFootnoteId + ' not found.');
+                return '';
+            }
+
+            const referenceTextElement = footnoteElement.querySelector('.reference-text');
+            if (referenceTextElement) {
+                return referenceTextElement.innerHTML;
+            }
+
+            const clone = footnoteElement.cloneNode(true);
+            const backlinks = clone.querySelectorAll('.mw-cite-backlink');
+            backlinks.forEach(bl => bl.remove());
+            return clone.innerHTML;
+        }
 
         function showFootnoteModal(targetFootnoteId, linkTextContent) {
             const footnoteElement = document.getElementById(targetFootnoteId);
@@ -51,18 +79,7 @@
             }
         }
 
-        function startHideTimer() {
-            clearTimeout(hideModalTimer);
-            hideModalTimer = setTimeout(() => {
-                footnoteModalInstance.hide();
-            }, HOVER_DELAY);
-        }
-
-        function clearHideTimer() {
-            clearTimeout(hideModalTimer);
-        }
-
-        const isDesktop = window.matchMedia("(min-width: 992px)").matches; // Example breakpoint for desktop (Bootstrap's lg)
+        const isDesktop = window.matchMedia('(hover: hover)').matches;
 
         footnoteLinks.forEach(link => {
             const href = link.getAttribute('href');
@@ -72,41 +89,31 @@
             const targetId = href.substring(1);
             const linkText = link.textContent.trim();
 
-            // Click behavior for all devices (as per original Phase 1)
-            link.addEventListener('click', function (event) {
-                event.preventDefault();
-                clearHideTimer(); // Clear any pending hide from hover
-                showFootnoteModal(targetId, linkText);
-            });
-
-            // Hover behavior for desktop
             if (isDesktop) {
-                link.addEventListener('mouseenter', function () {
-                    clearHideTimer(); // Clear any existing hide timer
-                    // Small delay before showing on hover to avoid accidental popups
-                    setTimeout(() => {
-                        // Check if modal is already shown by a click or another hover
-                        if (!footnoteModalElement.classList.contains('show')) {
-                            showFootnoteModal(targetId, linkText);
-                        }
-                    }, 150); // Short delay before showing
+                const tooltip = new bootstrap.Tooltip(link, {
+                    container: 'body',
+                    html: true,
+                    sanitize: false,
+                    trigger: 'hover focus',
+                    title: () => getFootnoteHtml(targetId)
                 });
 
-                link.addEventListener('mouseleave', function () {
-                    startHideTimer();
+                link.addEventListener('click', function (event) {
+                    // Prevent jumping to the footnote when tooltip is used
+                    event.preventDefault();
+                    tooltip.show();
+                });
+            } else {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const content = getFootnoteHtml(targetId);
+                    if (content) {
+                        modalBody.innerHTML = content;
+                        modalTitle.textContent = 'Footnote ' + linkText;
+                        footnoteModalInstance.show();
+                    }
                 });
             }
         });
-
-        // Keep modal open if mouse enters the modal itself
-        if (isDesktop) {
-            footnoteModalElement.addEventListener('mouseenter', function () {
-                clearHideTimer();
-            });
-
-            footnoteModalElement.addEventListener('mouseleave', function () {
-                startHideTimer();
-            });
-        }
     });
 })();

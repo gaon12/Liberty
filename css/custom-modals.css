@@ -1,1 +1,22 @@
 /* css/custom-modals.css - For footnote modal and other custom modal styling */
+
+.liberty-footnote-modal[data-bs-theme='dark'] .modal-content {
+    background-color: #000;
+    color: #ddd;
+}
+
+.liberty-footnote-modal[data-bs-theme='light'] .modal-content {
+    background-color: #fff;
+    color: #000;
+}
+
+.tooltip[data-bs-theme='dark'] {
+    --bs-tooltip-bg: #333;
+    --bs-tooltip-color: #fff;
+}
+
+.tooltip[data-bs-theme='light'] {
+    --bs-tooltip-bg: #fff;
+    --bs-tooltip-color: #000;
+    border: 1px solid #ccc;
+}
