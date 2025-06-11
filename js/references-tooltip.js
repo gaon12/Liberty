@@ -1,117 +1,157 @@
-( function () {
-  // ————— 설정 —————
-  const REF_SELECTOR = 'sup.reference, a[href^="#cite_note"]';  // 참조 링크 선택자
+(function () {
+  const REF_SELECTOR = 'sup.reference, a[href^="#cite_note"]';
   const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-  let activeTooltip = null;  // 현재 표시 중인 툴팁
 
-  // 다크/라이트 모드 컬러 계산
-  function getColors() {
-    const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return {
-      bg:    dark ? '#2e2e2e' : '#ffffff',
-      fg:    dark ? '#f0f0f0' : '#111111',
-      border:dark ? '#555555' : '#cccccc'
-    };
+  let desktopTooltip = null;
+  let hideTimer = null;
+  let modalOverlay = null;
+
+  // -- 공통: 원본 <li>에서 불필요한 부분 제거하고 HTML 꺼내기
+  function extractContent(refNode) {
+    refNode = refNode.cloneNode(true);
+    // ID, 백링크(↑) 제거
+    refNode.removeAttribute('id');
+    refNode.querySelectorAll('.mw-cite-backlink').forEach(el => el.remove());
+    // 이제 남은 innerHTML 리턴
+    return refNode.innerHTML;
   }
 
-  // 툴팁 제거
-  function hideTooltip() {
-    if (activeTooltip) {
-      document.body.removeChild(activeTooltip);
-      activeTooltip = null;
-    }
-  }
+  // -- PC용 툴팁 보여주기
+  function showDesktopTooltip(link) {
+    clearTimeout(hideTimer);
+    hideDesktopTooltip();
 
-  // 툴팁 생성 및 표시
-  function showTooltip(link) {
-    hideTooltip();
-
-    // href에서 ID 추출 (#cite_note-1 → cite_note-1)
     const refId = link.getAttribute('href').slice(1);
     const refNode = document.getElementById(refId);
     if (!refNode) return;
 
-    // 참조 내용을 복제
-    const clone = refNode.cloneNode(true);
+    const html = extractContent(refNode);
+    const tip = document.createElement('div');
+    tip.className = 'mw-ref-tooltip';
+    tip.innerHTML = html;
 
-    // 툴팁 엘리먼트
-    const tooltip = document.createElement('div');
-    tooltip.className = 'mw-ref-tooltip';
-    tooltip.appendChild(clone);
-
-    // 스타일 인라인 설정
-    const { bg, fg, border } = getColors();
-    Object.assign(tooltip.style, {
+    // 인라인 스타일
+    Object.assign(tip.style, {
       position:      'absolute',
-      maxWidth:      '90vw',
+      maxWidth:      '300px',
       padding:       '0.6rem',
-      background:    bg,
-      color:         fg,
-      border:        `1px solid ${border}`,
-      borderRadius:  '0.3rem',
-      boxShadow:     '0 2px 8px rgba(0,0,0,0.15)',
+      background:    '#fff',
+      color:         '#111',
+      border:        '1px solid #ccc',
+      borderRadius:  '0.5rem',
+      boxShadow:     '0 4px 12px rgba(0,0,0,0.15)',
       fontSize:      '0.9rem',
       lineHeight:    '1.4',
       zIndex:        9999,
-      boxSizing:     'border-box',
-      overflow:      'auto',
-      maxHeight:     '50vh'
+      boxSizing:     'border-box'
     });
 
-    document.body.appendChild(tooltip);
-    activeTooltip = tooltip;
+    document.body.appendChild(tip);
+    desktopTooltip = tip;
 
-    // 위치 계산: 링크 바로 아래·왼쪽 정렬
+    // 위치 계산
     const rect = link.getBoundingClientRect();
     const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    tooltip.style.top  = (rect.bottom + scrollY + 5) + 'px';
-    tooltip.style.left = (rect.left) + 'px';
+    tip.style.top  = (rect.bottom + scrollY + 5) + 'px';
+    tip.style.left = (rect.left) + 'px';
+
+    // 툴팁에 올라가도 유지되도록 이벤트
+    tip.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+    tip.addEventListener('mouseleave', hideDesktopTooltip);
   }
 
-  // 이벤트 위임 핸들러 등록 (단 한 번)
-  function setupDelegation() {
-    if (isTouch) {
-      // 모바일: 클릭 토글, 바깥 클릭 시 닫기
-      document.addEventListener('click', e => {
-        const link = e.target.closest(REF_SELECTOR);
-        if (link) {
-          e.preventDefault();
-          activeTooltip ? hideTooltip() : showTooltip(link);
-        } else if (activeTooltip && !e.target.closest('.mw-ref-tooltip')) {
-          hideTooltip();
-        }
-      }, { passive: true });
-    } else {
-      // PC: 마우스 호버
-      document.addEventListener('mouseover', e => {
-        const link = e.target.closest(REF_SELECTOR);
-        if (link) showTooltip(link);
-      }, { passive: true });
-      document.addEventListener('mouseout', e => {
-        const link = e.target.closest(REF_SELECTOR);
-        if (link) hideTooltip();
-      }, { passive: true });
-    }
+  function scheduleHide() {
+    hideTimer = setTimeout(hideDesktopTooltip, 150);
+  }
 
-    // 다크/라이트 모드 변경 감지 시 툴팁 색상 갱신
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-      if (activeTooltip) {
-        const { bg, fg, border } = getColors();
-        Object.assign(activeTooltip.style, {
-          background: bg,
-          color: fg,
-          border: `1px solid ${border}`
-        });
-      }
+  function hideDesktopTooltip() {
+    if (desktopTooltip) {
+      desktopTooltip.remove();
+      desktopTooltip = null;
+    }
+  }
+
+  // -- 모바일용 모달 보여주기
+  function showMobileModal(link) {
+    const refId = link.getAttribute('href').slice(1);
+    const refNode = document.getElementById(refId);
+    if (!refNode) return;
+
+    // 오버레이
+    const overlay = document.createElement('div');
+    Object.assign(overlay.style, {
+      position:   'fixed', top: 0, left: 0, right: 0, bottom: 0,
+      background: 'rgba(0,0,0,0.5)', zIndex: 9998,
+      display:    'flex', justifyContent: 'center', alignItems: 'center'
+    });
+    document.body.appendChild(overlay);
+    modalOverlay = overlay;
+
+    // 모달 박스
+    const modal = document.createElement('div');
+    modal.className = 'mw-ref-modal';
+    const html = extractContent(refNode);
+    modal.innerHTML = `
+      <button class="mw-ref-modal-close">닫기</button>
+      <div class="mw-ref-modal-content">${html}</div>
+    `;
+    Object.assign(modal.style, {
+      background:    '#fff',
+      color:         '#111',
+      borderRadius:  '0.5rem',
+      maxWidth:      '90vw',
+      maxHeight:     '80vh',
+      overflowY:     'auto',
+      padding:       '1rem',
+      position:      'relative',
+      boxShadow:     '0 6px 16px rgba(0,0,0,0.2)',
+      boxSizing:     'border-box'
+    });
+    overlay.appendChild(modal);
+
+    // 닫기 버튼 스타일
+    const btn = modal.querySelector('.mw-ref-modal-close');
+    Object.assign(btn.style, {
+      position:   'absolute',
+      top:        '0.5rem',
+      right:      '0.5rem',
+      border:     'none',
+      background: 'transparent',
+      fontSize:   '1rem',
+      cursor:     'pointer'
+    });
+
+    // 닫기 로직
+    btn.addEventListener('click', hideMobileModal);
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) hideMobileModal();
     });
   }
 
-  // 미디어위키 컨텐츠 로드 후(무한 스크롤 등)에도 동작하게 하기
-  mw.hook('wikipage.content').add(() => {
-    // 최초 한 번만 이벤트 위임 설정
-    if (!window._mwRefTooltipInitialized) {
-      setupDelegation();
-      window._mwRefTooltipInitialized = true;
+  function hideMobileModal() {
+    if (modalOverlay) {
+      modalOverlay.remove();
+      modalOverlay = null;
     }
+  }
+
+  // -- 링크에 이벤트 붙이기
+  function bindLink(link) {
+    if (isTouch) {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        showMobileModal(link);
+      }, { passive: false });
+    } else {
+      link.addEventListener('mouseenter', () => showDesktopTooltip(link));
+      link.addEventListener('mouseleave', scheduleHide);
+    }
+  }
+
+  // -- 초기화 & 무한 스크롤 대응
+  mw.hook('wikipage.content').add($content => {
+    hideDesktopTooltip();
+    hideMobileModal();
+    $content.querySelectorAll(REF_SELECTOR).forEach(bindLink);
   });
-}() );
+})();
