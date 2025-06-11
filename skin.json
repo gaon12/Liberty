@@ -131,7 +131,8 @@
 				"js/share-button.js",
 				"js/layout.js",
 				"js/table.js",
-				"js/scroll-button.js"
+				"js/scroll-button.js",
+				"js/references-tooltip.js"
 			],
 			"dependencies": "mediawiki.cookie"
 		},
