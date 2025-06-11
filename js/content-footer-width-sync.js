@@ -4,8 +4,9 @@
   function waitForElementsAndSync() {
     const content = document.querySelector('#content');
     const footer = document.querySelector('body > section > div > div > footer');
+    const header = document.querySelector('.liberty-content-header');
 
-    if (!content || !footer) {
+    if (!content || !footer || !header) {
       // 요소가 아직 안 보이면 다음 루프에서 다시 시도
       requestAnimationFrame(waitForElementsAndSync);
       return;
@@ -13,20 +14,22 @@
 
     let prevContentWidth = null;
 
-    function syncFooterWidth() {
+    function syncElementsWidth() {
       const contentWidth = content.offsetWidth;
 
       if (contentWidth !== prevContentWidth) {
-        footer.style.width = contentWidth + 'px';
-        // console.log(`[SYNC] content width: ${contentWidth}px, footer width: ${footer.offsetWidth}px`);
+        const widthPx = contentWidth + 'px';
+        footer.style.width = widthPx;
+        header.style.width = widthPx;
+        // console.log(`[SYNC] content width: ${contentWidth}px`);
         prevContentWidth = contentWidth;
       }
 
-      requestAnimationFrame(syncFooterWidth);
+      requestAnimationFrame(syncElementsWidth);
     }
 
     // 동기화 루프 시작
-    syncFooterWidth();
+    syncElementsWidth();
   }
 
   // DOM 완전히 준비된 후 시작
