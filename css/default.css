@@ -926,3 +926,8 @@ ins.adsbygoogle {
          width: auto; /* Or a specific width, prevent it from taking 100% if not desired */
     }
 }
+
+/* Header, footer match the width of the content */
+.container-fluid {
+	width: initial !important;
+}

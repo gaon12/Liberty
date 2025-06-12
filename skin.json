@@ -132,8 +132,7 @@
 				"js/layout.js",
 				"js/table.js",
 				"js/scroll-button.js",
-				"js/references-tooltip.js",
-				"js/content-footer-width-sync.js"
+				"js/references-tooltip.js"
 			],
 			"dependencies": "mediawiki.cookie"
 		},
