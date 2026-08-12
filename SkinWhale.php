@@ -22,8 +22,8 @@ class SkinWhale extends SkinMustache {
 	// @codingStandardsIgnoreEnd
 
 	private const DEFAULT_THEME_COLORS = [
-		'light' => [ 'primary' => '#7568E8', 'secondary' => '#5F57CF' ],
-		'dark' => [ 'primary' => '#7568E8', 'secondary' => '#5F57CF' ],
+		'light' => [ 'primary' => '#0B67D1', 'secondary' => '#0958D9' ],
+		'dark' => [ 'primary' => '#4096FF', 'secondary' => '#1677FF' ],
 	];
 	private const LEGACY_DEFAULT_THEME_COLORS = [
 		'primary' => '#00BCD4',
@@ -119,6 +119,10 @@ class SkinWhale extends SkinMustache {
 		$secondColor = $themeColors['light']['secondary'];
 		$darkMainColor = $themeColors['dark']['primary'];
 		$darkSecondColor = $themeColors['dark']['secondary'];
+		$mainContrastColor = $this->getContrastColor( $mainColor );
+		$secondContrastColor = $this->getContrastColor( $secondColor );
+		$darkMainContrastColor = $this->getContrastColor( $darkMainColor );
+		$darkSecondContrastColor = $this->getContrastColor( $darkSecondColor );
 		$ogLogo = $GLOBALS['wgWhaleOgLogo'] ?? $wgLogo;
 		if ( !is_string( $ogLogo ) || !preg_match( '/^((?:(?:http(?:s)?)?:)?\/\/(?:.{4,}))$/i', $ogLogo ) ) {
 			$server = $GLOBALS['wgServer'] ?? '';
@@ -194,28 +198,38 @@ class SkinWhale extends SkinMustache {
 			".Whale {
 			--whale-main-color: $mainColor;
 			--whale-second-color: $secondColor;
+			--whale-main-contrast-color: $mainContrastColor;
+			--whale-second-contrast-color: $secondContrastColor;
 		}
 
 		body.whale-dark .Whale {
 			--whale-main-color: $darkMainColor;
 			--whale-second-color: $darkSecondColor;
+			--whale-main-contrast-color: $darkMainContrastColor;
+			--whale-second-contrast-color: $darkSecondContrastColor;
 		}
 
 		@media (prefers-color-scheme: dark) {
 			body.whale-auto-dark .Whale {
 				--whale-main-color: $darkMainColor;
 				--whale-second-color: $darkSecondColor;
+				--whale-main-contrast-color: $darkMainContrastColor;
+				--whale-second-contrast-color: $darkSecondContrastColor;
 			}
 
 			body.whale-auto-dark.Whale {
 				--whale-main-color: $darkMainColor;
 				--whale-second-color: $darkSecondColor;
+				--whale-main-contrast-color: $darkMainContrastColor;
+				--whale-second-contrast-color: $darkSecondContrastColor;
 			}
 		}
 
 		body.whale-dark.Whale {
 			--whale-main-color: $darkMainColor;
 			--whale-second-color: $darkSecondColor;
+			--whale-main-contrast-color: $darkMainContrastColor;
+			--whale-second-contrast-color: $darkSecondContrastColor;
 		}"
 		);
 
@@ -898,6 +912,24 @@ JS
 		}
 
 		return sprintf( '#%06X', $value );
+	}
+
+	private function getContrastColor( string $background ): string {
+		$luminance = 0.0;
+		$weights = [ 0.2126, 0.7152, 0.0722 ];
+
+		foreach ( $weights as $index => $weight ) {
+			$component = hexdec( substr( $background, 1 + ( $index * 2 ), 2 ) ) / 255;
+			$linearComponent = $component <= 0.04045
+				? $component / 12.92
+				: ( ( $component + 0.055 ) / 1.055 ) ** 2.4;
+			$luminance += $linearComponent * $weight;
+		}
+
+		$blackContrast = ( $luminance + 0.05 ) / 0.05;
+		$whiteContrast = 1.05 / ( $luminance + 0.05 );
+
+		return $whiteContrast >= $blackContrast ? '#FFFFFF' : '#000000';
 	}
 
 	/**

@@ -16,7 +16,8 @@
 			"@test:short-url",
 			"@test:sections",
 			"@test:avatar",
-			"@test:navbar"
+			"@test:navbar",
+			"@test:theme-contrast"
 		],
 		"test:folding": [
 			"php scripts/check-folding.php"
@@ -32,6 +33,9 @@
 		],
 		"test:navbar": [
 			"php scripts/check-navbar.php"
+		],
+		"test:theme-contrast": [
+			"php scripts/check-theme-contrast.php"
 		],
 		"fix": "php vendor/squizlabs/php_codesniffer/bin/phpcbf"
 	},

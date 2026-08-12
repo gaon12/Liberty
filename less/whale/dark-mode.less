@@ -1,28 +1,30 @@
 /* Dark mode */
 body.whale-dark .Whale,
 body.whale-dark.Whale {
-	--whale-link-color: #8fc7f2;
-	--whale-link-hover-color: #b9def8;
+	--whale-link-color: #69b1ff;
+	--whale-link-hover-color: #91caff;
 	--whale-danger-color: #ff9ca8;
 	--whale-skeleton-color: #29373f;
-	--whale-canvas-color: #10191f;
-	--whale-surface-color: #18252d;
-	--whale-surface-elevated-color: #213039;
-	--whale-surface-muted-color: #202d35;
-	--whale-text-color: #e2e9ed;
-	--whale-content-muted-color: #aab8c1;
-	--whale-accent-soft-color: #282834;
+	--whale-canvas-color: #0f1a22;
+	--whale-surface-color: #172630;
+	--whale-surface-elevated-color: #1d303b;
+	--whale-surface-muted-color: #223741;
+	--whale-control-background: #1b2d37;
+	--whale-text-color: #e6f0f5;
+	--whale-content-muted-color: #a8bbc6;
+	--whale-accent-soft-color: #163b54;
 	--whale-notice-background-color: var(--whale-accent-soft-color);
-	--whale-notice-text-color: #d9d6ff;
-	--whale-code-background: #17191c;
-	--whale-table-background: #18252d;
-	--whale-table-header-background: #202d35;
-	--whale-table-border-color: #40515c;
-	--whale-border-color: #40515c;
-	--whale-border-strong-color: #60727e;
-	--whale-hover-color: #293a44;
-	--whale-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.24);
-	--whale-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.32);
+	--whale-notice-text-color: #bae0ff;
+	--whale-code-background: #13232c;
+	--whale-table-background: #1a2b35;
+	--whale-table-header-background: #223741;
+	--whale-table-border-color: #344d5b;
+	--whale-border-color: #344d5b;
+	--whale-border-strong-color: #4b6877;
+	--whale-hover-color: #203f50;
+	--whale-focus-ring: 0 0 0 3px rgba(64, 150, 255, 0.28);
+	--whale-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.24), 0 6px 18px rgba(0, 0, 0, 0.16);
+	--whale-shadow-md: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 
 body.whale-dark,
@@ -451,7 +453,7 @@ body.whale-dark .whale-floating-toc a:focus,
 body.whale-dark .whale-floating-toc a.is-active {
 	background-color: var(--whale-main-color);
 	border-color: var(--whale-main-color);
-	color: #fff;
+	color: var(--whale-main-contrast-color);
 }
 
 body.whale-dark.Whale .whale-floating-toc a:hover,
@@ -459,7 +461,7 @@ body.whale-dark.Whale .whale-floating-toc a:focus,
 body.whale-dark.Whale .whale-floating-toc a.is-active {
 	background-color: var(--whale-main-color);
 	border-color: var(--whale-main-color);
-	color: #fff;
+	color: var(--whale-main-contrast-color);
 }
 
 body.whale-dark #whale-bottombtn .scroll-button:hover,
@@ -482,28 +484,30 @@ body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main {
 @media (prefers-color-scheme: dark) {
 	body.whale-auto-dark .Whale,
 	body.whale-auto-dark.Whale {
-		--whale-link-color: #8fc7f2;
-		--whale-link-hover-color: #b9def8;
+		--whale-link-color: #69b1ff;
+		--whale-link-hover-color: #91caff;
 		--whale-danger-color: #ff9ca8;
 		--whale-skeleton-color: #29373f;
-		--whale-canvas-color: #10191f;
-		--whale-surface-color: #18252d;
-		--whale-surface-elevated-color: #213039;
-		--whale-surface-muted-color: #202d35;
-		--whale-text-color: #e2e9ed;
-		--whale-content-muted-color: #aab8c1;
-		--whale-accent-soft-color: #282834;
+		--whale-canvas-color: #0f1a22;
+		--whale-surface-color: #172630;
+		--whale-surface-elevated-color: #1d303b;
+		--whale-surface-muted-color: #223741;
+		--whale-control-background: #1b2d37;
+		--whale-text-color: #e6f0f5;
+		--whale-content-muted-color: #a8bbc6;
+		--whale-accent-soft-color: #163b54;
 		--whale-notice-background-color: var(--whale-accent-soft-color);
-		--whale-notice-text-color: #d9d6ff;
-		--whale-code-background: #17191c;
-		--whale-table-background: #18252d;
-		--whale-table-header-background: #202d35;
-		--whale-table-border-color: #40515c;
-		--whale-border-color: #40515c;
-		--whale-border-strong-color: #60727e;
-		--whale-hover-color: #293a44;
-		--whale-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.24);
-		--whale-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.32);
+		--whale-notice-text-color: #bae0ff;
+		--whale-code-background: #13232c;
+		--whale-table-background: #1a2b35;
+		--whale-table-header-background: #223741;
+		--whale-table-border-color: #344d5b;
+		--whale-border-color: #344d5b;
+		--whale-border-strong-color: #4b6877;
+		--whale-hover-color: #203f50;
+		--whale-focus-ring: 0 0 0 3px rgba(64, 150, 255, 0.28);
+		--whale-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.24), 0 6px 18px rgba(0, 0, 0, 0.16);
+		--whale-shadow-md: 0 12px 32px rgba(0, 0, 0, 0.4);
 	}
 
 	body.whale-auto-dark,
@@ -932,7 +936,7 @@ body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main {
 	body.whale-auto-dark .whale-floating-toc a.is-active {
 		background-color: var(--whale-main-color);
 		border-color: var(--whale-main-color);
-		color: #fff;
+		color: var(--whale-main-contrast-color);
 	}
 
 	body.whale-auto-dark.Whale .whale-floating-toc a:hover,
@@ -940,7 +944,7 @@ body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main {
 	body.whale-auto-dark.Whale .whale-floating-toc a.is-active {
 		background-color: var(--whale-main-color);
 		border-color: var(--whale-main-color);
-		color: #fff;
+		color: var(--whale-main-contrast-color);
 	}
 
 	body.whale-auto-dark #whale-bottombtn .scroll-button:hover,
@@ -961,6 +965,376 @@ body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main {
 	}
 }
 /* Dark mode End */
+
+/* Keep component surfaces on the shared token system after legacy extension overrides. */
+body.whale-dark .Whale .whale-nav-wrapper,
+body.whale-dark.Whale .whale-nav-wrapper {
+	background-color: var(--whale-surface-elevated-color);
+	border-color: var(--whale-border-color);
+	box-shadow: var(--whale-shadow-sm);
+}
+
+body.whale-dark .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link,
+body.whale-dark.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link {
+	color: var(--whale-text-color);
+}
+
+body.whale-dark .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link:hover,
+body.whale-dark .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link:focus,
+body.whale-dark.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link:hover,
+body.whale-dark.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link:focus {
+	background-color: var(--whale-hover-color);
+	color: var(--whale-link-color);
+}
+
+body.whale-dark .Whale .whale-nav-wrapper .whale-navbar .whale-search-group,
+body.whale-dark.Whale .whale-nav-wrapper .whale-navbar .whale-search-group,
+body.whale-dark .Whale .whale-login-modal .whale-form-control,
+body.whale-dark.Whale .whale-login-modal .whale-form-control {
+	background-color: var(--whale-control-background);
+	border-color: var(--whale-border-strong-color);
+	color: var(--whale-text-color);
+}
+
+body.whale-dark .Whale .whale-nav-wrapper .whale-navbar .whale-search-form #searchGoButton,
+body.whale-dark.Whale .whale-nav-wrapper .whale-navbar .whale-search-form #searchGoButton {
+	background-color: var(--whale-control-background);
+	border-color: var(--whale-border-color);
+	color: var(--whale-content-muted-color);
+}
+
+body.whale-dark .Whale .whale-nav-wrapper .whale-navbar .whale-search-form #mw-searchButton,
+body.whale-dark.Whale .whale-nav-wrapper .whale-navbar .whale-search-form #mw-searchButton {
+	background-color: var(--whale-main-color);
+	border-color: var(--whale-main-color);
+	color: var(--whale-main-contrast-color);
+}
+
+body.whale-dark .Whale .content-wrapper .whale-content,
+body.whale-dark.Whale .content-wrapper .whale-content,
+body.whale-dark .Whale .content-wrapper .whale-content .whale-content-header,
+body.whale-dark.Whale .content-wrapper .whale-content .whale-content-header,
+body.whale-dark .Whale .content-wrapper .whale-content .whale-content-main,
+body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main,
+body.whale-dark .Whale .content-wrapper .live-recent .live-recent-feed,
+body.whale-dark.Whale .content-wrapper .live-recent .live-recent-feed,
+body.whale-dark .whale-dropdown-menu,
+body.whale-dark.Whale .whale-dropdown-menu,
+body.whale-dark .whale-modal-content,
+body.whale-dark.Whale .whale-modal-content {
+	background-color: var(--whale-surface-elevated-color);
+	border-color: var(--whale-border-color);
+	color: var(--whale-text-color);
+}
+
+body.whale-dark .Whale .content-wrapper .whale-footer,
+body.whale-dark.Whale .content-wrapper .whale-footer,
+body.whale-dark .Whale .live-recent-header,
+body.whale-dark.Whale .live-recent-header {
+	background-color: var(--whale-surface-muted-color);
+	border-color: var(--whale-border-color);
+	color: var(--whale-text-color);
+}
+
+body.whale-dark .Whale .whale-modal-header,
+body.whale-dark.Whale .whale-modal-header,
+body.whale-dark .Whale .whale-modal-body,
+body.whale-dark.Whale .whale-modal-body,
+body.whale-dark .Whale .whale-reference-content,
+body.whale-dark.Whale .whale-reference-content,
+body.whale-dark .Whale .whale-reference-actions,
+body.whale-dark.Whale .whale-reference-actions,
+body.whale-dark .Whale .whale-external-link-actions,
+body.whale-dark.Whale .whale-external-link-actions {
+	background-color: var(--whale-surface-elevated-color);
+	border-color: var(--whale-border-color);
+	color: var(--whale-text-color);
+}
+
+body.whale-dark .Whale .content-wrapper .whale-content .whale-content-main .toc,
+body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main .toc {
+	background-color: var(--whale-surface-color);
+	border-color: var(--whale-border-color);
+	color: var(--whale-text-color);
+}
+
+body.whale-dark .Whale .content-wrapper .whale-content .whale-content-main .toc .toctitle,
+body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main .toc .toctitle {
+	background-color: var(--whale-surface-muted-color);
+	border-color: var(--whale-border-color);
+	color: var(--whale-text-color);
+}
+
+body.whale-dark .Whale .content-wrapper .whale-content .whale-content-main .toc > ul,
+body.whale-dark .Whale .content-wrapper .whale-content .whale-content-main .toc ul,
+body.whale-dark .Whale .content-wrapper .whale-content .whale-content-main .toc li,
+body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main .toc > ul,
+body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main .toc ul,
+body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main .toc li {
+	background-color: transparent;
+	border-color: var(--whale-border-color);
+	color: var(--whale-text-color);
+}
+
+@media (prefers-color-scheme: dark) {
+	body.whale-auto-dark .Whale .whale-nav-wrapper,
+	body.whale-auto-dark.Whale .whale-nav-wrapper {
+		background-color: var(--whale-surface-elevated-color);
+		border-color: var(--whale-border-color);
+		box-shadow: var(--whale-shadow-sm);
+	}
+
+	body.whale-auto-dark .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link,
+	body.whale-auto-dark.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link {
+		color: var(--whale-text-color);
+	}
+
+	body.whale-auto-dark .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link:hover,
+	body.whale-auto-dark .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link:focus,
+	body.whale-auto-dark.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link:hover,
+	body.whale-auto-dark.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link:focus {
+		background-color: var(--whale-hover-color);
+		color: var(--whale-link-color);
+	}
+
+	body.whale-auto-dark .Whale .whale-nav-wrapper .whale-navbar .whale-search-group,
+	body.whale-auto-dark.Whale .whale-nav-wrapper .whale-navbar .whale-search-group,
+	body.whale-auto-dark .Whale .whale-login-modal .whale-form-control,
+	body.whale-auto-dark.Whale .whale-login-modal .whale-form-control {
+		background-color: var(--whale-control-background);
+		border-color: var(--whale-border-strong-color);
+		color: var(--whale-text-color);
+	}
+
+	body.whale-auto-dark .Whale .whale-nav-wrapper .whale-navbar .whale-search-form #searchGoButton,
+	body.whale-auto-dark.Whale .whale-nav-wrapper .whale-navbar .whale-search-form #searchGoButton {
+		background-color: var(--whale-control-background);
+		border-color: var(--whale-border-color);
+		color: var(--whale-content-muted-color);
+	}
+
+	body.whale-auto-dark .Whale .whale-nav-wrapper .whale-navbar .whale-search-form #mw-searchButton,
+	body.whale-auto-dark.Whale .whale-nav-wrapper .whale-navbar .whale-search-form #mw-searchButton {
+		background-color: var(--whale-main-color);
+		border-color: var(--whale-main-color);
+		color: var(--whale-main-contrast-color);
+	}
+
+	body.whale-auto-dark .Whale .content-wrapper .whale-content,
+	body.whale-auto-dark.Whale .content-wrapper .whale-content,
+	body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-header,
+	body.whale-auto-dark.Whale .content-wrapper .whale-content .whale-content-header,
+	body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main,
+	body.whale-auto-dark.Whale .content-wrapper .whale-content .whale-content-main,
+	body.whale-auto-dark .Whale .content-wrapper .live-recent .live-recent-feed,
+	body.whale-auto-dark.Whale .content-wrapper .live-recent .live-recent-feed,
+	body.whale-auto-dark .whale-dropdown-menu,
+	body.whale-auto-dark.Whale .whale-dropdown-menu,
+	body.whale-auto-dark .whale-modal-content,
+	body.whale-auto-dark.Whale .whale-modal-content {
+		background-color: var(--whale-surface-elevated-color);
+		border-color: var(--whale-border-color);
+		color: var(--whale-text-color);
+	}
+
+	body.whale-auto-dark .Whale .content-wrapper .whale-footer,
+	body.whale-auto-dark.Whale .content-wrapper .whale-footer,
+	body.whale-auto-dark .Whale .live-recent-header,
+	body.whale-auto-dark.Whale .live-recent-header {
+		background-color: var(--whale-surface-muted-color);
+		border-color: var(--whale-border-color);
+		color: var(--whale-text-color);
+	}
+
+	body.whale-auto-dark .Whale .whale-modal-header,
+	body.whale-auto-dark.Whale .whale-modal-header,
+	body.whale-auto-dark .Whale .whale-modal-body,
+	body.whale-auto-dark.Whale .whale-modal-body,
+	body.whale-auto-dark .Whale .whale-reference-content,
+	body.whale-auto-dark.Whale .whale-reference-content,
+	body.whale-auto-dark .Whale .whale-reference-actions,
+	body.whale-auto-dark.Whale .whale-reference-actions,
+	body.whale-auto-dark .Whale .whale-external-link-actions,
+	body.whale-auto-dark.Whale .whale-external-link-actions {
+		background-color: var(--whale-surface-elevated-color);
+		border-color: var(--whale-border-color);
+		color: var(--whale-text-color);
+	}
+
+	body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main .toc,
+	body.whale-auto-dark.Whale .content-wrapper .whale-content .whale-content-main .toc {
+		background-color: var(--whale-surface-color);
+		border-color: var(--whale-border-color);
+		color: var(--whale-text-color);
+	}
+
+	body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main .toc .toctitle,
+	body.whale-auto-dark.Whale .content-wrapper .whale-content .whale-content-main .toc .toctitle {
+		background-color: var(--whale-surface-muted-color);
+		border-color: var(--whale-border-color);
+		color: var(--whale-text-color);
+	}
+
+	body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main .toc > ul,
+	body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main .toc ul,
+	body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main .toc li,
+	body.whale-auto-dark.Whale .content-wrapper .whale-content .whale-content-main .toc > ul,
+	body.whale-auto-dark.Whale .content-wrapper .whale-content .whale-content-main .toc ul,
+	body.whale-auto-dark.Whale .content-wrapper .whale-content .whale-content-main .toc li {
+		background-color: transparent;
+		border-color: var(--whale-border-color);
+		color: var(--whale-text-color);
+	}
+}
+
+body.whale-dark,
+body.whale-auto-dark {
+	background-color: var(--whale-canvas-color);
+}
+
+body.whale-dark .whale-btn-secondary,
+body.whale-dark.Whale .whale-btn-secondary,
+body.whale-auto-dark .whale-btn-secondary,
+body.whale-auto-dark.Whale .whale-btn-secondary {
+	background-color: var(--whale-control-background);
+	border-color: var(--whale-border-strong-color);
+	color: var(--whale-text-color);
+}
+
+body.whale-dark .whale-btn-secondary:hover,
+body.whale-dark .whale-btn-secondary:focus,
+body.whale-dark.Whale .whale-btn-secondary:hover,
+body.whale-dark.Whale .whale-btn-secondary:focus,
+body.whale-auto-dark .whale-btn-secondary:hover,
+body.whale-auto-dark .whale-btn-secondary:focus,
+body.whale-auto-dark.Whale .whale-btn-secondary:hover,
+body.whale-auto-dark.Whale .whale-btn-secondary:focus {
+	background-color: var(--whale-hover-color);
+	border-color: var(--whale-main-color);
+	color: var(--whale-link-color);
+}
+
+body.whale-dark .Whale .whale-short-url-copy-row .whale-short-url-value,
+body.whale-dark.Whale .whale-short-url-copy-row .whale-short-url-value,
+body.whale-dark .Whale .whale-external-link-url,
+body.whale-dark.Whale .whale-external-link-url,
+body.whale-auto-dark .Whale .whale-short-url-copy-row .whale-short-url-value,
+body.whale-auto-dark.Whale .whale-short-url-copy-row .whale-short-url-value,
+body.whale-auto-dark .Whale .whale-external-link-url,
+body.whale-auto-dark.Whale .whale-external-link-url {
+	background-color: var(--whale-surface-muted-color);
+	border-color: var(--whale-border-strong-color);
+	color: var(--whale-text-color);
+}
+
+body.whale-dark .Whale .content-wrapper .whale-content .whale-content-main table.wikitable,
+body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main table.wikitable,
+body.whale-dark .Whale .content-wrapper .whale-content .whale-content-main table.infobox,
+body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main table.infobox,
+body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main table.wikitable,
+body.whale-auto-dark.Whale .content-wrapper .whale-content .whale-content-main table.wikitable,
+body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main table.infobox,
+body.whale-auto-dark.Whale .content-wrapper .whale-content .whale-content-main table.infobox {
+	background-color: var(--whale-table-background);
+	border-color: var(--whale-table-border-color);
+	color: var(--whale-text-color);
+}
+
+body.whale-dark .Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > th,
+body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > th,
+body.whale-dark .Whale .content-wrapper .whale-content .whale-content-main table.infobox tr > th,
+body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main table.infobox tr > th,
+body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > th,
+body.whale-auto-dark.Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > th,
+body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main table.infobox tr > th,
+body.whale-auto-dark.Whale .content-wrapper .whale-content .whale-content-main table.infobox tr > th {
+	background-color: var(--whale-table-header-background);
+	border-color: var(--whale-table-border-color);
+	color: var(--whale-text-color);
+}
+
+body.whale-dark .Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > td,
+body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > td,
+body.whale-dark .Whale .content-wrapper .whale-content .whale-content-main table.infobox tr > td,
+body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main table.infobox tr > td,
+body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > td,
+body.whale-auto-dark.Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > td,
+body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main table.infobox tr > td,
+body.whale-auto-dark.Whale .content-wrapper .whale-content .whale-content-main table.infobox tr > td {
+	background-color: var(--whale-table-background);
+	border-color: var(--whale-table-border-color);
+	color: var(--whale-text-color);
+}
+
+body.whale-dark #whale-bottombtn,
+body.whale-dark.Whale #whale-bottombtn,
+body.whale-auto-dark #whale-bottombtn,
+body.whale-auto-dark.Whale #whale-bottombtn {
+	background-color: var(--whale-surface-elevated-color);
+	border-color: var(--whale-border-strong-color);
+}
+
+body.whale-dark #whale-bottombtn .scroll-button,
+body.whale-dark.Whale #whale-bottombtn .scroll-button,
+body.whale-auto-dark #whale-bottombtn .scroll-button,
+body.whale-auto-dark.Whale #whale-bottombtn .scroll-button {
+	background-color: transparent;
+	border-color: transparent;
+	color: var(--whale-content-muted-color);
+}
+
+body.whale-dark #whale-bottombtn .scroll-button:hover,
+body.whale-dark #whale-bottombtn .scroll-button:focus-visible,
+body.whale-dark.Whale #whale-bottombtn .scroll-button:hover,
+body.whale-dark.Whale #whale-bottombtn .scroll-button:focus-visible,
+body.whale-auto-dark #whale-bottombtn .scroll-button:hover,
+body.whale-auto-dark #whale-bottombtn .scroll-button:focus-visible,
+body.whale-auto-dark.Whale #whale-bottombtn .scroll-button:hover,
+body.whale-auto-dark.Whale #whale-bottombtn .scroll-button:focus-visible {
+	background-color: var(--whale-hover-color);
+	color: var(--whale-link-color);
+}
+
+body.whale-dark.Whale .whale-not-found,
+body.whale-auto-dark.Whale .whale-not-found {
+	background-color: var(--whale-surface-elevated-color);
+	border-color: var(--whale-border-color);
+	border-left-color: var(--whale-main-color);
+	color: var(--whale-text-color);
+}
+
+body.whale-dark.Whale .whale-not-found-icon,
+body.whale-auto-dark.Whale .whale-not-found-icon {
+	background-color: var(--whale-accent-soft-color);
+	border-color: var(--whale-border-color);
+	color: var(--whale-link-color);
+}
+
+body.whale-dark.Whale .whale-not-found h2,
+body.whale-auto-dark.Whale .whale-not-found h2 {
+	color: var(--whale-text-color);
+}
+
+body.whale-dark.Whale .whale-not-found p,
+body.whale-auto-dark.Whale .whale-not-found p {
+	color: var(--whale-content-muted-color);
+}
+
+body.whale-dark.Whale .whale-login-modal .whale-login-links a,
+body.whale-auto-dark.Whale .whale-login-modal .whale-login-links a {
+	background-color: transparent;
+	border-color: transparent;
+	color: var(--whale-link-color);
+}
+
+body.whale-dark.Whale .whale-login-modal .whale-login-links a:hover,
+body.whale-dark.Whale .whale-login-modal .whale-login-links a:focus,
+body.whale-auto-dark.Whale .whale-login-modal .whale-login-links a:hover,
+body.whale-auto-dark.Whale .whale-login-modal .whale-login-links a:focus {
+	background-color: transparent;
+	border-color: transparent;
+	color: var(--whale-link-hover-color);
+}
 
 body.whale-reduce-motion .Whale .content-wrapper .whale-content .whale-content-main .whale-section-toggle,
 body.whale-reduce-motion .Whale .content-wrapper .whale-content .whale-content-main .whale-section-toggle::before,

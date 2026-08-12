@@ -95,7 +95,7 @@ const context = {
 				return '';
 			}
 
-			return '#7568e8';
+			return '#0b67d1';
 		},
 	}),
 	location: { protocol: 'https:' },
@@ -139,7 +139,7 @@ if (context.document.documentElement.style.colorScheme !== 'dark') {
 	throw new Error('System dark mode should set root color-scheme to dark.');
 }
 
-if (!metas.every((meta) => meta.content === '#7568e8')) {
+if (!metas.every((meta) => meta.content === '#0b67d1')) {
 	throw new Error(
 		'Browser theme metadata should follow the dark Whale palette.',
 	);
@@ -160,7 +160,7 @@ if (context.document.documentElement.style.colorScheme !== 'light') {
 	throw new Error('Explicit light mode should set root color-scheme to light.');
 }
 
-if (!metas.every((meta) => meta.content === '#7568e8')) {
+if (!metas.every((meta) => meta.content === '#0b67d1')) {
 	throw new Error(
 		'Browser theme metadata should return to the light Whale palette.',
 	);
