@@ -635,6 +635,26 @@ assertIncludes(
 );
 assertIncludes(
 	mediaWikiStyles,
+	'> div[style*="text-align: center"] > p > span[style*="color"]',
+	'Main-page inline text color neutralization',
+);
+assertIncludes(
+	mediaWikiStyles,
+	'color: var(--whale-content-muted-color) !important',
+	'Main-page secondary text contrast',
+);
+assertIncludes(
+	mediaWikiStyles,
+	'> div[style*="text-align: center"] > p > span[style*="font-weight"]',
+	'Main-page emphasized text targeting',
+);
+assertIncludes(
+	mediaWikiStyles,
+	'color: var(--whale-text-color) !important',
+	'Main-page emphasized text contrast',
+);
+assertIncludes(
+	mediaWikiStyles,
 	'background-color: transparent !important',
 	'Main-page flat outer surfaces',
 );
@@ -648,7 +668,33 @@ assertIncludes(
 	'background-color: var(--whale-code-background)',
 	'Article code treatment',
 );
+assertIncludes(styles, '--whale-canvas-color: #eaf1f5', 'Page canvas token');
+assertIncludes(
+	styles,
+	'--whale-surface-color: #f9fbfc',
+	'Document surface token',
+);
 assertIncludes(styles, '--whale-table-background', 'Table color tokens');
+assertIncludes(
+	styles,
+	'--whale-notice-text-color: #423c80',
+	'Notice text token',
+);
+assertIncludes(
+	styles,
+	'background-color: var(--whale-notice-background-color)',
+	'Notice theme background color',
+);
+assertIncludes(
+	styles,
+	'color: var(--whale-notice-text-color)',
+	'Notice theme text color',
+);
+assertIncludes(
+	styles,
+	'--whale-notice-text-color: #d9d6ff',
+	'Dark notice text contrast',
+);
 assertIncludes(styles, '--whale-table-header-background', 'Table color tokens');
 assertIncludes(styles, '--whale-table-border-color', 'Table color tokens');
 assertIncludes(
@@ -676,10 +722,10 @@ assertIncludes(
 	'body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > td',
 	'Auto dark table cell override',
 );
-assertIncludes(styles, '--whale-radius: 4px', 'Shared surface corner radius');
+assertIncludes(styles, '--whale-radius: 8px', 'Shared surface corner radius');
 assertIncludes(
 	styles,
-	'--whale-radius-sm: 2px',
+	'--whale-radius-sm: 5px',
 	'Shared control corner radius',
 );
 assertIncludes(styles, '--whale-layout-width: 1280px', 'Desktop layout width');
@@ -691,9 +737,17 @@ assertIncludes(
 	'Centered desktop frame width',
 );
 assertNotIncludes(styles, 'gradient(', 'Gradient-free interface treatment');
-assertIncludes(styles, 'background-color: #f1f2f3', 'Document canvas color');
-assertIncludes(styles, '--whale-border-color: #d5d8dc', 'Interface border');
-assertIncludes(styles, '--whale-shadow-sm: none', 'Flat surface treatment');
+assertIncludes(
+	styles,
+	'background-color: var(--whale-canvas-color)',
+	'Document canvas color',
+);
+assertIncludes(styles, '--whale-border-color: #d4dee5', 'Interface border');
+assertIncludes(
+	styles,
+	'--whale-shadow-sm: 0 1px 3px rgba(44, 66, 81, 0.08)',
+	'Subtle surface elevation',
+);
 assertIncludes(
 	styles,
 	'box-shadow: var(--whale-shadow-md)',

@@ -12,7 +12,7 @@
 	background-color: var(--whale-surface-color);
 	background-image: none;
 	border-bottom: 1px solid var(--whale-border-color);
-	box-shadow: none;
+	box-shadow: 0 1px 4px rgba(44, 66, 81, 0.08);
 }
 
 .Whale .whale-nav-wrapper .whale-navbar {
@@ -142,10 +142,10 @@
 	height: 34px;
 	min-width: 0;
 	overflow: hidden;
-	background-color: #fff;
+	background-color: var(--whale-surface-elevated-color);
 	border: 1px solid var(--whale-border-strong-color);
 	border-radius: var(--whale-radius);
-	box-shadow: none;
+	box-shadow: inset 0 1px 1px rgba(44, 66, 81, 0.04);
 	vertical-align: middle;
 	transition: box-shadow 0.16s ease;
 }
@@ -181,7 +181,7 @@
 .Whale .whale-nav-wrapper .whale-navbar .whale-search-form .whale-btn {
 	align-items: center;
 	border: 0;
-	border-left: 1px solid #ccc;
+	border-left: 1px solid var(--whale-border-color);
 	border-radius: 0;
 	display: inline-flex;
 	justify-content: center;
