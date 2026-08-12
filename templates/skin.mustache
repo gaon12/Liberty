@@ -34,12 +34,16 @@
 					</div>
 				{{/has-whale-site-notice}}
 				{{{ html-whale-header-ad }}}
-				{{>ContentTools}}
-				<div class="title">
-					<h1>{{{ html-title }}}</h1>
-				</div>
-				<div class="contentSub" {{{ html-user-language-attributes }}}>
-					{{{ html-subtitle }}}
+				<div class="whale-content-heading">
+					<div class="whale-content-title-group">
+						<div class="title">
+							<h1>{{{ html-title }}}</h1>
+						</div>
+						<div class="contentSub" {{{ html-user-language-attributes }}}>
+							{{{ html-subtitle }}}
+						</div>
+					</div>
+					{{>ContentTools}}
 				</div>
 			</div>
 			<div class="whale-content-main" id="content">

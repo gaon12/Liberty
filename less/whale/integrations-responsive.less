@@ -79,24 +79,25 @@
 	}
 
 	.Whale .content-wrapper .whale-content .whale-content-header {
-		display: flex;
-		flex-direction: column;
-		min-height: 0;
+		display: block;
 	}
 
 	.Whale .content-wrapper .whale-content .whale-content-header .whale-notice {
-		order: 1;
 		margin: 0.5rem;
 		padding: 0.75rem 2.5rem 0.75rem 0.75rem;
 	}
 
-	.Whale .content-wrapper .whale-content .whale-content-header .header-ads {
-		order: 2;
+	.Whale .content-wrapper .whale-content .whale-content-heading {
+		display: block;
+		padding: 0;
+	}
+
+	.Whale .content-wrapper .whale-content .whale-content-title-group {
+		padding: 0.65rem 0.75rem 0.5rem;
 	}
 
 	.Whale .content-wrapper .whale-content .whale-content-header .title {
-		order: 3;
-		padding: 0.65rem 0.75rem 0.4rem;
+		padding: 0;
 	}
 
 	.Whale .content-wrapper .whale-content .whale-content-header .title > h1 {
@@ -104,13 +105,11 @@
 	}
 
 	.Whale .content-wrapper .whale-content .whale-content-header .contentSub {
-		order: 4;
-		margin-top: -0.25rem;
-		padding: 0 0.75rem 0.5rem;
+		margin-top: 0.25rem;
+		padding: 0;
 	}
 
 	.Whale .content-wrapper .whale-content .whale-content-header .content-tools {
-		order: 5;
 		float: none;
 		text-align: right;
 		border-top: 1px solid var(--whale-border-color);

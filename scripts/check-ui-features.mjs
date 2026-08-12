@@ -686,6 +686,22 @@ const skinTemplate = read('templates/skin.mustache');
 assertIncludes(skinTemplate, 'whale-content-no-sidebar', 'No-sidebar layout');
 assertIncludes(
 	skinTemplate,
+	'whale-content-heading',
+	'Compact article heading layout',
+);
+assertIncludes(
+	styles,
+	'.whale-content-title-group',
+	'Compact article heading layout',
+);
+assertIncludes(
+	styles,
+	'justify-content: space-between',
+	'Article heading and tools alignment',
+);
+assertNotIncludes(styles, 'min-height: 204px', 'Legacy article header height');
+assertIncludes(
+	skinTemplate,
 	'whale-content-wrapper-no-sidebar',
 	'No-sidebar layout',
 );
