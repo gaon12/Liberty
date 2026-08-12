@@ -203,6 +203,10 @@ class TestElement {
 	focus() {
 		this.focused = true;
 	}
+
+	select() {
+		this.selected = true;
+	}
 }
 
 class TestDocument extends TestElement {
@@ -293,6 +297,10 @@ editSection.append(editLink);
 heading.append(toggle, headline, editSection);
 container.append(heading, body);
 document.body.append(container);
+
+const searchInput = new TestElement('input', { id: 'searchInput' });
+const editorInput = new TestElement('input');
+document.body.append(searchInput, editorInput);
 
 const modalTrigger = new TestElement('button');
 modalTrigger.setAttribute('data-whale-toggle', 'modal');
@@ -497,4 +505,41 @@ if (modalTrigger.focused || modal.style.display !== 'none') {
 	throw new Error(
 		'Programmatic modal close should support suppressing focus restoration.',
 	);
+}
+
+let searchPrevented = false;
+document.dispatch('keydown', {
+	target: document.body,
+	key: '/',
+	defaultPrevented: false,
+	metaKey: false,
+	ctrlKey: false,
+	shiftKey: false,
+	altKey: false,
+	preventDefault: () => {
+		searchPrevented = true;
+	},
+});
+
+if (!searchPrevented || !searchInput.focused || !searchInput.selected) {
+	throw new Error('Slash shortcut should focus and select the search input.');
+}
+
+searchInput.focused = false;
+searchInput.selected = false;
+document.dispatch('keydown', {
+	target: editorInput,
+	key: '/',
+	defaultPrevented: false,
+	metaKey: false,
+	ctrlKey: false,
+	shiftKey: false,
+	altKey: false,
+	preventDefault: () => {
+		throw new Error('Slash typed in a form field should remain untouched.');
+	},
+});
+
+if (searchInput.focused || searchInput.selected) {
+	throw new Error('Slash typed in a form field should not focus search.');
 }

@@ -343,6 +343,42 @@
 		}
 	};
 
+	const focusSearchFromShortcut = (event) => {
+		if (
+			event.defaultPrevented ||
+			event.key !== '/' ||
+			event.metaKey ||
+			event.ctrlKey ||
+			event.shiftKey ||
+			event.altKey ||
+			activeModal
+		) {
+			return false;
+		}
+
+		const entryTarget = whale.closest(
+			event.target,
+			'input, textarea, select, [contenteditable]',
+		);
+		if (
+			entryTarget &&
+			(!entryTarget.hasAttribute('contenteditable') ||
+				entryTarget.getAttribute('contenteditable') !== 'false')
+		) {
+			return false;
+		}
+
+		const search = document.getElementById('searchInput');
+		if (!search) {
+			return false;
+		}
+
+		event.preventDefault();
+		search.focus();
+		search.select?.();
+		return true;
+	};
+
 	whale.ready(() => {
 		initContentSkeleton();
 		initReadingProgress();
@@ -489,6 +525,10 @@
 		});
 
 		document.addEventListener('keydown', (event) => {
+			if (focusSearchFromShortcut(event)) {
+				return;
+			}
+
 			trapModalFocus(event);
 
 			if (event.key === 'Escape') {

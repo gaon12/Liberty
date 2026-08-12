@@ -483,6 +483,13 @@ assertIncludes(
 const searchTemplate = read('templates/SearchBox.mustache');
 assertIncludes(searchTemplate, 'aria-label="{{go-label}}"', 'Search form');
 assertIncludes(searchTemplate, 'aria-label="{{search-label}}"', 'Search form');
+assertIncludes(searchTemplate, 'aria-keyshortcuts="/"', 'Search shortcut');
+assertIncludes(layout, "event.key !== '/'", 'Search shortcut');
+assertIncludes(
+	layout,
+	"'input, textarea, select, [contenteditable]'",
+	'Search shortcut',
+);
 
 const navTemplate = read('templates/Nav.mustache');
 assertIncludes(navTemplate, 'width="258" height="64"', 'Navbar logo');
