@@ -200,20 +200,21 @@ assertIncludes(
 );
 
 const recovery = read('js/recovery.js');
+const liveRecent = read('js/live-recent.js');
 assertIncludes(
 	recovery,
+	'live-recent-no-data-text',
+	'Recovery live recent empty state',
+);
+assertIncludes(
+	liveRecent,
+	'live-recent-no-data-text',
+	'Live recent empty state',
+);
+assertNotIncludes(
+	`${recovery}\n${liveRecent}`,
 	'live-recent-no-data-visual',
-	'Recovery live recent empty state',
-);
-assertIncludes(
-	recovery,
-	'live-recent-no-data-paper',
-	'Recovery live recent empty state',
-);
-assertIncludes(
-	recovery,
-	'live-recent-no-data-bubble',
-	'Recovery live recent empty state',
+	'Decorative live recent empty state',
 );
 
 const skinPhp = read('SkinWhale.php');
@@ -269,6 +270,27 @@ const wikiStyles = read('less/wiki.less');
 const tableStyles = read('less/wiki-table.less');
 const mediaWikiStyles = read('less/only-mw.less');
 const bottomToolsStyles = read('less/whale/bottom-tools.less');
+const liveRecentStyles = read('less/whale/live-recent.less');
+const liveRecentHeaderBlock = getRuleBlock(
+	liveRecentStyles,
+	'.Whale .content-wrapper .live-recent .live-recent-header',
+	'Live recent header',
+);
+assertIncludes(
+	liveRecentHeaderBlock,
+	'min-height: 2.7rem',
+	'Compact live recent header',
+);
+assertIncludes(
+	liveRecentHeaderBlock,
+	'border-bottom: 1px solid var(--whale-border-color)',
+	'Live recent header divider',
+);
+assertNotIncludes(
+	liveRecentStyles,
+	'live-recent-no-data-visual',
+	'Decorative live recent empty state styles',
+);
 assertIncludes(styles, 'color-scheme: light dark', 'Stylesheet');
 assertIncludes(styles, 'body.whale-dark,', 'Stylesheet');
 assertIncludes(

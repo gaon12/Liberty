@@ -47,25 +47,13 @@
 
 	const createNoDataRow = () => {
 		const listItem = document.createElement('li');
-		const visual = document.createElement('span');
-		const tray = document.createElement('span');
-		const paper = document.createElement('span');
-		const bubble = document.createElement('span');
-		const dots = document.createElement('span');
 		const text = document.createElement('span');
 
 		listItem.className = 'live-recent-no-data';
-		visual.className = 'live-recent-no-data-visual';
-		tray.className = 'live-recent-no-data-tray';
-		paper.className = 'live-recent-no-data-paper';
-		bubble.className = 'live-recent-no-data-bubble';
-		dots.className = 'live-recent-no-data-dots';
 		text.className = 'live-recent-no-data-text';
 		text.textContent = mw.message('whale-live-recent-no-data').text();
 
-		bubble.append(dots);
-		visual.append(tray, paper, bubble);
-		listItem.append(visual, text);
+		listItem.append(text);
 
 		return listItem;
 	};
