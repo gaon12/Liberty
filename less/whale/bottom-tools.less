@@ -3,10 +3,12 @@
 	position: fixed;
 	right: 0.9rem;
 	bottom: 4rem;
-	background: transparent;
+	background: var(--whale-surface-color);
+	border: 1px solid var(--whale-border-strong-color);
+	border-radius: var(--whale-radius);
 	padding: 0;
 	display: flex;
-	gap: 0.45rem;
+	gap: 0;
 	z-index: 1000;
 	transition: transform 180ms ease;
 }
@@ -19,8 +21,8 @@ body.whale-scroll-buttons-horizontal #whale-bottombtn {
 	right: 0.9rem;
 	bottom: 1rem;
 	flex-direction: row;
-	gap: 0.45rem;
-	background: transparent;
+	gap: 0;
+	background: var(--whale-surface-color);
 }
 
 #whale-bottombtn .scroll-button {
@@ -28,11 +30,12 @@ body.whale-scroll-buttons-horizontal #whale-bottombtn {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 2.75rem;
-	height: 2.75rem;
-	background-color: #fff;
-	border: 1px solid var(--whale-border-strong-color);
-	border-radius: var(--whale-radius);
+	width: 2.4rem;
+	height: 2.4rem;
+	background-color: transparent;
+	border: 0;
+	border-bottom: 1px solid var(--whale-border-color);
+	border-radius: 0;
 	color: #4f5b63;
 	text-align: center;
 	cursor: pointer;
@@ -44,23 +47,28 @@ body.whale-scroll-buttons-horizontal #whale-bottombtn {
 }
 
 #whale-bottombtn .scroll-button:hover {
-	background-color: var(--whale-main-color);
-	border-color: var(--whale-main-color);
-	color: #fff;
-	transition: 500ms;
+	background-color: var(--whale-hover-color);
+	color: var(--whale-main-color);
+	transition: background-color 0.16s ease, color 0.16s ease;
 }
 
 body.whale-scroll-buttons-horizontal #whale-bottombtn .scroll-button {
-	width: 2.75rem;
-	height: 2.75rem;
-	background-color: #fff;
-	border: 1px solid var(--whale-border-strong-color);
-	border-radius: var(--whale-radius);
+	width: 2.4rem;
+	height: 2.4rem;
+	background-color: transparent;
+	border: 0;
+	border-right: 1px solid var(--whale-border-color);
+	border-radius: 0;
 	color: #4f5b63;
 }
 
-body.whale-scroll-buttons-horizontal #whale-bottombtn .scroll-button + .scroll-button {
-	border-left: 1px solid var(--whale-border-strong-color);
+#whale-bottombtn > :last-child {
+	border-bottom: 0;
+}
+
+body.whale-scroll-buttons-horizontal #whale-bottombtn > :last-child {
+	border-right: 0;
+	border-bottom: 0;
 }
 
 #whale-bottombtn .whale-bottom-tools {
@@ -70,23 +78,10 @@ body.whale-scroll-buttons-horizontal #whale-bottombtn .scroll-button + .scroll-b
 #whale-bottombtn .whale-bottom-tools-menu {
 	top: auto;
 	right: 0;
-	bottom: calc(100% + 0.45rem);
+	bottom: calc(100% + 0.35rem);
 	left: auto;
 	min-width: 12.5rem;
 	padding: 0.35rem;
-}
-
-#whale-bottombtn .whale-bottom-tools-menu::after {
-	position: absolute;
-	right: 0.9rem;
-	bottom: -0.4rem;
-	width: 0.75rem;
-	height: 0.75rem;
-	background: inherit;
-	border-right: 1px solid #e1e8ed;
-	border-bottom: 1px solid #e1e8ed;
-	content: "";
-	transform: rotate(45deg);
 }
 
 #whale-bottombtn .whale-bottom-tools-menu .whale-dropdown-item {
@@ -95,7 +90,7 @@ body.whale-scroll-buttons-horizontal #whale-bottombtn .scroll-button + .scroll-b
 	gap: 0.55rem;
 	min-height: 2.25rem;
 	padding: 0.45rem 0.65rem;
-	border-radius: var(--whale-radius-sm);
+	border-radius: 0;
 }
 
 #whale-bottombtn .whale-bottom-tools-menu .whale-icon {

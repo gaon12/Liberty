@@ -362,12 +362,20 @@ assert(
 	'The new code wrapper should replace the pre at its original position.',
 );
 
-const plainButton = plainWrapper.querySelector('.whale-code-copy');
+const plainToolbar = plainWrapper.querySelector('.whale-code-toolbar');
+const plainButton = plainToolbar?.querySelector('.whale-code-copy');
 assert(
-	plainButton &&
-		plainWrapper.children[0] === plainButton &&
+	plainToolbar &&
+		plainButton &&
+		plainWrapper.children[0] === plainToolbar &&
 		plainWrapper.children[1] === plainPre,
-	'The copy button should be prepended before the plain pre.',
+	'The code toolbar should be prepended before the plain pre.',
+);
+assert(
+	plainWrapper.querySelectorAll('.whale-code-toolbar').length === 1 &&
+		plainToolbar.children.length === 1 &&
+		plainToolbar.children[0] === plainButton,
+	'The plain code wrapper should contain exactly one toolbar with one copy button.',
 );
 assert(
 	plainButton.type === 'button' &&
@@ -387,10 +395,20 @@ assert(
 		highlight.classList.contains('whale-code-block'),
 	'An existing .mw-highlight container should be reused as the code wrapper.',
 );
-const highlightButton = highlight.querySelector('.whale-code-copy');
+const highlightToolbar = highlight.querySelector('.whale-code-toolbar');
+const highlightButton = highlightToolbar?.querySelector('.whale-code-copy');
 assert(
-	highlightButton && highlight.children[0] === highlightButton,
-	'The reused highlight container should receive a prepended copy button.',
+	highlightToolbar &&
+		highlightButton &&
+		highlight.children[0] === highlightToolbar &&
+		highlight.children[1] === highlightedPre,
+	'The reused highlight container should receive a toolbar before its pre.',
+);
+assert(
+	highlight.querySelectorAll('.whale-code-toolbar').length === 1 &&
+		highlightToolbar.children.length === 1 &&
+		highlightToolbar.children[0] === highlightButton,
+	'The reused highlight wrapper should contain exactly one toolbar with one copy button.',
 );
 
 assert(
@@ -399,11 +417,13 @@ assert(
 );
 hookCallbacks[0]([content]);
 assert(
-	plainWrapper.querySelectorAll('.whale-code-copy').length === 1 &&
+	plainWrapper.querySelectorAll('.whale-code-toolbar').length === 1 &&
+		plainWrapper.querySelectorAll('.whale-code-copy').length === 1 &&
+		highlight.querySelectorAll('.whale-code-toolbar').length === 1 &&
 		highlight.querySelectorAll('.whale-code-copy').length === 1 &&
 		plainPre.parentElement === plainWrapper &&
 		highlightedPre.parentElement === highlight,
-	'Reprocessing content should not create duplicate wrappers or buttons.',
+	'Reprocessing content should not create duplicate wrappers, toolbars, or buttons.',
 );
 
 const dynamicContainer = new TestElement('section');
@@ -414,14 +434,19 @@ dynamicContainer.append(dynamicPre);
 document.body.append(dynamicContainer);
 hookCallbacks[0]([dynamicPre]);
 const dynamicWrapper = dynamicPre.parentElement;
+const dynamicToolbar = dynamicWrapper?.querySelector('.whale-code-toolbar');
+const dynamicButton = dynamicToolbar?.querySelector('.whale-code-copy');
 assert(
 	dynamicWrapper !== dynamicContainer &&
 		dynamicWrapper?.classList.contains('whale-code-block') &&
-		dynamicWrapper.querySelector('.whale-code-copy'),
+		dynamicWrapper.children[0] === dynamicToolbar &&
+		dynamicWrapper.children[1] === dynamicPre &&
+		dynamicWrapper.querySelectorAll('.whale-code-toolbar').length === 1 &&
+		dynamicToolbar.children.length === 1 &&
+		dynamicToolbar.children[0] === dynamicButton,
 	'The hook should prepare a pre passed directly as its content root.',
 );
 
-const dynamicButton = dynamicWrapper.querySelector('.whale-code-copy');
 const originalPlainText = plainPre.textContent;
 copyResults.push(true);
 await document.dispatchClick(plainButton);

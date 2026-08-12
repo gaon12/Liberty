@@ -709,6 +709,17 @@ if (!scrollButtonBlock) {
 	throw new Error('Scroll button block should exist.');
 }
 assertIncludes(scrollButtonBlock, 'box-shadow: none', 'Flat scroll buttons');
+assertIncludes(scrollButtonBlock, 'width: 2.4rem', 'Compact scroll toolbar');
+assertIncludes(
+	bottomToolsStyles,
+	'border: 1px solid var(--whale-border-strong-color)',
+	'Attached scroll toolbar frame',
+);
+assertNotIncludes(
+	bottomToolsStyles,
+	'.whale-bottom-tools-menu::after',
+	'Decorative bottom tools menu pointer',
+);
 
 const rendererPhp = read('WhaleRenderer.php');
 const navbarParserPhp = read('WhaleNavbarParser.php');
@@ -870,7 +881,13 @@ assertIncludes(
 assertIncludes(styles, '.whale-reference-content', 'Reference modal content');
 assertIncludes(styles, '~"min(60vh, 30rem)"', 'Reference modal scroll limit');
 assertIncludes(styles, '.whale-code-copy', 'Code block copy control');
-assertIncludes(styles, 'padding-top: 3rem', 'Code block copy control spacing');
+assertIncludes(styles, '.whale-code-toolbar', 'Code block copy toolbar');
+assertIncludes(
+	styles,
+	'border-bottom: 1px solid var(--whale-border-color)',
+	'Code block toolbar divider',
+);
+assertIncludes(codeCopy, 'createCopyToolbar', 'Code block toolbar structure');
 if (
 	!skin.ResourceModules['skins.whale.layoutjs'].scripts.includes(
 		'js/code-copy.js',

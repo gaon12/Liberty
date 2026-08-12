@@ -360,6 +360,12 @@ body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main .toc a
 	color: #fff;
 }
 
+body.whale-dark #whale-bottombtn,
+body.whale-dark.Whale #whale-bottombtn {
+	background-color: var(--whale-surface-color);
+	border-color: var(--whale-border-color);
+}
+
 body.whale-dark .whale-floating-toc a,
 body.whale-dark #whale-bottombtn .scroll-button {
 	background-color: #1f2023;
@@ -433,8 +439,7 @@ body.whale-dark.Whale .whale-not-found p {
 
 body.whale-dark .whale-floating-toc a:hover,
 body.whale-dark .whale-floating-toc a:focus,
-body.whale-dark .whale-floating-toc a.is-active,
-body.whale-dark #whale-bottombtn .scroll-button:hover {
+body.whale-dark .whale-floating-toc a.is-active {
 	background-color: var(--whale-main-color);
 	border-color: var(--whale-main-color);
 	color: #fff;
@@ -442,16 +447,19 @@ body.whale-dark #whale-bottombtn .scroll-button:hover {
 
 body.whale-dark.Whale .whale-floating-toc a:hover,
 body.whale-dark.Whale .whale-floating-toc a:focus,
-body.whale-dark.Whale .whale-floating-toc a.is-active,
-body.whale-dark.Whale #whale-bottombtn .scroll-button:hover {
+body.whale-dark.Whale .whale-floating-toc a.is-active {
 	background-color: var(--whale-main-color);
 	border-color: var(--whale-main-color);
 	color: #fff;
 }
 
-/* Soft near-black canvas behind the Central-style document card, and
-   the article body shares the sheet surface with its header/footer
-   instead of dropping to pure black between them. */
+body.whale-dark #whale-bottombtn .scroll-button:hover,
+body.whale-dark.Whale #whale-bottombtn .scroll-button:hover {
+	background-color: var(--whale-hover-color);
+	color: var(--whale-main-color);
+}
+
+/* Keep the dark document surface distinct from the page canvas. */
 body.whale-dark,
 body.whale-dark.Whale {
 	background-color: #17181a;
@@ -824,6 +832,12 @@ body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main {
 		color: #fff;
 	}
 
+	body.whale-auto-dark #whale-bottombtn,
+	body.whale-auto-dark.Whale #whale-bottombtn {
+		background-color: var(--whale-surface-color);
+		border-color: var(--whale-border-color);
+	}
+
 	body.whale-auto-dark .whale-floating-toc a,
 	body.whale-auto-dark #whale-bottombtn .scroll-button {
 		background-color: #1f2023;
@@ -897,8 +911,7 @@ body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main {
 
 	body.whale-auto-dark .whale-floating-toc a:hover,
 	body.whale-auto-dark .whale-floating-toc a:focus,
-	body.whale-auto-dark .whale-floating-toc a.is-active,
-	body.whale-auto-dark #whale-bottombtn .scroll-button:hover {
+	body.whale-auto-dark .whale-floating-toc a.is-active {
 		background-color: var(--whale-main-color);
 		border-color: var(--whale-main-color);
 		color: #fff;
@@ -906,14 +919,19 @@ body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main {
 
 	body.whale-auto-dark.Whale .whale-floating-toc a:hover,
 	body.whale-auto-dark.Whale .whale-floating-toc a:focus,
-	body.whale-auto-dark.Whale .whale-floating-toc a.is-active,
-	body.whale-auto-dark.Whale #whale-bottombtn .scroll-button:hover {
+	body.whale-auto-dark.Whale .whale-floating-toc a.is-active {
 		background-color: var(--whale-main-color);
 		border-color: var(--whale-main-color);
 		color: #fff;
 	}
 
-	/* Central-style dark canvas; see the whale-dark rules above. */
+	body.whale-auto-dark #whale-bottombtn .scroll-button:hover,
+	body.whale-auto-dark.Whale #whale-bottombtn .scroll-button:hover {
+		background-color: var(--whale-hover-color);
+		color: var(--whale-main-color);
+	}
+
+	/* Keep the automatic dark canvas aligned with the explicit mode. */
 	body.whale-auto-dark,
 	body.whale-auto-dark.Whale {
 		background-color: #17181a;

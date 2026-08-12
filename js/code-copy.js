@@ -18,6 +18,13 @@
 		return button;
 	};
 
+	const createCopyToolbar = () => {
+		const toolbar = document.createElement('div');
+		toolbar.className = 'whale-code-toolbar';
+		toolbar.append(createCopyButton());
+		return toolbar;
+	};
+
 	const prepareCodeBlock = (pre) => {
 		if (pre.dataset.whaleCodeCopyReady === 'true') {
 			return;
@@ -37,7 +44,7 @@
 			wrapper.append(pre);
 		}
 
-		wrapper.prepend(createCopyButton());
+		wrapper.prepend(createCopyToolbar());
 		pre.dataset.whaleCodeCopyReady = 'true';
 	};
 

@@ -376,10 +376,10 @@ body.whale-font-scale-x-large .Whale .content-wrapper .whale-content .whale-cont
 .Whale .content-wrapper .whale-content .whale-content-main .whale-heading-anchor {
 	appearance: none;
 	margin-left: 0.35rem;
-	padding: 0.05rem 0.35rem;
-	border: 1px solid #d8e0e7;
-	border-radius: var(--whale-radius-sm);
-	background: var(--whale-surface-muted-color);
+	padding: 0.05rem 0.2rem;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
 	color: #5d666d;
 	cursor: pointer;
 	font-size: 0.8rem;
@@ -400,9 +400,8 @@ body.whale-font-scale-x-large .Whale .content-wrapper .whale-content .whale-cont
 
 .Whale .content-wrapper .whale-content .whale-content-main .whale-heading-anchor:hover,
 .Whale .content-wrapper .whale-content .whale-content-main .whale-heading-anchor:focus {
-	background: var(--whale-main-color);
-	border-color: var(--whale-main-color);
-	color: #fff;
+	background: transparent;
+	color: var(--whale-main-color);
 }
 
 .whale-heading-anchor-alert {
@@ -412,11 +411,11 @@ body.whale-font-scale-x-large .Whale .content-wrapper .whale-content .whale-cont
 	z-index: 1100;
 	max-width: ~"min(20rem, calc(100vw - 2rem))";
 	padding: 0.55rem 0.75rem;
-	border: 1px solid var(--whale-main-color);
-	border-radius: var(--whale-radius);
-	background-color: #fff;
-	box-shadow: var(--whale-shadow-md);
-	color: #202326;
+	border: 1px solid #202326;
+	border-radius: var(--whale-radius-sm);
+	background-color: #202326;
+	box-shadow: none;
+	color: #fff;
 	font-size: 0.9rem;
 	line-height: 1.35;
 	opacity: 0;
