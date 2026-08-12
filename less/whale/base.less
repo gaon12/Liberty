@@ -31,7 +31,7 @@ html {
 	box-sizing: border-box;
 	/* Whale manages both schemes itself; tell browsers not to auto-rewrite colors. */
 	color-scheme: light dark;
-	font-size: 15px;
+	font-size: 16px;
 	scrollbar-gutter: stable;
 	-webkit-text-size-adjust: 100%;
 }
@@ -81,9 +81,9 @@ select {
 
 body {
 	margin: 0;
-	font-size: 0.95rem;
-	line-height: 1.55;
-	background-color: #f1f2f3;
+	font-size: 1rem;
+	line-height: 1.6;
+	background-color: #dce7ed;
 }
 
 body,
@@ -265,32 +265,41 @@ strike {
 
 /* Background Color */
 .Whale {
-	--whale-layout-width: 1280px;
-	--whale-sidebar-width: 260px;
-	--whale-layout-gap: 14px;
+	--whale-layout-width: 1360px;
+	--whale-sidebar-width: 280px;
+	--whale-layout-gap: 20px;
+	--whale-nav-height: 54px;
+	--whale-control-height: 2.75rem;
+	--whale-control-height-sm: 2.25rem;
+	--whale-reading-size: 1.05rem;
+	--whale-reading-leading: 1.68;
 	--whale-main-color: #7568e8;
 	--whale-second-color: #5f57cf;
-	--whale-canvas-color: #eaf1f5;
-	--whale-text-color: #263642;
-	--whale-content-muted-color: #647582;
+	--whale-link-color: #1769aa;
+	--whale-link-hover-color: #125486;
+	--whale-danger-color: #a33d48;
+	--whale-skeleton-color: #d3e0e6;
+	--whale-canvas-color: #dce7ed;
+	--whale-text-color: #20313d;
+	--whale-content-muted-color: #586d7b;
 	--whale-dark-text-color: #f1f3f5;
-	--whale-surface-color: #f6f9fb;
-	--whale-surface-elevated-color: #fcfdfe;
-	--whale-surface-muted-color: #edf3f6;
+	--whale-surface-color: #edf3f6;
+	--whale-surface-elevated-color: #f4f7f9;
+	--whale-surface-muted-color: #e4edf2;
 	--whale-accent-soft-color: #eef0ff;
 	--whale-notice-background-color: var(--whale-accent-soft-color);
 	--whale-notice-text-color: #423c80;
-	--whale-code-background: #f4f5f6;
-	--whale-table-background: #fff;
-	--whale-table-header-background: #f3f4f5;
-	--whale-table-border-color: #d4dee5;
-	--whale-border-color: #d4dee5;
-	--whale-border-strong-color: #b8c6d0;
-	--whale-hover-color: #e7eff4;
-	--whale-shadow-sm: 0 1px 3px rgba(44, 66, 81, 0.08);
+	--whale-code-background: #e5edf1;
+	--whale-table-background: #eef4f7;
+	--whale-table-header-background: #e2ebf0;
+	--whale-table-border-color: #bdcbd4;
+	--whale-border-color: #bdcbd4;
+	--whale-border-strong-color: #9eafba;
+	--whale-hover-color: #dbe7ed;
+	--whale-shadow-sm: 0 2px 8px rgba(35, 55, 68, 0.12);
 	--whale-shadow-md: 0 8px 24px rgba(24, 28, 33, 0.18);
-	--whale-radius: 8px;
-	--whale-radius-sm: 5px;
+	--whale-radius: 12px;
+	--whale-radius-sm: 8px;
 	background-color: var(--whale-canvas-color);
 	color: var(--whale-text-color);
 	color-scheme: light;

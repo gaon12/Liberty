@@ -313,6 +313,7 @@ if (!readingProgressBlock || /display:\s*none/.test(readingProgressBlock)) {
 }
 assertIncludes(styles, '.whale-floating-toc.is-mobile', 'Stylesheet');
 const rootHtmlBlock = getRuleBlock(styles, 'html', 'Root viewport styles');
+assertIncludes(rootHtmlBlock, 'font-size: 16px', 'Readable root font size');
 assertIncludes(
 	rootHtmlBlock,
 	'scrollbar-gutter: stable',
@@ -712,15 +713,15 @@ assertIncludes(
 	'background-color: var(--whale-code-background)',
 	'Article code treatment',
 );
-assertIncludes(styles, '--whale-canvas-color: #eaf1f5', 'Page canvas token');
+assertIncludes(styles, '--whale-canvas-color: #dce7ed', 'Page canvas token');
 assertIncludes(
 	styles,
-	'--whale-surface-color: #f6f9fb',
+	'--whale-surface-color: #edf3f6',
 	'Document surface token',
 );
 assertIncludes(
 	styles,
-	'--whale-surface-elevated-color: #fcfdfe',
+	'--whale-surface-elevated-color: #f4f7f9',
 	'Elevated surface token',
 );
 assertIncludes(styles, '--whale-table-background', 'Table color tokens');
@@ -771,15 +772,28 @@ assertIncludes(
 	'body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > td',
 	'Auto dark table cell override',
 );
-assertIncludes(styles, '--whale-radius: 8px', 'Shared surface corner radius');
+assertIncludes(styles, '--whale-radius: 12px', 'Shared surface corner radius');
 assertIncludes(
 	styles,
-	'--whale-radius-sm: 5px',
+	'--whale-radius-sm: 8px',
 	'Shared control corner radius',
 );
-assertIncludes(styles, '--whale-layout-width: 1280px', 'Desktop layout width');
-assertIncludes(styles, '--whale-sidebar-width: 260px', 'Sidebar width token');
-assertIncludes(styles, '--whale-layout-gap: 14px', 'Desktop layout gap');
+assertIncludes(styles, '--whale-layout-width: 1360px', 'Desktop layout width');
+assertIncludes(styles, '--whale-sidebar-width: 280px', 'Sidebar width token');
+assertIncludes(styles, '--whale-layout-gap: 20px', 'Desktop layout gap');
+assertIncludes(styles, '--whale-nav-height: 54px', 'Shared navigation height');
+assertIncludes(
+	styles,
+	'--whale-reading-size: 1.05rem',
+	'Readable article size',
+);
+assertIncludes(
+	styles,
+	'--whale-reading-leading: 1.68',
+	'Readable article leading',
+);
+assertIncludes(styles, '--whale-link-color: #1769aa', 'Light link color token');
+assertIncludes(styles, '--whale-link-color: #8fc7f2', 'Dark link color token');
 assertIncludes(
 	styles,
 	'max-width: var(--whale-layout-width)',
@@ -791,10 +805,10 @@ assertIncludes(
 	'background-color: var(--whale-canvas-color)',
 	'Document canvas color',
 );
-assertIncludes(styles, '--whale-border-color: #d4dee5', 'Interface border');
+assertIncludes(styles, '--whale-border-color: #bdcbd4', 'Interface border');
 assertIncludes(
 	styles,
-	'--whale-shadow-sm: 0 1px 3px rgba(44, 66, 81, 0.08)',
+	'--whale-shadow-sm: 0 2px 8px rgba(35, 55, 68, 0.12)',
 	'Subtle surface elevation',
 );
 assertIncludes(
