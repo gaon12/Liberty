@@ -715,8 +715,13 @@ assertIncludes(
 assertIncludes(styles, '--whale-canvas-color: #eaf1f5', 'Page canvas token');
 assertIncludes(
 	styles,
-	'--whale-surface-color: #f9fbfc',
+	'--whale-surface-color: #f6f9fb',
 	'Document surface token',
+);
+assertIncludes(
+	styles,
+	'--whale-surface-elevated-color: #fcfdfe',
+	'Elevated surface token',
 );
 assertIncludes(styles, '--whale-table-background', 'Table color tokens');
 assertIncludes(
