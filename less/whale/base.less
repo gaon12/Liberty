@@ -293,7 +293,18 @@ strike {
 }
 
 .Whale .whale-reading-progress {
-	display: none;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 1100;
+	height: 3px;
+	background-color: var(--whale-main-color);
+	pointer-events: none;
+	transform: scaleX(0);
+	transform-origin: left center;
+	transition: transform 80ms linear;
+	will-change: transform;
 }
 /* Background Color End */
 

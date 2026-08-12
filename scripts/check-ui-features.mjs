@@ -218,6 +218,24 @@ const tableStyles = read('less/wiki-table.less');
 const mediaWikiStyles = read('less/only-mw.less');
 assertIncludes(styles, 'color-scheme: light dark', 'Stylesheet');
 assertIncludes(styles, 'body.whale-dark,', 'Stylesheet');
+assertIncludes(
+	styles,
+	'.Whale .whale-reading-progress',
+	'Reading progress indicator',
+);
+assertIncludes(styles, 'height: 3px', 'Reading progress indicator');
+assertIncludes(styles, 'transform: scaleX(0)', 'Reading progress indicator');
+assertIncludes(
+	styles,
+	'transform-origin: left center',
+	'Reading progress indicator',
+);
+const readingProgressBlock = styles.match(
+	/\.Whale \.whale-reading-progress\s*\{(?<block>[\s\S]*?)\n\}/,
+)?.groups?.block;
+if (!readingProgressBlock || /display:\s*none/.test(readingProgressBlock)) {
+	throw new Error('Reading progress indicator should remain visible.');
+}
 assertIncludes(styles, '.whale-floating-toc.is-mobile', 'Stylesheet');
 assertIncludes(styles, '.whale-content-no-sidebar', 'No-sidebar layout');
 assertIncludes(styles, 'scrollbar-gutter: stable', 'Stylesheet');
