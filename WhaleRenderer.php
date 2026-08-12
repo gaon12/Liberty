@@ -297,7 +297,7 @@ class WhaleRenderer {
 					$title,
 					new HtmlArmor( $this->renderIcon( $editable ? 'edit' : 'lock' ) . ' ' . $skin->msg( 'edit' )->escaped() ),
 					[
-						'class' => 'whale-btn whale-btn-secondary tools-btn',
+						'class' => 'whale-btn whale-btn-primary tools-btn tools-edit',
 						'id' => 'ca-edit',
 						'title' => Linker::titleAttrib( 'ca-edit', 'withaccess' ),
 						'accesskey' => Linker::accesskey( 'ca-edit' ),
@@ -722,6 +722,7 @@ class WhaleRenderer {
 			'show-login-modal' => $skin->getUser()->isAnon(),
 			'title' => $skin->msg( 'whale-login' )->text(),
 			'alert-label' => $skin->msg( 'error' )->text(),
+			'name-label' => $skin->msg( 'userlogin-yourname' )->text(),
 			'name-placeholder' => $skin->msg( 'userlogin-yourname-ph' )->text(),
 			'password-label' => $skin->msg( 'userlogin-yourpassword' )->text(),
 			'password-placeholder' => $skin->msg( 'userlogin-yourpassword-ph' )->text(),

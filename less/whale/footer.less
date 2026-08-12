@@ -1,18 +1,18 @@
 /* Footer */
 .Whale .content-wrapper .whale-footer {
 	display: flex;
-	align-items: flex-end;
+	align-items: center;
 	justify-content: space-between;
 	flex-wrap: wrap;
-	gap: 0.9rem 1.4rem;
+	gap: 1rem 1.5rem;
 	border: 0;
 	border-top: 1px solid var(--whale-border-color);
-	border-radius: 0;
+	border-radius: 0 0 var(--whale-radius) var(--whale-radius);
 	background-color: var(--whale-surface-muted-color);
 	color: var(--whale-content-muted-color);
 	font-size: 0.875rem;
 	line-height: 1.6;
-	padding: 1.1rem 1.35rem;
+	padding: 1.25rem 1.5rem;
 	text-align: left;
 }
 
@@ -24,6 +24,25 @@
 	flex-wrap: wrap;
 	gap: 0.2rem 0.75rem;
 	width: auto;
+}
+
+.Whale .content-wrapper .whale-footer a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 1.75rem;
+	margin: -0.1rem -0.35rem;
+	padding: 0.1rem 0.35rem;
+	border-radius: var(--whale-radius-sm);
+	color: var(--whale-content-muted-color);
+	text-decoration: none;
+	transition: background-color 0.16s ease, color 0.16s ease;
+}
+
+.Whale .content-wrapper .whale-footer a:hover,
+.Whale .content-wrapper .whale-footer a:focus {
+	background-color: var(--whale-hover-color);
+	color: var(--whale-main-color);
+	text-decoration: none;
 }
 
 .Whale .content-wrapper .whale-footer .whale-footer-links {
@@ -60,5 +79,12 @@
 	height: 31px;
 	object-fit: contain;
 	margin: 0;
+	opacity: 0.78;
+	transition: opacity 0.16s ease;
+}
+
+.Whale .content-wrapper .whale-footer a:hover .whale-footer-brand-img,
+.Whale .content-wrapper .whale-footer a:focus .whale-footer-brand-img {
+	opacity: 1;
 }
 /* Footer End */

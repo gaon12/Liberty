@@ -4,8 +4,8 @@
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) var(--whale-sidebar-width);
 	gap: var(--whale-layout-gap);
-	margin-top: ~"calc(var(--whale-nav-height) + 14px)";
-	padding: 0 12px 1.25rem;
+	margin-top: ~"calc(var(--whale-nav-height) + 16px)";
+	padding: 0 12px 1.5rem;
 	z-index: 0;
 }
 
@@ -18,28 +18,29 @@
 	min-width: 0;
 	margin: 0;
 	padding: 0;
-	background-color: var(--whale-surface-color);
+	background-color: var(--whale-surface-elevated-color);
 	border: 1px solid var(--whale-border-color);
 	border-radius: var(--whale-radius);
 	box-shadow: var(--whale-shadow-sm);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header {
+	display: flow-root;
 	border: 0;
 	border-bottom: 1px solid var(--whale-border-color);
 	border-radius: var(--whale-radius) var(--whale-radius) 0 0;
-	background-color: var(--whale-surface-color);
+	background-color: var(--whale-surface-elevated-color);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .whale-notice {
 	background-color: var(--whale-notice-background-color);
-	border: 1px solid var(--whale-border-color);
+	border: 1px solid #91caff;
 	border-left: 4px solid var(--whale-main-color);
 	border-radius: var(--whale-radius-sm);
 	color: var(--whale-notice-text-color);
-	margin: 1.25rem 1.4rem 0;
+	margin: 1.5rem 1.75rem 0;
 	position: relative;
-	padding: 0.85rem 3.25rem 0.85rem 1.05rem;
+	padding: 0.9rem 3.25rem 0.9rem 1.1rem;
 	font-size: 0.95rem;
 	line-height: 1.55;
 	overflow-wrap: anywhere;
@@ -70,7 +71,7 @@
 
 .Whale .content-wrapper .whale-content .whale-content-header .whale-notice .whale-notice-close:hover,
 .Whale .content-wrapper .whale-content .whale-content-header .whale-notice .whale-notice-close:focus {
-	background-color: rgba(117, 104, 232, 0.1);
+	background-color: rgba(11, 103, 209, 0.12);
 	opacity: 1;
 }
 
@@ -79,9 +80,9 @@
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .whale-notice ul {
+	margin: 0.25rem 0 0.25rem 1.25rem;
 	list-style-image: none;
-	list-style-type: none;
-	text-align: center;
+	list-style-type: disc;
 	line-height: 1.8rem;
 }
 
@@ -123,10 +124,10 @@
 
 .Whale .content-wrapper .whale-content .whale-content-heading {
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	justify-content: space-between;
 	gap: 1.25rem;
-	padding: 1.25rem 1.4rem 1.05rem;
+	padding: 1.5rem 1.75rem 1.35rem;
 }
 
 .Whale .content-wrapper .whale-content > .whale-content-header > .whale-notice + .whale-content-heading {
@@ -149,19 +150,23 @@
 	display: inline-flex;
 	flex-wrap: wrap;
 	justify-content: flex-end;
-	gap: 0;
+	gap: 0.3rem;
 	max-width: 100%;
+	padding: 0.25rem;
+	border: 1px solid var(--whale-border-color);
+	border-radius: ~"calc(var(--whale-radius-sm) + 2px)";
+	background-color: var(--whale-surface-muted-color);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .content-tools .whale-btn-group > .whale-btn,
 .Whale .content-wrapper .whale-content .whale-content-header .content-tools .whale-btn-group > .whale-btn-group {
-	margin-left: -1px;
-	border-radius: 0;
+	margin-left: 0;
+	border-radius: var(--whale-radius-sm);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .content-tools .whale-btn-group > .whale-btn:first-child {
 	margin-left: 0;
-	border-radius: var(--whale-radius-sm) 0 0 var(--whale-radius-sm);
+	border-radius: var(--whale-radius-sm);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .content-tools .tools-btn {
@@ -169,6 +174,21 @@
 	min-height: var(--whale-control-height-sm);
 	padding: 0.42rem 0.75rem;
 	border-radius: var(--whale-radius-sm);
+	background-color: var(--whale-control-background);
+}
+
+.Whale .content-wrapper .whale-content .whale-content-header .content-tools .tools-edit {
+	background-color: var(--whale-main-color);
+	border-color: var(--whale-main-color);
+	color: var(--whale-main-contrast-color);
+}
+
+.Whale .content-wrapper .whale-content .whale-content-header .content-tools .tools-edit:hover,
+.Whale .content-wrapper .whale-content .whale-content-header .content-tools .tools-edit:focus,
+.Whale .content-wrapper .whale-content .whale-content-header .content-tools .tools-edit:active {
+	background-color: var(--whale-second-color);
+	border-color: var(--whale-second-color);
+	color: var(--whale-second-contrast-color);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .content-tools .whale-dropdown-toggle {
@@ -177,7 +197,7 @@
 	justify-content: center;
 	width: var(--whale-control-height-sm);
 	padding: 0.3rem 0;
-	border-radius: 0 var(--whale-radius-sm) var(--whale-radius-sm) 0;
+	border-radius: var(--whale-radius-sm);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .content-tools .tools-watch {
@@ -197,18 +217,18 @@
 	margin-left: 0;
 }
 
-.Whale .content-wrapper .whale-content .whale-content-header .content-tools .tools-btn:hover,
-.Whale .content-wrapper .whale-content .whale-content-header .content-tools .tools-btn:focus,
-.Whale .content-wrapper .whale-content .whale-content-header .content-tools .tools-btn:active {
+.Whale .content-wrapper .whale-content .whale-content-header .content-tools .tools-btn:not(.tools-edit):hover,
+.Whale .content-wrapper .whale-content .whale-content-header .content-tools .tools-btn:not(.tools-edit):focus,
+.Whale .content-wrapper .whale-content .whale-content-header .content-tools .tools-btn:not(.tools-edit):active {
 	background-color: var(--whale-hover-color);
 	color: var(--whale-main-color);
 	outline: 0;
-	border-color: var(--whale-border-color);
+	border-color: #69b1ff;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .content-tools .tools-btn:focus-visible {
-	outline: 2px solid var(--whale-main-color, #7568e8);
-	outline-offset: 2px;
+	outline: 0;
+	box-shadow: var(--whale-focus-ring);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .content-tools .whale-dropdown-menu {
@@ -234,7 +254,7 @@
 .Whale .content-wrapper .whale-content .whale-content-header .title > h1 {
 	color: var(--whale-text-color);
 	font-weight: 700;
-	font-size: 2.05rem;
+	font-size: 2rem;
 	letter-spacing: -0.025em;
 	line-height: 1.25;
 }
@@ -246,9 +266,9 @@
 
 .Whale .content-wrapper .whale-content .whale-content-main {
 	border: 0;
-	background-color: var(--whale-surface-color);
+	background-color: var(--whale-surface-elevated-color);
 	color: var(--whale-text-color);
-	padding: 1.4rem;
+	padding: 1.6rem 1.75rem 1.8rem;
 	overflow: visible;
 	overflow-wrap: anywhere;
 	font-size: var(--whale-reading-size);
@@ -286,33 +306,37 @@ body.whale-content-skeleton-loading .Whale .content-wrapper .whale-content .whal
 	max-width: 44rem;
 	margin: 2.5rem auto;
 	padding: 2rem;
-	border: 1px solid #d8e0e7;
+	border: 1px solid var(--whale-border-color);
+	border-left: 4px solid var(--whale-main-color);
 	border-radius: var(--whale-radius);
-	background-color: var(--whale-surface-muted-color);
+	background-color: var(--whale-surface-elevated-color);
+	box-shadow: var(--whale-shadow-sm);
 }
 
 .Whale .whale-not-found-icon {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 4.5rem;
-	height: 4.5rem;
-	border-radius: 50%;
-	background-color: var(--whale-surface-elevated-color);
+	width: 3rem;
+	height: 3rem;
+	border-radius: var(--whale-radius-sm);
+	background-color: var(--whale-accent-soft-color);
 	color: var(--whale-main-color);
 	border: 1px solid var(--whale-border-color);
 }
 
 .Whale .whale-not-found-icon .whale-icon {
-	width: 2.25rem;
-	height: 2.25rem;
+	width: 1.5rem;
+	height: 1.5rem;
 	margin: 0;
 }
 
 .Whale .whale-not-found-kicker {
 	margin: 0 0 0.35rem;
 	color: var(--whale-main-color);
-	font-weight: 700;
+	font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+	font-size: 0.82rem;
+	font-weight: 600;
 	letter-spacing: 0.08em;
 }
 
@@ -639,9 +663,11 @@ body.whale-font-scale-x-large .Whale .content-wrapper .whale-content .whale-cont
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .whale-section-toggle:focus-visible {
-	outline: 2px solid rgba(0, 102, 217, 0.28);
+	outline: 0;
+	box-shadow: var(--whale-focus-ring);
 	outline-offset: 0.15rem;
 }
+
 
 .Whale .content-wrapper .whale-content .whale-content-main .whale-section-body[hidden],
 .Whale .content-wrapper .whale-content .whale-content-main .whale-folding-body[hidden] {
