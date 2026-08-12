@@ -207,10 +207,12 @@
 	let modalTimer = null;
 
 	const reserveModalScrollbar = () => {
-		const scrollbarWidth = Math.max(
-			0,
-			window.innerWidth - document.documentElement.clientWidth,
-		);
+		const hasStableScrollbarGutter = String(
+			getComputedStyle(document.documentElement).scrollbarGutter || '',
+		).includes('stable');
+		const scrollbarWidth = hasStableScrollbarGutter
+			? 0
+			: Math.max(0, window.innerWidth - document.documentElement.clientWidth);
 		document.body.style.setProperty(
 			'--whale-modal-scrollbar-offset',
 			scrollbarWidth > 0 ? `${scrollbarWidth}px` : '0',

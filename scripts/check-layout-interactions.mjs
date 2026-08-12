@@ -277,9 +277,11 @@ class TestDocument extends TestElement {
 
 const document = new TestDocument();
 const readyCallbacks = [];
+let rootScrollbarGutter = 'auto';
 const context = {
 	document,
 	console,
+	getComputedStyle: () => ({ scrollbarGutter: rootScrollbarGutter }),
 	mw: {
 		cookie: { set: () => {} },
 		message: (key) => ({ text: () => key }),
@@ -593,6 +595,25 @@ if (modalTrigger.focused || modal.style.display !== 'none') {
 		'Programmatic modal close should support suppressing focus restoration.',
 	);
 }
+
+rootScrollbarGutter = 'stable';
+document.dispatch('click', {
+	target: modalTrigger,
+	preventDefault: () => {},
+	stopPropagation: () => {},
+});
+
+if (
+	document.body.style.getPropertyValue('--whale-modal-scrollbar-offset') !== '0'
+) {
+	throw new Error(
+		'A stable root scrollbar gutter should not receive duplicate modal compensation.',
+	);
+}
+
+document.dispatch('whale:closeModal', {
+	detail: { modal, restoreFocus: false },
+});
 
 let searchPrevented = false;
 document.dispatch('keydown', {

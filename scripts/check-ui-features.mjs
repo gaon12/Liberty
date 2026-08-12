@@ -313,7 +313,27 @@ if (!readingProgressBlock || /display:\s*none/.test(readingProgressBlock)) {
 }
 assertIncludes(styles, '.whale-floating-toc.is-mobile', 'Stylesheet');
 assertIncludes(styles, '.whale-content-no-sidebar', 'No-sidebar layout');
-assertIncludes(styles, 'scrollbar-gutter: stable', 'Stylesheet');
+const rootHtmlBlock = getRuleBlock(styles, 'html', 'Root viewport styles');
+assertIncludes(
+	rootHtmlBlock,
+	'scrollbar-gutter: stable',
+	'Stable root scrollbar gutter',
+);
+const noSidebarWrapperBlock = getRuleBlock(
+	styles,
+	'.Whale .content-wrapper.whale-content-wrapper-no-sidebar',
+	'No-sidebar wrapper',
+);
+assertIncludes(
+	noSidebarWrapperBlock,
+	'grid-template-columns: minmax(0, 1fr)',
+	'Centered no-sidebar grid',
+);
+assertIncludes(
+	layout,
+	'hasStableScrollbarGutter',
+	'Stable gutter modal compensation',
+);
 assertIncludes(
 	styles,
 	'padding-right: var(--whale-modal-scrollbar-offset, 0)',
