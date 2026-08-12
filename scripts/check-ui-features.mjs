@@ -312,7 +312,6 @@ if (!readingProgressBlock || /display:\s*none/.test(readingProgressBlock)) {
 	throw new Error('Reading progress indicator should remain visible.');
 }
 assertIncludes(styles, '.whale-floating-toc.is-mobile', 'Stylesheet');
-assertIncludes(styles, '.whale-content-no-sidebar', 'No-sidebar layout');
 const rootHtmlBlock = getRuleBlock(styles, 'html', 'Root viewport styles');
 assertIncludes(
 	rootHtmlBlock,
@@ -328,6 +327,16 @@ assertIncludes(
 	noSidebarWrapperBlock,
 	'grid-template-columns: minmax(0, 1fr)',
 	'Centered no-sidebar grid',
+);
+assertNotIncludes(
+	styles,
+	'.whale-content-no-sidebar {',
+	'Redundant no-sidebar grid placement override',
+);
+assertNotIncludes(
+	styles,
+	'grid-column: 1 / -1',
+	'Minifier-sensitive no-sidebar grid shorthand',
 );
 assertIncludes(
 	layout,
