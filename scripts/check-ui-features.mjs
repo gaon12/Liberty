@@ -655,8 +655,13 @@ assertIncludes(
 );
 assertIncludes(
 	mediaWikiStyles,
-	'> div[style*="text-align: center"] > p > span[style*="color"]',
+	'> div[style*="text-align"] > p > span[style*="color"]',
 	'Main-page inline text color neutralization',
+);
+assertNotIncludes(
+	mediaWikiStyles,
+	'[style*="text-align: center"]',
+	'Minifier-safe main-page selector',
 );
 assertIncludes(
 	mediaWikiStyles,
@@ -665,7 +670,7 @@ assertIncludes(
 );
 assertIncludes(
 	mediaWikiStyles,
-	'> div[style*="text-align: center"] > p > span[style*="font-weight"]',
+	'> div[style*="text-align"] > p > span[style*="font-weight"]',
 	'Main-page emphasized text targeting',
 );
 assertIncludes(
