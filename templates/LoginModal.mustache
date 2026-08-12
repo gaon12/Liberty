@@ -10,14 +10,19 @@
 			<div class="whale-modal-body">
 				<div id="whale-login-alert" class="whale-alert whale-alert-hidden whale-alert-danger" role="alert" aria-label="{{alert-label}}"></div>
 				<form id="whale-login-form" name="userlogin" class="whale-login-form" method="post">
-					<input class="loginText whale-form-control" id="wpName1" tabindex="1" placeholder="{{name-placeholder}}" value="" name="lgname" autocomplete="username">
-					<label for="wpPassword1" class="whale-sr-only">{{password-label}}</label>
-					<input class="loginPassword whale-form-control" id="wpPassword1" tabindex="2" placeholder="{{password-placeholder}}" type="password" name="lgpassword" autocomplete="current-password">
+					<div class="whale-form-field">
+						<label for="wpName1" class="whale-form-label">{{name-label}}</label>
+						<input class="loginText whale-form-control" id="wpName1" tabindex="1" placeholder="{{name-placeholder}}" value="" name="lgname" autocomplete="username">
+					</div>
+					<div class="whale-form-field">
+						<label for="wpPassword1" class="whale-form-label">{{password-label}}</label>
+						<input class="loginPassword whale-form-control" id="wpPassword1" tabindex="2" placeholder="{{password-placeholder}}" type="password" name="lgpassword" autocomplete="current-password">
+					</div>
 					<div class="whale-login-checkbox">
 						<input id="wpRemember" tabindex="3" type="checkbox" value="1" name="wpRemember">
 						<label for="wpRemember">{{remember-label}}</label>
 					</div>
-					<input class="whale-btn whale-btn-success whale-btn-block" type="submit" value="{{login-label}}" tabindex="4">
+					<input class="whale-btn whale-btn-primary whale-btn-block" type="submit" value="{{login-label}}" tabindex="4">
 					<div class="whale-login-links">
 						{{{ join-html }}}
 						{{{ forgot-html }}}
