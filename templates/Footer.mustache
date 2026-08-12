@@ -1,11 +1,13 @@
 {{#data-whale-footer}}
-{{#categories}}
-	<ul class="{{class}}">
-		{{#items}}
-			<li class="{{class}}">{{{ html }}}</li>
-		{{/items}}
-	</ul>
-{{/categories}}
+	<div class="whale-footer-links">
+		{{#categories}}
+			<ul class="{{class}}">
+				{{#items}}
+					<li class="{{class}}">{{{ html }}}</li>
+				{{/items}}
+			</ul>
+		{{/categories}}
+	</div>
 	<ul class="footer-icons">
 		{{#icon-blocks}}
 			<li class="{{class}}">{{{ html }}}</li>

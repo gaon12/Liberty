@@ -27,6 +27,16 @@ const assertNotIncludes = (source, needle, label) => {
 		throw new Error(`${label} should not include ${needle}`);
 	}
 };
+const getRuleBlock = (source, selector, label) => {
+	const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	const block = source.match(
+		new RegExp(`${escapedSelector}\\s*\\{(?<block>[\\s\\S]*?)\\n\\}`),
+	)?.groups?.block;
+	if (!block) {
+		throw new Error(`${label} should define ${selector}`);
+	}
+	return block;
+};
 
 const skin = JSON.parse(read('skin.json'));
 if (skin.config.WhaleEnableMobileFloatingToc !== true) {
@@ -508,9 +518,29 @@ assertIncludes(
 
 const navTemplate = read('templates/Nav.mustache');
 assertIncludes(navTemplate, 'width="258" height="64"', 'Navbar logo');
-assertIncludes(styles, 'height: 2.25rem', 'Navbar logo auto upscale');
-assertIncludes(styles, 'min-width: 2.25rem', 'Navbar logo auto upscale');
-assertIncludes(styles, 'margin: 0 1rem 0 0', 'Navbar brand spacing');
+const navbarWrapperBlock = getRuleBlock(
+	styles,
+	'.Whale .whale-nav-wrapper',
+	'Navbar surface',
+);
+assertIncludes(
+	navbarWrapperBlock,
+	'background-color: var(--whale-surface-color)',
+	'Navbar neutral surface',
+);
+assertIncludes(
+	navbarWrapperBlock,
+	'border-bottom: 1px solid var(--whale-border-color)',
+	'Navbar divider',
+);
+const navbarLogoBlock = getRuleBlock(
+	styles,
+	'.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-brand-logo',
+	'Navbar logo',
+);
+assertIncludes(navbarLogoBlock, 'height: 2rem', 'Navbar logo size');
+assertIncludes(navbarLogoBlock, 'min-width: 2rem', 'Navbar logo size');
+assertIncludes(styles, 'margin: 0 0.8rem 0 0', 'Navbar brand spacing');
 assertIncludes(
 	navTemplate,
 	'whale-navbar-notifications',
@@ -527,13 +557,18 @@ assertIncludes(
 	'Navbar notification placement',
 );
 assertIncludes(styles, 'order: 29', 'Navbar notification placement');
-assertIncludes(styles, 'height: 36px', 'Navbar link height clamp');
-assertIncludes(
+const navbarLinkBlock = getRuleBlock(
 	styles,
+	'.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link',
+	'Navbar link',
+);
+assertIncludes(navbarLinkBlock, 'height: 32px', 'Navbar link height clamp');
+assertIncludes(
+	navbarLinkBlock,
 	'border-radius: var(--whale-radius-sm)',
 	'Navbar restrained corner radius',
 );
-assertIncludes(styles, 'font-weight: 600', 'Navbar menu weight');
+assertIncludes(navbarLinkBlock, 'font-weight: 500', 'Navbar menu weight');
 assertIncludes(styles, '.whale-icon-random', 'Navbar random icon sizing');
 assertIncludes(styles, 'width: 2.4rem', 'Mobile navbar icon target sizing');
 assertIncludes(
@@ -595,35 +630,29 @@ assertIncludes(
 	'body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > td',
 	'Auto dark table cell override',
 );
-assertIncludes(styles, '--whale-radius: 12px', 'Shared surface corner radius');
+assertIncludes(styles, '--whale-radius: 4px', 'Shared surface corner radius');
 assertIncludes(
 	styles,
-	'--whale-radius-sm: 8px',
+	'--whale-radius-sm: 2px',
 	'Shared control corner radius',
 );
-assertIncludes(styles, '--whale-layout-width: 1424px', 'Desktop layout width');
-assertIncludes(styles, '--whale-sidebar-width: 300px', 'Sidebar width token');
-assertIncludes(styles, '--whale-layout-gap: 16px', 'Desktop layout gap');
+assertIncludes(styles, '--whale-layout-width: 1280px', 'Desktop layout width');
+assertIncludes(styles, '--whale-sidebar-width: 260px', 'Sidebar width token');
+assertIncludes(styles, '--whale-layout-gap: 14px', 'Desktop layout gap');
 assertIncludes(
 	styles,
 	'max-width: var(--whale-layout-width)',
 	'Centered desktop frame width',
 );
-assertNotIncludes(styles, 'gradient(', 'Gradient-free Central treatment');
-assertIncludes(styles, 'background-color: #f6f6f8', 'Central canvas color');
-assertIncludes(styles, '--whale-border-color: #dedfe3', 'Central card border');
+assertNotIncludes(styles, 'gradient(', 'Gradient-free interface treatment');
+assertIncludes(styles, 'background-color: #f1f2f3', 'Document canvas color');
+assertIncludes(styles, '--whale-border-color: #d5d8dc', 'Interface border');
 assertIncludes(styles, '--whale-shadow-sm: none', 'Flat surface treatment');
 assertIncludes(
 	styles,
 	'box-shadow: var(--whale-shadow-md)',
 	'Floating layer elevation',
 );
-const navbarLinkBlock = styles.match(
-	/\.whale-navbar-link\s*\{(?<block>[\s\S]*?)\n\}/,
-)?.groups?.block;
-if (!navbarLinkBlock) {
-	throw new Error('Navbar link block should exist.');
-}
 if (/box-shadow:/.test(navbarLinkBlock)) {
 	throw new Error('Navbar links should not use decorative bottom shadows.');
 }
@@ -815,8 +844,26 @@ assertIncludes(
 );
 assertIncludes(
 	skinTemplate,
+	'whale-sidebar-column',
+	'Desktop sidebar grid placement',
+);
+assertNotIncludes(
+	skinTemplate,
 	'whale-sidebar-notice',
-	'Desktop site notice card placement',
+	'Duplicate desktop site notice',
+);
+if (
+	skinTemplate.indexOf('class="whale-content') >
+	skinTemplate.indexOf('class="whale-sidebar-column')
+) {
+	throw new Error(
+		'Article content should precede the sidebar in document order.',
+	);
+}
+assertIncludes(
+	read('templates/Footer.mustache'),
+	'whale-footer-links',
+	'Compact footer grouping',
 );
 assertIncludes(rendererPhp, 'tools-watch', 'Visible article watch control');
 assertIncludes(

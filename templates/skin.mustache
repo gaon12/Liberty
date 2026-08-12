@@ -5,24 +5,6 @@
 </header>
 <section>
 	<div class="content-wrapper{{^has-whale-sidebar}} whale-content-wrapper-no-sidebar{{/has-whale-sidebar}}">
-		{{#has-whale-sidebar}}
-			<aside>
-				<div class="whale-sidebar">
-					{{#has-whale-site-notice}}
-						<div class="whale-sidebar-notice" role="alert">
-							<button type="button" class="whale-notice-close" data-whale-dismiss="notice" aria-label="{{whale-close-label}}">
-								<span aria-hidden="true">&times;</span>
-							</button>
-							{{{ html-whale-site-notice }}}
-						</div>
-					{{/has-whale-site-notice}}
-					<div class="live-recent-wrapper">
-						{{>LiveRecent}}
-					</div>
-					{{{ html-whale-right-ad }}}
-				</div>
-			</aside>
-		{{/has-whale-sidebar}}
 		<div class="whale-content{{^has-whale-sidebar}} whale-content-no-sidebar{{/has-whale-sidebar}}">
 			<div class="whale-content-header{{#has-whale-sidebar}} whale-content-header-with-sidebar{{/has-whale-sidebar}}">
 				{{#has-whale-site-notice}}
@@ -112,6 +94,16 @@
 				<button type="button" class="scroll-button" id="whale-scrolldown" aria-label="{{whale-scroll-down-label}}" title="{{whale-scroll-down-label}}">{{{ html-whale-scroll-down-icon }}}</button>
 			</div>
 		</div>
+		{{#has-whale-sidebar}}
+			<aside class="whale-sidebar-column">
+				<div class="whale-sidebar">
+					<div class="live-recent-wrapper">
+						{{>LiveRecent}}
+					</div>
+					{{{ html-whale-right-ad }}}
+				</div>
+			</aside>
+		{{/has-whale-sidebar}}
 	</div>
 </section>
 {{{ html-whale-adsense-script }}}
