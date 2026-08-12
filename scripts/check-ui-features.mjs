@@ -30,7 +30,7 @@ const assertNotIncludes = (source, needle, label) => {
 const getRuleBlock = (source, selector, label) => {
 	const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	const block = source.match(
-		new RegExp(`${escapedSelector}\\s*\\{(?<block>[\\s\\S]*?)\\n\\}`),
+		new RegExp(`${escapedSelector}\\s*\\{(?<block>[\\s\\S]*?)\\n[\\t ]*\\}`),
 	)?.groups?.block;
 	if (!block) {
 		throw new Error(`${label} should define ${selector}`);
@@ -240,6 +240,21 @@ assertIncludes(
 );
 assertIncludes(
 	skinPhp,
+	'$this->getContrastColor( $mainColor )',
+	'Dynamic primary action contrast',
+);
+assertIncludes(
+	skinPhp,
+	'--whale-main-contrast-color: $mainContrastColor',
+	'Light primary action contrast token',
+);
+assertIncludes(
+	skinPhp,
+	'--whale-main-contrast-color: $darkMainContrastColor',
+	'Dark primary action contrast token',
+);
+assertIncludes(
+	skinPhp,
 	"addMeta( 'color-scheme', 'light dark' )",
 	'Color scheme meta',
 );
@@ -276,6 +291,27 @@ const responsiveStyles = read('less/whale/integrations-responsive.less');
 const printStyles = read('less/print.less');
 const bottomToolsStyles = read('less/whale/bottom-tools.less');
 const liveRecentStyles = read('less/whale/live-recent.less');
+const editorStyles = read('less/wikiedittor-whale.less');
+assertNotIncludes(
+	mediaWikiStyles,
+	'.whale-content-main button:not(.whale-btn)',
+	'Native article control styling should not override component buttons',
+);
+assertIncludes(
+	mediaWikiStyles,
+	':not(.oo-ui-buttonElement-button):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-button)',
+	'Native article controls should preserve editor component styling',
+);
+assertIncludes(
+	mediaWikiStyles,
+	':not(.mw-ui-button):not(:disabled):hover',
+	'Native article control hover state should exclude disabled controls',
+);
+assertIncludes(
+	mediaWikiStyles,
+	'opacity: 0.65',
+	'Native article control disabled affordance',
+);
 const liveRecentHeaderBlock = getRuleBlock(
 	liveRecentStyles,
 	'.Whale .content-wrapper .live-recent .live-recent-header',
@@ -283,7 +319,7 @@ const liveRecentHeaderBlock = getRuleBlock(
 );
 assertIncludes(
 	liveRecentHeaderBlock,
-	'min-height: 3rem',
+	'min-height: 3.25rem',
 	'Comfortable live recent header',
 );
 assertIncludes(
@@ -576,14 +612,14 @@ if (multiPositionGradientStop) {
 	);
 }
 assertIncludes(styles, '~"min(82vw, 22rem)"', 'Mobile TOC CSS min escape');
-assertIncludes(styles, 'gap: 0.65rem', 'Short URL copy row spacing');
+assertIncludes(styles, 'gap: 0', 'Attached short URL input group');
 assertIncludes(
 	styles,
 	'.Whale .whale-login-modal .whale-login-links',
 	'Login modal link alignment',
 );
-assertIncludes(styles, 'display: grid', 'Login modal link alignment');
-assertIncludes(styles, 'height: 3rem', 'Login modal button sizing');
+assertIncludes(styles, 'display: flex', 'Login modal link alignment');
+assertIncludes(styles, 'height: 2.75rem', 'Login modal control sizing');
 const sharedButtonBlock = getRuleBlock(
 	buttonStyles,
 	'.whale-btn',
@@ -647,6 +683,23 @@ const shortUrlTemplate = read('templates/ShortUrlModal.mustache');
 if (shortUrlTemplate.includes('whale-short-url-code')) {
 	throw new Error('Short URL modal should not render the internal code pill.');
 }
+assertIncludes(
+	shortUrlTemplate,
+	'whale-btn-primary whale-short-url-copy',
+	'Primary short URL copy action',
+);
+const loginTemplate = read('templates/LoginModal.mustache');
+assertIncludes(
+	loginTemplate,
+	'class="whale-form-label"',
+	'Visible login labels',
+);
+assertIncludes(loginTemplate, '{{name-label}}', 'Visible login name label');
+assertIncludes(
+	loginTemplate,
+	'whale-btn-primary whale-btn-block',
+	'Primary login action',
+);
 
 const headingAnchors = read('js/heading-anchors.js');
 assertIncludes(headingAnchors, 'showCopyAlert', 'Heading anchor copy feedback');
@@ -671,6 +724,57 @@ assertIncludes(
 	"'input, textarea, select, [contenteditable]'",
 	'Search shortcut',
 );
+const searchSubmitBlock = getRuleBlock(
+	styles,
+	'.Whale .whale-nav-wrapper .whale-navbar .whale-search-form #mw-searchButton',
+	'Primary search action',
+);
+assertIncludes(
+	searchSubmitBlock,
+	'background-color: var(--whale-main-color)',
+	'Primary search action',
+);
+assertIncludes(
+	searchSubmitBlock,
+	'color: var(--whale-main-contrast-color)',
+	'Primary search action contrast',
+);
+assertIncludes(
+	buttonStyles,
+	'color: var(--whale-main-contrast-color)',
+	'Primary button contrast token',
+);
+assertIncludes(
+	buttonStyles,
+	'color: var(--whale-second-contrast-color)',
+	'Primary button hover contrast token',
+);
+
+const mobileContentToolsBlock = getRuleBlock(
+	responsiveStyles,
+	'.Whale .content-wrapper .whale-content .whale-content-header .content-tools',
+	'Responsive article tools',
+);
+assertIncludes(
+	mobileContentToolsBlock,
+	'overflow: visible',
+	'Responsive article tool dropdown visibility',
+);
+assertNotIncludes(
+	mobileContentToolsBlock,
+	'overflow-x: auto',
+	'Responsive article tool dropdown clipping',
+);
+const mobileContentToolGroupBlock = getRuleBlock(
+	responsiveStyles,
+	'.Whale .content-wrapper .whale-content .whale-content-header .content-tools .whale-btn-group',
+	'Responsive article tool group',
+);
+assertIncludes(
+	mobileContentToolGroupBlock,
+	'flex-wrap: wrap',
+	'Responsive article tool wrapping',
+);
 
 const navTemplate = read('templates/Nav.mustache');
 assertIncludes(navTemplate, 'width="258" height="64"', 'Navbar logo');
@@ -681,8 +785,8 @@ const navbarWrapperBlock = getRuleBlock(
 );
 assertIncludes(
 	navbarWrapperBlock,
-	'background-color: var(--whale-surface-color)',
-	'Navbar neutral surface',
+	'background-color: var(--whale-surface-elevated-color)',
+	'Navbar elevated surface',
 );
 assertIncludes(
 	navbarWrapperBlock,
@@ -694,9 +798,9 @@ const navbarLogoBlock = getRuleBlock(
 	'.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-brand-logo',
 	'Navbar logo',
 );
-assertIncludes(navbarLogoBlock, 'height: 2rem', 'Navbar logo size');
-assertIncludes(navbarLogoBlock, 'min-width: 2rem', 'Navbar logo size');
-assertIncludes(styles, 'margin: 0 0.8rem 0 0', 'Navbar brand spacing');
+assertIncludes(navbarLogoBlock, 'height: 2.125rem', 'Navbar logo size');
+assertIncludes(navbarLogoBlock, 'min-width: 2.125rem', 'Navbar logo size');
+assertIncludes(styles, 'margin: 0 1.1rem 0 0', 'Navbar brand spacing');
 assertIncludes(
 	navTemplate,
 	'whale-navbar-notifications',
@@ -720,7 +824,7 @@ const navbarLinkBlock = getRuleBlock(
 );
 assertIncludes(
 	navbarLinkBlock,
-	'height: var(--whale-control-height-sm)',
+	'height: var(--whale-control-height)',
 	'Navbar link control height',
 );
 assertIncludes(
@@ -745,6 +849,11 @@ assertIncludes(
 	mediaWikiStyles,
 	'.whale-content-main .mw-parser-output',
 	'Article reading typography',
+);
+assertNotIncludes(
+	mediaWikiStyles,
+	'\nselect,\ninput:not(',
+	'Generic MediaWiki form styles should stay inside article content',
 );
 const parserOutputBlock = getRuleBlock(
 	mediaWikiStyles,
@@ -798,8 +907,8 @@ assertIncludes(
 );
 assertIncludes(
 	mediaWikiStyles,
-	'background-color: transparent !important',
-	'Main-page flat outer surfaces',
+	'body.page-Main_Page.Whale',
+	'MediaWiki main-page body scope',
 );
 assertIncludes(
 	mediaWikiStyles,
@@ -808,7 +917,7 @@ assertIncludes(
 );
 assertIncludes(
 	mediaWikiStyles,
-	'border-radius: var(--whale-radius) !important',
+	'border-radius: var(--whale-radius-sm) !important',
 	'Main-page information panel corners',
 );
 assertIncludes(
@@ -818,24 +927,35 @@ assertIncludes(
 );
 assertIncludes(
 	mediaWikiStyles,
+	'box-shadow: none !important',
+	'Main-page nested surface elevation restraint',
+);
+assertIncludes(mediaWikiStyles, '.whale-section-body', 'Main-page card body');
+assertIncludes(
+	mediaWikiStyles,
+	'background-color: var(--whale-surface-muted-color) !important',
+	'Main-page card header surface',
+);
+assertIncludes(
+	mediaWikiStyles,
 	'background-color: var(--whale-code-background)',
 	'Article code treatment',
 );
-assertIncludes(styles, '--whale-canvas-color: #dce7ed', 'Page canvas token');
+assertIncludes(styles, '--whale-canvas-color: #e5edf2', 'Page canvas token');
 assertIncludes(
 	styles,
-	'--whale-surface-color: #edf3f6',
+	'--whale-surface-color: #f2f6f8',
 	'Document surface token',
 );
 assertIncludes(
 	styles,
-	'--whale-surface-elevated-color: #f4f7f9',
+	'--whale-surface-elevated-color: #f7fafb',
 	'Elevated surface token',
 );
 assertIncludes(styles, '--whale-table-background', 'Table color tokens');
 assertIncludes(
 	styles,
-	'--whale-notice-text-color: #423c80',
+	'--whale-notice-text-color: #15466b',
 	'Notice text token',
 );
 assertIncludes(
@@ -853,7 +973,7 @@ const noticeBlock = getRuleBlock(
 	'.Whale .content-wrapper .whale-content .whale-content-header .whale-notice',
 	'Article notice',
 );
-assertIncludes(noticeBlock, 'margin: 1.25rem 1.4rem 0', 'Inset notice spacing');
+assertIncludes(noticeBlock, 'margin: 1.5rem 1.75rem 0', 'Inset notice spacing');
 assertIncludes(
 	noticeBlock,
 	'border-radius: var(--whale-radius-sm)',
@@ -876,7 +996,7 @@ assertIncludes(
 );
 assertIncludes(
 	styles,
-	'--whale-notice-text-color: #d9d6ff',
+	'--whale-notice-text-color: #bae0ff',
 	'Dark notice text contrast',
 );
 assertIncludes(styles, '--whale-table-header-background', 'Table color tokens');
@@ -906,28 +1026,28 @@ assertIncludes(
 	'body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > td',
 	'Auto dark table cell override',
 );
-assertIncludes(styles, '--whale-radius: 12px', 'Shared surface corner radius');
+assertIncludes(styles, '--whale-radius: 8px', 'Shared surface corner radius');
 assertIncludes(
 	styles,
-	'--whale-radius-sm: 8px',
+	'--whale-radius-sm: 6px',
 	'Shared control corner radius',
 );
 assertIncludes(styles, '--whale-layout-width: 1360px', 'Desktop layout width');
 assertIncludes(styles, '--whale-sidebar-width: 280px', 'Sidebar width token');
 assertIncludes(styles, '--whale-layout-gap: 20px', 'Desktop layout gap');
-assertIncludes(styles, '--whale-nav-height: 54px', 'Shared navigation height');
+assertIncludes(styles, '--whale-nav-height: 60px', 'Shared navigation height');
 assertIncludes(
 	styles,
-	'--whale-reading-size: 1.05rem',
+	'--whale-reading-size: 1.0625rem',
 	'Readable article size',
 );
 assertIncludes(
 	styles,
-	'--whale-reading-leading: 1.68',
+	'--whale-reading-leading: 1.72',
 	'Readable article leading',
 );
-assertIncludes(styles, '--whale-link-color: #1769aa', 'Light link color token');
-assertIncludes(styles, '--whale-link-color: #8fc7f2', 'Dark link color token');
+assertIncludes(styles, '--whale-link-color: #0969b5', 'Light link color token');
+assertIncludes(styles, '--whale-link-color: #69b1ff', 'Dark link color token');
 assertIncludes(
 	styles,
 	'max-width: var(--whale-layout-width)',
@@ -939,10 +1059,10 @@ assertIncludes(
 	'background-color: var(--whale-canvas-color)',
 	'Document canvas color',
 );
-assertIncludes(styles, '--whale-border-color: #bdcbd4', 'Interface border');
+assertIncludes(styles, '--whale-border-color: #cbd7de', 'Interface border');
 assertIncludes(
 	styles,
-	'--whale-shadow-sm: 0 2px 8px rgba(35, 55, 68, 0.12)',
+	'--whale-shadow-sm: 0 1px 2px rgba(23, 50, 66, 0.1), 0 6px 18px rgba(23, 50, 66, 0.06)',
 	'Subtle surface elevation',
 );
 assertIncludes(
@@ -960,16 +1080,69 @@ if (!scrollButtonBlock) {
 	throw new Error('Scroll button block should exist.');
 }
 assertIncludes(scrollButtonBlock, 'box-shadow: none', 'Flat scroll buttons');
-assertIncludes(scrollButtonBlock, 'width: 2.4rem', 'Compact scroll toolbar');
+assertIncludes(
+	scrollButtonBlock,
+	'width: 2.75rem',
+	'Accessible scroll toolbar',
+);
+assertIncludes(
+	scrollButtonBlock,
+	'border-radius: var(--whale-radius-sm)',
+	'Scroll toolbar control corners',
+);
 assertIncludes(
 	bottomToolsStyles,
 	'border: 1px solid var(--whale-border-strong-color)',
-	'Attached scroll toolbar frame',
+	'Floating scroll toolbar frame',
+);
+assertIncludes(
+	bottomToolsStyles,
+	'background: var(--whale-surface-elevated-color)',
+	'Floating scroll toolbar surface',
+);
+assertIncludes(
+	bottomToolsStyles,
+	'padding: 0.25rem',
+	'Floating scroll toolbar spacing',
+);
+assertIncludes(
+	bottomToolsStyles,
+	'border-radius: var(--whale-radius-sm)',
+	'Bottom tool menu item corners',
 );
 assertNotIncludes(
 	bottomToolsStyles,
 	'.whale-bottom-tools-menu::after',
 	'Decorative bottom tools menu pointer',
+);
+
+for (const legacyEditorColor of [
+	'#0275d8',
+	'#5bc0de',
+	'#f0ad4e',
+	'#f5f8fa',
+	'#e1e8ed',
+]) {
+	assertNotIncludes(
+		editorStyles,
+		legacyEditorColor,
+		'Editor component token consistency',
+	);
+}
+assertIncludes(
+	editorStyles,
+	'background-color: var(--whale-control-background)',
+	'Editor summary field surface',
+);
+assertIncludes(
+	editorStyles,
+	'background-color: var(--whale-main-color)',
+	'Editor primary save action',
+);
+assertIncludes(
+	editorStyles,
+	'background-color: var(--whale-surface-elevated-color)',
+	'Editor secondary action surface',
 );
 
 const rendererPhp = read('WhaleRenderer.php');
@@ -1198,7 +1371,7 @@ const referenceHeaderBlock = getRuleBlock(
 );
 assertIncludes(
 	referenceHeaderBlock,
-	'background-color: var(--whale-surface-muted-color)',
+	'background-color: var(--whale-surface-elevated-color)',
 	'Reference modal header surface',
 );
 const referenceActionsBlock = getRuleBlock(
@@ -1213,7 +1386,7 @@ assertIncludes(
 );
 assertIncludes(
 	referenceActionsBlock,
-	'background-color: var(--whale-surface-muted-color)',
+	'background-color: var(--whale-surface-elevated-color)',
 	'Reference modal action surface',
 );
 const referenceJumpBlock = getRuleBlock(
@@ -1302,6 +1475,11 @@ assertIncludes(
 	'Compact footer grouping',
 );
 assertIncludes(rendererPhp, 'tools-watch', 'Visible article watch control');
+assertIncludes(
+	rendererPhp,
+	'whale-btn-primary tools-btn tools-edit',
+	'Primary article edit action',
+);
 assertIncludes(
 	read('templates/ContentTools.mustache'),
 	'whale-dropdown-item tools-share',
