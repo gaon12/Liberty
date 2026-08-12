@@ -1,0 +1,38 @@
+.Whale .content-wrapper .whale-content .whale-content-main .whale-code-block {
+	position: relative;
+	margin: 1rem 0;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main .whale-code-block > pre {
+	margin: 0;
+	padding-top: 3rem;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main .whale-code-copy {
+	position: absolute;
+	top: 0.55rem;
+	right: 0.55rem;
+	z-index: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 2rem;
+	padding: 0.25rem 0.65rem;
+	border: 1px solid var(--whale-border-strong-color);
+	border-radius: var(--whale-radius-sm);
+	background-color: var(--whale-surface-color);
+	box-shadow: var(--whale-shadow-sm);
+	color: var(--whale-content-muted-color);
+	font-size: 0.8rem;
+	font-weight: 600;
+	line-height: 1.2;
+	opacity: 0.78;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main .whale-code-copy:hover,
+.Whale .content-wrapper .whale-content .whale-content-main .whale-code-copy:focus-visible {
+	border-color: var(--whale-main-color);
+	background-color: var(--whale-main-color);
+	color: #fff;
+	opacity: 1;
+}

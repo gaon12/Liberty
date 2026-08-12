@@ -79,6 +79,9 @@ for (const locale of ['en', 'ja', 'ko', 'zh-hans', 'zh-hant']) {
 		'whale-reference-title',
 		'whale-reference-title-numbered',
 		'whale-reference-jump',
+		'whale-code-copy',
+		'whale-code-copied',
+		'whale-code-copy-failed',
 	]) {
 		if (!messages[key]) {
 			throw new Error(`${locale} should define ${key}.`);
@@ -140,6 +143,7 @@ assertIncludes(
 const layout = read('js/layout.js');
 const delayScrolling = read('js/delay-scrolling.js');
 const referenceModal = read('js/reference-modal.js');
+const codeCopy = read('js/code-copy.js');
 assertIncludes(layout, 'whale:toggleFloatingToc', 'Layout scroll TOC handler');
 assertIncludes(layout, 'container?.classList.toggle', 'Section folding state');
 assertIncludes(layout, 'folding?.classList.toggle', 'Folding block state');
@@ -172,6 +176,17 @@ assertIncludes(
 	referenceModal,
 	'restoreFocus: false',
 	'Reference list jump focus behavior',
+);
+assertIncludes(codeCopy, 'whale.copyText', 'Code block copy action');
+assertIncludes(
+	codeCopy,
+	"mw.hook?.('wikipage.content')",
+	'Dynamic code blocks',
+);
+assertIncludes(
+	codeCopy,
+	"pre.dataset.whaleCodeCopyReady = 'true'",
+	'Idempotent code block controls',
 );
 
 const recovery = read('js/recovery.js');
@@ -779,6 +794,15 @@ assertIncludes(
 );
 assertIncludes(styles, '.whale-reference-content', 'Reference modal content');
 assertIncludes(styles, '~"min(60vh, 30rem)"', 'Reference modal scroll limit');
+assertIncludes(styles, '.whale-code-copy', 'Code block copy control');
+assertIncludes(styles, 'padding-top: 3rem', 'Code block copy control spacing');
+if (
+	!skin.ResourceModules['skins.whale.layoutjs'].scripts.includes(
+		'js/code-copy.js',
+	)
+) {
+	throw new Error('Layout resources should load code block copy controls.');
+}
 assertIncludes(
 	skinTemplate,
 	'whale-content-wrapper-no-sidebar',

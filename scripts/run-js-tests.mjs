@@ -6,6 +6,7 @@ const root = realpathSync.native(fileURLToPath(new URL('..', import.meta.url)));
 const tests = [
 	'check-js.mjs',
 	'check-copy-helper.mjs',
+	'check-code-copy.mjs',
 	'check-external-link-warning.mjs',
 	'check-reference-modal.mjs',
 	'check-share-button.mjs',
