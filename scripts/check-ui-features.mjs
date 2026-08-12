@@ -925,6 +925,47 @@ if (
 const skinTemplate = read('templates/skin.mustache');
 const referenceTemplate = read('templates/ReferenceModal.mustache');
 assertIncludes(skinTemplate, 'whale-content-no-sidebar', 'No-sidebar layout');
+const bottomToolsTemplateIndex = skinTemplate.indexOf('id="whale-bottombtn"');
+const contentSectionEndIndex = skinTemplate.indexOf('</section>');
+if (
+	bottomToolsTemplateIndex < contentSectionEndIndex ||
+	bottomToolsTemplateIndex === -1 ||
+	contentSectionEndIndex === -1
+) {
+	throw new Error(
+		'Bottom tools should be mounted after the content section at the root stacking level.',
+	);
+}
+assertIncludes(
+	skinPhp,
+	'.Whale #whale-bottombtn',
+	'Root-level bottom tools visibility setting',
+);
+assertNotIncludes(
+	skinPhp,
+	'.Whale .content-wrapper #whale-bottombtn',
+	'Obsolete nested bottom tools selector',
+);
+const bottomToolsFrameBlock = getRuleBlock(
+	bottomToolsStyles,
+	'#whale-bottombtn',
+	'Bottom tools stacking level',
+);
+const floatingTocFrameBlock = getRuleBlock(
+	styles,
+	'.whale-floating-toc',
+	'Floating table of contents stacking level',
+);
+assertIncludes(
+	bottomToolsFrameBlock,
+	'z-index: 1000',
+	'Bottom tools stack order',
+);
+assertIncludes(
+	floatingTocFrameBlock,
+	'z-index: 999',
+	'Floating table of contents stack order',
+);
 assertIncludes(
 	skinTemplate,
 	'whale-content-heading',

@@ -257,7 +257,7 @@ class SkinWhale extends SkinMustache {
 
 		if ( isset( $WhaleUsercontrolbarSettings ) && $WhaleUsercontrolbarSettings ) {
 			$out->addInlineStyle(
-				".Whale .content-wrapper #whale-bottombtn {
+				".Whale #whale-bottombtn {
 					display: none;
 				}"
 			);

@@ -69,30 +69,6 @@
 					{{>Footer}}
 				</div>
 			</footer>
-			<div id="whale-bottombtn">
-				<div class="whale-dropdown whale-bottom-tools">
-					<button type="button" class="scroll-button whale-tools-toggle" data-whale-toggle="dropdown" aria-label="{{whale-tools-label}}" title="{{whale-tools-label}}" aria-haspopup="true" aria-expanded="false">{{{ html-whale-tools-icon }}}<span class="whale-bottom-tools-toggle-label">{{whale-tools-label}}</span></button>
-					<div class="whale-dropdown-menu whale-bottom-tools-menu" role="menu">
-						{{#data-whale-theme-toggle}}
-							<button type="button" class="whale-dropdown-item whale-theme-toggle" data-whale-theme-toggle aria-label="{{label}}" title="{{label}}" aria-pressed="{{aria-pressed}}">
-								<span class="whale-theme-toggle-icon whale-theme-toggle-when-light">{{{ html-moon-icon }}}</span>
-								<span class="whale-theme-toggle-icon whale-theme-toggle-when-dark">{{{ html-sun-icon }}}</span>
-								<span class="whale-tools-label" data-whale-theme-toggle-label>{{label}}</span>
-							</button>
-						{{/data-whale-theme-toggle}}
-						{{#data-whale-short-url}}
-							{{#has-short-url}}
-								<button type="button" class="whale-dropdown-item whale-short-url-open" data-whale-toggle="modal" data-whale-target="#whale-short-url-modal">{{{ html-icon }}}<span class="whale-tools-label">{{button-label}}</span></button>
-							{{/has-short-url}}
-						{{/data-whale-short-url}}
-					</div>
-				</div>
-				{{#has-whale-section-tools}}
-					<button type="button" class="scroll-button" id="whale-scrolltoc" aria-label="{{whale-scroll-toc-label}}" title="{{whale-scroll-toc-label}}">{{{ html-whale-scroll-toc-icon }}}</button>
-				{{/has-whale-section-tools}}
-				<button type="button" class="scroll-button" id="whale-scrollup" aria-label="{{whale-scroll-up-label}}" title="{{whale-scroll-up-label}}">{{{ html-whale-scroll-up-icon }}}</button>
-				<button type="button" class="scroll-button" id="whale-scrolldown" aria-label="{{whale-scroll-down-label}}" title="{{whale-scroll-down-label}}">{{{ html-whale-scroll-down-icon }}}</button>
-			</div>
 		</div>
 		{{#has-whale-sidebar}}
 			<aside class="whale-sidebar-column">
@@ -106,6 +82,30 @@
 		{{/has-whale-sidebar}}
 	</div>
 </section>
+<div id="whale-bottombtn">
+	<div class="whale-dropdown whale-bottom-tools">
+		<button type="button" class="scroll-button whale-tools-toggle" data-whale-toggle="dropdown" aria-label="{{whale-tools-label}}" title="{{whale-tools-label}}" aria-haspopup="true" aria-expanded="false">{{{ html-whale-tools-icon }}}<span class="whale-bottom-tools-toggle-label">{{whale-tools-label}}</span></button>
+		<div class="whale-dropdown-menu whale-bottom-tools-menu" role="menu">
+			{{#data-whale-theme-toggle}}
+				<button type="button" class="whale-dropdown-item whale-theme-toggle" data-whale-theme-toggle aria-label="{{label}}" title="{{label}}" aria-pressed="{{aria-pressed}}">
+					<span class="whale-theme-toggle-icon whale-theme-toggle-when-light">{{{ html-moon-icon }}}</span>
+					<span class="whale-theme-toggle-icon whale-theme-toggle-when-dark">{{{ html-sun-icon }}}</span>
+					<span class="whale-tools-label" data-whale-theme-toggle-label>{{label}}</span>
+				</button>
+			{{/data-whale-theme-toggle}}
+			{{#data-whale-short-url}}
+				{{#has-short-url}}
+					<button type="button" class="whale-dropdown-item whale-short-url-open" data-whale-toggle="modal" data-whale-target="#whale-short-url-modal">{{{ html-icon }}}<span class="whale-tools-label">{{button-label}}</span></button>
+				{{/has-short-url}}
+			{{/data-whale-short-url}}
+		</div>
+	</div>
+	{{#has-whale-section-tools}}
+		<button type="button" class="scroll-button" id="whale-scrolltoc" aria-label="{{whale-scroll-toc-label}}" title="{{whale-scroll-toc-label}}">{{{ html-whale-scroll-toc-icon }}}</button>
+	{{/has-whale-section-tools}}
+	<button type="button" class="scroll-button" id="whale-scrollup" aria-label="{{whale-scroll-up-label}}" title="{{whale-scroll-up-label}}">{{{ html-whale-scroll-up-icon }}}</button>
+	<button type="button" class="scroll-button" id="whale-scrolldown" aria-label="{{whale-scroll-down-label}}" title="{{whale-scroll-down-label}}">{{{ html-whale-scroll-down-icon }}}</button>
+</div>
 {{{ html-whale-adsense-script }}}
 {{>LoginModal}}
 {{>ShortUrlModal}}
