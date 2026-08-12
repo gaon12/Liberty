@@ -216,6 +216,7 @@ const styles = readLessWithImports('less/default.less');
 const wikiStyles = read('less/wiki.less');
 const tableStyles = read('less/wiki-table.less');
 const mediaWikiStyles = read('less/only-mw.less');
+const bottomToolsStyles = read('less/whale/bottom-tools.less');
 assertIncludes(styles, 'color-scheme: light dark', 'Stylesheet');
 assertIncludes(styles, 'body.whale-dark,', 'Stylesheet');
 assertIncludes(
@@ -249,6 +250,18 @@ assertIncludes(
 	'body.whale-scroll-buttons-vertical.whale-floating-toc-enabled #whale-bottombtn',
 	'Fixed desktop scroll toolbar position',
 );
+assertIncludes(
+	bottomToolsStyles,
+	'#whale-bottombtn .whale-bottom-tools',
+	'Bottom utility menu',
+);
+if (
+	/@media screen and \(min-width: 1024px\)\s*\{[\s\S]*?#whale-bottombtn \.whale-bottom-tools\s*\{[\s\S]*?display:\s*none/.test(
+		bottomToolsStyles,
+	)
+) {
+	throw new Error('Bottom utility menu should remain available on desktop.');
+}
 assertIncludes(
 	styles,
 	'right: 1.5rem',
