@@ -879,7 +879,38 @@ assertIncludes(
 	'Reference modal initial focus',
 );
 assertIncludes(styles, '.whale-reference-content', 'Reference modal content');
-assertIncludes(styles, '~"min(60vh, 30rem)"', 'Reference modal scroll limit');
+assertIncludes(
+	referenceTemplate,
+	'class="whale-modal-body whale-reference-body"',
+	'Reference modal scroll region',
+);
+assertIncludes(
+	referenceTemplate,
+	'tabindex="0" role="document"',
+	'Keyboard-scrollable reference content',
+);
+assertIncludes(
+	styles,
+	'~"calc(100dvh - 11rem)"',
+	'Reference modal scroll limit',
+);
+assertIncludes(
+	styles,
+	'overscroll-behavior: contain',
+	'Reference modal scroll containment',
+);
+assertIncludes(
+	styles,
+	'env(safe-area-inset-bottom)',
+	'Reference modal mobile safe area',
+);
+const modalCloseBlock = getRuleBlock(
+	styles,
+	'.whale-modal-close',
+	'Modal close control',
+);
+assertIncludes(modalCloseBlock, 'width: 2.75rem', 'Modal close target width');
+assertIncludes(modalCloseBlock, 'height: 2.75rem', 'Modal close target height');
 assertIncludes(styles, '.whale-code-copy', 'Code block copy control');
 assertIncludes(styles, '.whale-code-toolbar', 'Code block copy toolbar');
 assertIncludes(

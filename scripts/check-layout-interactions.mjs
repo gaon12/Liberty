@@ -172,6 +172,17 @@ class TestElement {
 	}
 
 	matches(selector) {
+		const excludedSelectors = [...selector.matchAll(/:not\(([^)]+)\)/g)].map(
+			(match) => match[1],
+		);
+		if (excludedSelectors.length > 0) {
+			const baseSelector = selector.replace(/:not\([^)]+\)/g, '');
+			return (
+				this.matches(baseSelector) &&
+				excludedSelectors.every((excluded) => !this.matches(excluded))
+			);
+		}
+
 		const attrMatch = selector.match(/^\[([^=\]]+)(?:="([^"]*)")?\]$/);
 		if (attrMatch) {
 			const [, name, value] = attrMatch;
@@ -184,6 +195,13 @@ class TestElement {
 		}
 		if (selector.startsWith('#')) {
 			return this.id === selector.slice(1);
+		}
+		const tagAttributeMatch = selector.match(/^([a-z][a-z0-9-]*)(\[.+\])$/i);
+		if (tagAttributeMatch) {
+			return (
+				this.tagName.toLowerCase() === tagAttributeMatch[1].toLowerCase() &&
+				this.matches(tagAttributeMatch[2])
+			);
 		}
 		return this.tagName.toLowerCase() === selector.toLowerCase();
 	}
@@ -200,8 +218,23 @@ class TestElement {
 		return null;
 	}
 
+	contains(node) {
+		let current = node;
+		while (current) {
+			if (current === this) {
+				return true;
+			}
+			current = current.parentNode;
+		}
+		return false;
+	}
+
 	focus() {
+		if (document.activeElement) {
+			document.activeElement.focused = false;
+		}
 		this.focused = true;
+		document.activeElement = this;
 	}
 
 	select() {
@@ -218,6 +251,7 @@ class TestDocument extends TestElement {
 		this.readyState = 'complete';
 		this.listeners = new Map();
 		this.append(this.body);
+		this.activeElement = this.body;
 	}
 
 	createElement(tagName) {
@@ -311,10 +345,13 @@ const modal = new TestElement('div', {
 });
 const modalDialog = new TestElement('div', { className: 'whale-modal-dialog' });
 const modalAutofocus = new TestElement('h2');
+modalAutofocus.setAttribute('tabindex', '-1');
 modalAutofocus.setAttribute('data-whale-modal-autofocus', '');
 const modalDismiss = new TestElement('button');
 modalDismiss.setAttribute('data-whale-dismiss', 'modal');
-modalDialog.append(modalAutofocus, modalDismiss);
+const modalJump = new TestElement('a');
+modalJump.setAttribute('href', '#reference-target');
+modalDialog.append(modalAutofocus, modalDismiss, modalJump);
 modal.append(modalDialog);
 const replacementTrigger = new TestElement('button');
 replacementTrigger.setAttribute('data-whale-toggle', 'modal');
@@ -456,6 +493,56 @@ if (
 if (!modalAutofocus.focused) {
 	throw new Error('Opening a modal should honor its explicit focus target.');
 }
+
+const assertModalTabFocus = ({ from, to, shiftKey, description }) => {
+	from.focus();
+	let prevented = false;
+	document.dispatch('keydown', {
+		target: from,
+		key: 'Tab',
+		defaultPrevented: false,
+		metaKey: false,
+		ctrlKey: false,
+		shiftKey,
+		altKey: false,
+		preventDefault: () => {
+			prevented = true;
+		},
+	});
+
+	if (!prevented || document.activeElement !== to) {
+		throw new Error(description);
+	}
+};
+
+assertModalTabFocus({
+	from: modalAutofocus,
+	to: modalDismiss,
+	shiftKey: false,
+	description:
+		'Tab from a non-tabbable modal autofocus target should move to the first focusable element.',
+});
+assertModalTabFocus({
+	from: modalAutofocus,
+	to: modalJump,
+	shiftKey: true,
+	description:
+		'Shift+Tab from a non-tabbable modal autofocus target should move to the last focusable element.',
+});
+assertModalTabFocus({
+	from: modalDismiss,
+	to: modalJump,
+	shiftKey: true,
+	description:
+		'Shift+Tab from the first modal control should wrap to the last control.',
+});
+assertModalTabFocus({
+	from: modalJump,
+	to: modalDismiss,
+	shiftKey: false,
+	description:
+		'Tab from the last modal control should wrap to the first control.',
+});
 
 document.dispatch('click', {
 	target: replacementTrigger,

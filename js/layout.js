@@ -245,7 +245,6 @@
 
 		modal.dataset.whaleModalState = 'closing';
 		modal.classList.remove('is-open');
-		modal.setAttribute('aria-hidden', 'true');
 		activeBackdrop?.classList.remove('is-open');
 		window.clearTimeout(modalTimer);
 
@@ -334,7 +333,11 @@
 
 		const first = focusable[0];
 		const last = focusable[focusable.length - 1];
-		if (event.shiftKey && document.activeElement === first) {
+		const activeIndex = focusable.indexOf(document.activeElement);
+		if (activeIndex === -1) {
+			event.preventDefault();
+			(event.shiftKey ? last : first).focus();
+		} else if (event.shiftKey && document.activeElement === first) {
 			event.preventDefault();
 			last.focus();
 		} else if (!event.shiftKey && document.activeElement === last) {
