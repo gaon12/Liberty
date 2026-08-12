@@ -699,6 +699,16 @@ assertIncludes(
 );
 assertIncludes(
 	mediaWikiStyles,
+	'border-radius: var(--whale-radius-sm) !important',
+	'Main-page information panel corners',
+);
+assertIncludes(
+	mediaWikiStyles,
+	'background-color: var(--whale-surface-elevated-color) !important',
+	'Main-page information panel surface',
+);
+assertIncludes(
+	mediaWikiStyles,
 	'background-color: var(--whale-code-background)',
 	'Article code treatment',
 );
