@@ -307,17 +307,25 @@ strike {
 
 .Whale .whale-reading-progress {
 	position: fixed;
-	top: 0;
+	bottom: 0;
+	bottom: env(safe-area-inset-bottom);
 	right: 0;
+	right: env(safe-area-inset-right);
 	left: 0;
-	z-index: 1100;
-	height: 3px;
+	left: env(safe-area-inset-left);
+	z-index: 998;
+	height: 4px;
 	background-color: var(--whale-main-color);
 	pointer-events: none;
 	transform: scaleX(0);
 	transform-origin: left center;
 	transition: transform 80ms linear;
 	will-change: transform;
+}
+
+html[dir="rtl"] .Whale .whale-reading-progress,
+.Whale[dir="rtl"] .whale-reading-progress {
+	transform-origin: right center;
 }
 /* Background Color End */
 

@@ -273,6 +273,7 @@ const buttonStyles = read('less/whale/buttons.less');
 const dropdownStyles = read('less/whale/dropdown.less');
 const contentStyles = read('less/whale/content.less');
 const responsiveStyles = read('less/whale/integrations-responsive.less');
+const printStyles = read('less/print.less');
 const bottomToolsStyles = read('less/whale/bottom-tools.less');
 const liveRecentStyles = read('less/whale/live-recent.less');
 const liveRecentHeaderBlock = getRuleBlock(
@@ -302,19 +303,67 @@ assertIncludes(
 	'.Whale .whale-reading-progress',
 	'Reading progress indicator',
 );
-assertIncludes(styles, 'height: 3px', 'Reading progress indicator');
-assertIncludes(styles, 'transform: scaleX(0)', 'Reading progress indicator');
-assertIncludes(
-	styles,
-	'transform-origin: left center',
-	'Reading progress indicator',
-);
 const readingProgressBlock = styles.match(
 	/\.Whale \.whale-reading-progress\s*\{(?<block>[\s\S]*?)\n\}/,
 )?.groups?.block;
 if (!readingProgressBlock || /display:\s*none/.test(readingProgressBlock)) {
 	throw new Error('Reading progress indicator should remain visible.');
 }
+assertIncludes(readingProgressBlock, 'bottom: 0', 'Bottom progress fallback');
+assertIncludes(
+	readingProgressBlock,
+	'bottom: env(safe-area-inset-bottom)',
+	'Bottom progress safe area',
+);
+assertIncludes(readingProgressBlock, 'right: 0', 'Progress inline fallback');
+assertIncludes(
+	readingProgressBlock,
+	'right: env(safe-area-inset-right)',
+	'Progress right safe area',
+);
+assertIncludes(readingProgressBlock, 'left: 0', 'Progress inline fallback');
+assertIncludes(
+	readingProgressBlock,
+	'left: env(safe-area-inset-left)',
+	'Progress left safe area',
+);
+assertIncludes(readingProgressBlock, 'z-index: 998', 'Progress UI stack order');
+assertIncludes(
+	readingProgressBlock,
+	'height: 4px',
+	'Reading progress indicator',
+);
+assertIncludes(
+	readingProgressBlock,
+	'pointer-events: none',
+	'Non-blocking reading progress',
+);
+assertIncludes(
+	readingProgressBlock,
+	'transform: scaleX(0)',
+	'Reading progress indicator',
+);
+assertIncludes(
+	readingProgressBlock,
+	'transform-origin: left center',
+	'Reading progress indicator',
+);
+assertNotIncludes(readingProgressBlock, 'top: 0', 'Top progress placement');
+const rtlProgressBlock = getRuleBlock(
+	styles,
+	'.Whale[dir="rtl"] .whale-reading-progress',
+	'RTL reading progress',
+);
+assertIncludes(
+	rtlProgressBlock,
+	'transform-origin: right center',
+	'RTL reading progress direction',
+);
+assertIncludes(
+	printStyles,
+	'.whale-reading-progress',
+	'Printed progress suppression',
+);
 assertIncludes(styles, '.whale-floating-toc.is-mobile', 'Stylesheet');
 const rootHtmlBlock = getRuleBlock(styles, 'html', 'Root viewport styles');
 assertIncludes(rootHtmlBlock, 'font-size: 16px', 'Readable root font size');
