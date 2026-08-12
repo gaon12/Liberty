@@ -33,14 +33,15 @@
 
 .Whale .content-wrapper .whale-content .whale-content-header .whale-notice {
 	background-color: var(--whale-notice-background-color);
-	border: 0;
-	border-left: 3px solid var(--whale-main-color);
-	border-radius: 0;
+	border: 1px solid var(--whale-border-color);
+	border-left: 4px solid var(--whale-main-color);
+	border-radius: var(--whale-radius-sm);
 	color: var(--whale-notice-text-color);
-	margin: 0;
+	margin: 1.25rem 1.4rem 0;
 	position: relative;
-	padding: 0.65rem 2.75rem 0.65rem 0.85rem;
-	line-height: 1.5;
+	padding: 0.85rem 3.25rem 0.85rem 1.05rem;
+	font-size: 0.95rem;
+	line-height: 1.55;
 	overflow-wrap: anywhere;
 	white-space: normal;
 }
@@ -49,19 +50,27 @@
 	appearance: none;
 	background: transparent;
 	border: 0;
+	border-radius: var(--whale-radius-sm);
 	color: inherit;
 	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	font-size: 1.4rem;
+	width: 2.75rem;
+	height: 2.75rem;
 	opacity: 0.65;
 	padding: 0;
 	position: absolute;
-	top: 0.55rem;
-	right: 0.75rem;
+	top: 50%;
+	right: 0.3rem;
+	transform: translateY(-50%);
 	line-height: 1;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .whale-notice .whale-notice-close:hover,
 .Whale .content-wrapper .whale-content .whale-content-header .whale-notice .whale-notice-close:focus {
+	background-color: rgba(117, 104, 232, 0.1);
 	opacity: 1;
 }
 
@@ -118,6 +127,10 @@
 	justify-content: space-between;
 	gap: 1.25rem;
 	padding: 1.25rem 1.4rem 1.05rem;
+}
+
+.Whale .content-wrapper .whale-content > .whale-content-header > .whale-notice + .whale-content-heading {
+	margin-top: 0.75rem;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-title-group {

@@ -271,6 +271,8 @@ const tableStyles = read('less/wiki-table.less');
 const mediaWikiStyles = read('less/only-mw.less');
 const buttonStyles = read('less/whale/buttons.less');
 const dropdownStyles = read('less/whale/dropdown.less');
+const contentStyles = read('less/whale/content.less');
+const responsiveStyles = read('less/whale/integrations-responsive.less');
 const bottomToolsStyles = read('less/whale/bottom-tools.less');
 const liveRecentStyles = read('less/whale/live-recent.less');
 const liveRecentHeaderBlock = getRuleBlock(
@@ -796,6 +798,32 @@ assertIncludes(
 	styles,
 	'color: var(--whale-notice-text-color)',
 	'Notice theme text color',
+);
+const noticeBlock = getRuleBlock(
+	contentStyles,
+	'.Whale .content-wrapper .whale-content .whale-content-header .whale-notice',
+	'Article notice',
+);
+assertIncludes(noticeBlock, 'margin: 1.25rem 1.4rem 0', 'Inset notice spacing');
+assertIncludes(
+	noticeBlock,
+	'border-radius: var(--whale-radius-sm)',
+	'Notice component corners',
+);
+const noticeHeadingGapBlock = getRuleBlock(
+	contentStyles,
+	'.Whale .content-wrapper .whale-content > .whale-content-header > .whale-notice + .whale-content-heading',
+	'Notice and article heading gap',
+);
+assertIncludes(
+	noticeHeadingGapBlock,
+	'margin-top: 0.75rem',
+	'Desktop notice and heading gap',
+);
+assertIncludes(
+	responsiveStyles,
+	'> .whale-notice + .whale-content-heading {\n\t\tmargin-top: 0.5rem',
+	'Responsive notice and heading gap',
 );
 assertIncludes(
 	styles,
