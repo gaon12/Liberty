@@ -1019,6 +1019,46 @@ assertIncludes(
 	'overscroll-behavior: contain',
 	'Reference modal scroll containment',
 );
+const referenceHeaderBlock = getRuleBlock(
+	styles,
+	'.Whale .whale-reference-modal .whale-modal-header',
+	'Reference modal header',
+);
+assertIncludes(
+	referenceHeaderBlock,
+	'background-color: var(--whale-surface-muted-color)',
+	'Reference modal header surface',
+);
+const referenceActionsBlock = getRuleBlock(
+	styles,
+	'.Whale .whale-reference-actions',
+	'Reference modal actions',
+);
+assertIncludes(
+	referenceActionsBlock,
+	'justify-content: flex-end',
+	'Reference modal action alignment',
+);
+assertIncludes(
+	referenceActionsBlock,
+	'background-color: var(--whale-surface-muted-color)',
+	'Reference modal action surface',
+);
+const referenceJumpBlock = getRuleBlock(
+	styles,
+	'.Whale .whale-reference-jump',
+	'Reference modal jump action',
+);
+assertIncludes(
+	referenceJumpBlock,
+	'border: 1px solid var(--whale-border-strong-color)',
+	'Reference modal button affordance',
+);
+assertIncludes(
+	styles,
+	'[data-whale-modal-autofocus]:focus',
+	'Reference modal programmatic focus treatment',
+);
 assertIncludes(
 	styles,
 	'env(safe-area-inset-bottom)',

@@ -96,10 +96,15 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 }
 
 .Whale .whale-short-url-modal .whale-modal-header,
-.Whale .whale-external-link-modal .whale-modal-header,
-.Whale .whale-reference-modal .whale-modal-header {
+.Whale .whale-external-link-modal .whale-modal-header {
 	min-height: 3.25rem;
 	padding: 0.65rem 3.25rem 0.65rem 0.9rem;
+}
+
+.Whale .whale-reference-modal .whale-modal-header {
+	min-height: 3.5rem;
+	padding: 0.75rem 3.75rem 0.75rem 1.1rem;
+	background-color: var(--whale-surface-muted-color);
 }
 
 .Whale .whale-short-url-modal .whale-modal-title,
@@ -114,14 +119,18 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 }
 
 .Whale .whale-reference-modal-dialog {
-	width: ~"min(40rem, calc(100% - 2rem))";
-	margin: 12vh auto 1.5rem;
+	width: ~"min(42rem, calc(100% - 2rem))";
+	margin: 10vh auto 1.5rem;
 }
 
 .Whale .whale-reference-modal-content {
 	max-height: ~"calc(100dvh - 4rem)";
 	overflow: hidden;
-	border-radius: var(--whale-radius-sm);
+	border-radius: var(--whale-radius);
+}
+
+.Whale .whale-reference-modal [data-whale-modal-autofocus]:focus {
+	outline: 0;
 }
 
 .Whale .whale-reference-body {
@@ -135,10 +144,11 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 	max-height: ~"calc(100dvh - 11rem)";
 	overflow: auto;
 	overscroll-behavior: contain;
-	padding: 1rem 1.05rem 1.1rem;
+	padding: 1.15rem 1.25rem 1.25rem;
+	background-color: var(--whale-surface-elevated-color);
 	color: var(--whale-text-color, #252a30);
 	font-size: 0.95rem;
-	line-height: 1.6;
+	line-height: 1.7;
 	overflow-wrap: anywhere;
 }
 
@@ -170,17 +180,22 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 
 .Whale .whale-reference-actions {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: flex-end;
 	flex: 0 0 auto;
+	padding: 0.6rem 0.75rem;
 	border-top: 1px solid var(--whale-border-color, #d9dee3);
+	background-color: var(--whale-surface-muted-color);
 }
 
 .Whale .whale-reference-jump {
 	display: inline-flex;
 	align-items: center;
-	min-height: 2.65rem;
-	padding: 0.5rem 1rem;
-	color: #0066d9;
+	min-height: 2.3rem;
+	padding: 0.4rem 0.75rem;
+	border: 1px solid var(--whale-border-strong-color);
+	border-radius: var(--whale-radius-sm);
+	background-color: var(--whale-surface-elevated-color);
+	color: var(--whale-main-color);
 	font-size: 0.85rem;
 	font-weight: 500;
 	text-decoration: none;
@@ -189,8 +204,8 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 .Whale .whale-reference-jump:hover,
 .Whale .whale-reference-jump:focus-visible {
 	background-color: var(--whale-hover-color);
-	text-decoration: underline;
-	text-underline-offset: 0.12em;
+	border-color: var(--whale-main-color);
+	text-decoration: none;
 }
 
 .Whale .whale-short-url-description,
@@ -567,7 +582,7 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 	.Whale .whale-reference-jump {
 		justify-content: center;
 		width: 100%;
-		min-height: 3rem;
+		min-height: 2.75rem;
 	}
 }
 /* Login modal End */
