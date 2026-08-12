@@ -96,18 +96,49 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 }
 
 .Whale .whale-short-url-modal .whale-modal-header,
-.Whale .whale-external-link-modal .whale-modal-header {
+.Whale .whale-external-link-modal .whale-modal-header,
+.Whale .whale-reference-modal .whale-modal-header {
 	padding: 0.85rem 1rem;
 }
 
 .Whale .whale-short-url-modal .whale-modal-title,
-.Whale .whale-external-link-modal .whale-modal-title {
+.Whale .whale-external-link-modal .whale-modal-title,
+.Whale .whale-reference-modal .whale-modal-title {
 	flex: 1;
 	margin: 0;
 	color: var(--whale-text-color, #252a30);
 	font-size: 1.05rem;
 	font-weight: 700;
 	text-align: left;
+}
+
+.Whale .whale-reference-modal-dialog {
+	width: ~"min(42rem, calc(100% - 2rem))";
+}
+
+.Whale .whale-reference-content {
+	max-height: ~"min(60vh, 30rem)";
+	overflow: auto;
+	color: var(--whale-text-color, #252a30);
+	line-height: 1.65;
+	overflow-wrap: anywhere;
+}
+
+.Whale .whale-reference-content > :last-child {
+	margin-bottom: 0;
+}
+
+.Whale .whale-reference-content img {
+	max-width: 100%;
+	height: auto;
+}
+
+.Whale .whale-reference-actions {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 1rem;
+	padding-top: 0.8rem;
+	border-top: 1px solid var(--whale-border-color, #d9dee3);
 }
 
 .Whale .whale-short-url-description,

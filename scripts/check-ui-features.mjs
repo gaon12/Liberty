@@ -76,6 +76,9 @@ for (const locale of ['en', 'ja', 'ko', 'zh-hans', 'zh-hant']) {
 	for (const key of [
 		'whale-pref-layout-mobile-toc',
 		'whale-pref-layout-mobile-toc-help',
+		'whale-reference-title',
+		'whale-reference-title-numbered',
+		'whale-reference-jump',
 	]) {
 		if (!messages[key]) {
 			throw new Error(`${locale} should define ${key}.`);
@@ -135,6 +138,8 @@ assertIncludes(
 );
 
 const layout = read('js/layout.js');
+const delayScrolling = read('js/delay-scrolling.js');
+const referenceModal = read('js/reference-modal.js');
 assertIncludes(layout, 'whale:toggleFloatingToc', 'Layout scroll TOC handler');
 assertIncludes(layout, 'container?.classList.toggle', 'Section folding state');
 assertIncludes(layout, 'folding?.classList.toggle', 'Folding block state');
@@ -145,6 +150,28 @@ assertIncludes(
 	layout,
 	'--whale-modal-scrollbar-offset',
 	'Modal scrollbar compensation',
+);
+assertIncludes(layout, 'whale:closeModal', 'Programmatic modal close');
+assertIncludes(
+	layout,
+	'[data-whale-modal-autofocus]',
+	'Explicit modal focus target',
+);
+assertNotIncludes(
+	delayScrolling,
+	'.reference > a',
+	'Legacy reference scroll interception',
+);
+assertIncludes(referenceModal, '.reference, .mw-ref', 'Reference link support');
+assertIncludes(
+	referenceModal,
+	'.reference-text, .mw-reference-text',
+	'Reference content support',
+);
+assertIncludes(
+	referenceModal,
+	'restoreFocus: false',
+	'Reference list jump focus behavior',
 );
 
 const recovery = read('js/recovery.js');
@@ -714,6 +741,7 @@ if (
 }
 
 const skinTemplate = read('templates/skin.mustache');
+const referenceTemplate = read('templates/ReferenceModal.mustache');
 assertIncludes(skinTemplate, 'whale-content-no-sidebar', 'No-sidebar layout');
 assertIncludes(
 	skinTemplate,
@@ -731,6 +759,19 @@ assertIncludes(
 	'Article heading and tools alignment',
 );
 assertNotIncludes(styles, 'min-height: 204px', 'Legacy article header height');
+assertIncludes(skinTemplate, '{{>ReferenceModal}}', 'Reference modal partial');
+assertIncludes(
+	referenceTemplate,
+	'aria-modal="true"',
+	'Accessible reference modal',
+);
+assertIncludes(
+	referenceTemplate,
+	'data-whale-modal-autofocus',
+	'Reference modal initial focus',
+);
+assertIncludes(styles, '.whale-reference-content', 'Reference modal content');
+assertIncludes(styles, '~"min(60vh, 30rem)"', 'Reference modal scroll limit');
 assertIncludes(
 	skinTemplate,
 	'whale-content-wrapper-no-sidebar',

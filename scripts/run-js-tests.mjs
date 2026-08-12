@@ -7,6 +7,7 @@ const tests = [
 	'check-js.mjs',
 	'check-copy-helper.mjs',
 	'check-external-link-warning.mjs',
+	'check-reference-modal.mjs',
 	'check-share-button.mjs',
 	'check-short-url-copy.mjs',
 	'check-toc-utils.mjs',

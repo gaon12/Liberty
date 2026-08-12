@@ -701,6 +701,19 @@ class WhaleRenderer {
 	}
 
 	/**
+	 * @return array<string,string>
+	 */
+	public function getReferenceModalData(): array {
+		$skin = $this->skin;
+
+		return [
+			'title' => $skin->msg( 'whale-reference-title' )->text(),
+			'jump-label' => $skin->msg( 'whale-reference-jump' )->text(),
+			'close-label' => $skin->msg( 'close' )->text(),
+		];
+	}
+
+	/**
 	 * @return array<string,mixed>
 	 */
 	public function getLoginModalData(): array {

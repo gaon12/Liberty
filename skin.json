@@ -140,14 +140,17 @@
 				"js/index-button.js",
 				"js/share-button.js",
 				"js/external-link-warning.js",
-				"js/layout.js"
+				"js/layout.js",
+				"js/reference-modal.js"
 			],
 			"messages": [
 				"whale-floating-toc",
 				"whale-reading-progress",
 				"whale-share-copied",
 				"whale-external-link-show-decoded",
-				"whale-external-link-show-original"
+				"whale-external-link-show-original",
+				"whale-reference-title",
+				"whale-reference-title-numbered"
 			],
 			"dependencies": ["mediawiki.cookie", "skins.whale.common"]
 		},

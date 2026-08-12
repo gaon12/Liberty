@@ -376,6 +376,7 @@ class SkinWhale extends SkinMustache {
 		$data['data-whale-footer'] = $footerData;
 		$data['data-whale-short-url'] = $shortUrlData;
 		$data['data-whale-external-link-warning'] = $renderer->getExternalLinkWarningData();
+		$data['data-whale-reference-modal'] = $renderer->getReferenceModalData();
 		$data['data-whale-login-modal'] = $renderer->getLoginModalData();
 		$data['data-whale-user-contribution-graph'] = $renderer->getUserContributionGraphData();
 		$data['has-whale-user-contribution-graph'] =

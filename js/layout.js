@@ -233,7 +233,7 @@
 		delete modal.dataset.whaleModalState;
 	};
 
-	const closeModal = (modal) => {
+	const closeModal = (modal, options = {}) => {
 		if (!modal) {
 			return;
 		}
@@ -259,7 +259,8 @@
 			clearModalScrollbar();
 			removeBackdrop();
 			activeModal = null;
-			const trigger = activeModalTrigger;
+			const trigger =
+				options.restoreFocus === false ? null : activeModalTrigger;
 			activeModalTrigger = null;
 			trigger?.focus?.();
 		}, MODAL_TRANSITION_MS);
@@ -310,7 +311,10 @@
 			modal.classList.add('is-open');
 			activeBackdrop?.classList.add('is-open');
 			modal.dataset.whaleModalState = 'open';
-			modal.querySelector(FOCUSABLE_SELECTOR)?.focus();
+			(
+				modal.querySelector('[data-whale-modal-autofocus]') ||
+				modal.querySelector(FOCUSABLE_SELECTOR)
+			)?.focus();
 		});
 	};
 
@@ -503,6 +507,12 @@
 
 		document.addEventListener('whale:openModal', (event) => {
 			openModal(event.detail?.modal, event.detail?.trigger || null);
+		});
+
+		document.addEventListener('whale:closeModal', (event) => {
+			closeModal(event.detail?.modal || activeModal, {
+				restoreFocus: event.detail?.restoreFocus,
+			});
 		});
 
 		document.addEventListener('pointerup', handleDirectToggle, {

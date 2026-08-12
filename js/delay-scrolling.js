@@ -4,7 +4,6 @@
 		'#fixed-toc ul li > a[href^="#"]',
 		'.mw-cite-backlink > a[href^="#"]',
 		'.mw-cite-backlink > * > a[href^="#"]',
-		'.reference > a[href^="#"]',
 		'#preftoc li > a[href^="#"]',
 	].join(',');
 

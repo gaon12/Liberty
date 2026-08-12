@@ -302,9 +302,11 @@ const modal = new TestElement('div', {
 	id: 'test-modal',
 });
 const modalDialog = new TestElement('div', { className: 'whale-modal-dialog' });
+const modalAutofocus = new TestElement('h2');
+modalAutofocus.setAttribute('data-whale-modal-autofocus', '');
 const modalDismiss = new TestElement('button');
 modalDismiss.setAttribute('data-whale-dismiss', 'modal');
-modalDialog.append(modalDismiss);
+modalDialog.append(modalAutofocus, modalDismiss);
 modal.append(modalDialog);
 const replacementTrigger = new TestElement('button');
 replacementTrigger.setAttribute('data-whale-toggle', 'modal');
@@ -443,6 +445,10 @@ if (
 	throw new Error('Opening a modal should reserve the scrollbar width.');
 }
 
+if (!modalAutofocus.focused) {
+	throw new Error('Opening a modal should honor its explicit focus target.');
+}
+
 document.dispatch('click', {
 	target: replacementTrigger,
 	preventDefault: () => {},
@@ -474,5 +480,21 @@ if (
 if (!modalTrigger.focused || replacementTrigger.focused) {
 	throw new Error(
 		'Replacing a modal should preserve the original focus return target.',
+	);
+}
+
+modalTrigger.focused = false;
+document.dispatch('click', {
+	target: modalTrigger,
+	preventDefault: () => {},
+	stopPropagation: () => {},
+});
+document.dispatch('whale:closeModal', {
+	detail: { modal, restoreFocus: false },
+});
+
+if (modalTrigger.focused || modal.style.display !== 'none') {
+	throw new Error(
+		'Programmatic modal close should support suppressing focus restoration.',
 	);
 }
