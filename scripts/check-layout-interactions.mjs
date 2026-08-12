@@ -200,7 +200,9 @@ class TestElement {
 		return null;
 	}
 
-	focus() {}
+	focus() {
+		this.focused = true;
+	}
 }
 
 class TestDocument extends TestElement {
@@ -304,7 +306,21 @@ const modalDismiss = new TestElement('button');
 modalDismiss.setAttribute('data-whale-dismiss', 'modal');
 modalDialog.append(modalDismiss);
 modal.append(modalDialog);
-document.body.append(modalTrigger, modal);
+const replacementTrigger = new TestElement('button');
+replacementTrigger.setAttribute('data-whale-toggle', 'modal');
+replacementTrigger.setAttribute('data-whale-target', '#replacement-modal');
+const replacementModal = new TestElement('div', {
+	className: 'whale-modal',
+	id: 'replacement-modal',
+});
+const replacementDialog = new TestElement('div', {
+	className: 'whale-modal-dialog',
+});
+const replacementDismiss = new TestElement('button');
+replacementDismiss.setAttribute('data-whale-dismiss', 'modal');
+replacementDialog.append(replacementDismiss);
+replacementModal.append(replacementDialog);
+document.body.append(modalTrigger, modal, replacementTrigger, replacementModal);
 
 runInNewContext(readFileSync(resolve('js/layout.js'), 'utf8'), context);
 for (const callback of readyCallbacks) {
@@ -428,7 +444,23 @@ if (
 }
 
 document.dispatch('click', {
-	target: modalDismiss,
+	target: replacementTrigger,
+	preventDefault: () => {},
+	stopPropagation: () => {},
+});
+
+if (
+	modal.style.display !== 'none' ||
+	modal.getAttribute('aria-hidden') !== 'true' ||
+	replacementModal.style.display !== 'block'
+) {
+	throw new Error(
+		'Replacing a modal should immediately hide the previous one.',
+	);
+}
+
+document.dispatch('click', {
+	target: replacementDismiss,
 	preventDefault: () => {},
 });
 
@@ -437,4 +469,10 @@ if (
 	document.body.style.getPropertyValue('--whale-modal-scrollbar-offset') !== ''
 ) {
 	throw new Error('Closing a modal should clear scrollbar compensation.');
+}
+
+if (!modalTrigger.focused || replacementTrigger.focused) {
+	throw new Error(
+		'Replacing a modal should preserve the original focus return target.',
+	);
 }

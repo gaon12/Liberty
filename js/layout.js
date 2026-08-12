@@ -226,8 +226,20 @@
 		activeBackdrop = null;
 	};
 
+	const hideModal = (modal) => {
+		modal.classList.remove('is-open');
+		modal.setAttribute('aria-hidden', 'true');
+		modal.style.display = 'none';
+		delete modal.dataset.whaleModalState;
+	};
+
 	const closeModal = (modal) => {
 		if (!modal) {
+			return;
+		}
+
+		if (modal !== activeModal) {
+			hideModal(modal);
 			return;
 		}
 
@@ -242,14 +254,14 @@
 				return;
 			}
 
-			modal.style.display = 'none';
-			delete modal.dataset.whaleModalState;
+			hideModal(modal);
 			document.body.classList.remove('whale-modal-open');
 			clearModalScrollbar();
 			removeBackdrop();
 			activeModal = null;
-			activeModalTrigger?.focus?.();
+			const trigger = activeModalTrigger;
 			activeModalTrigger = null;
+			trigger?.focus?.();
 		}, MODAL_TRANSITION_MS);
 	};
 
@@ -265,8 +277,13 @@
 			return;
 		}
 
+		let returnTrigger = trigger;
 		if (activeModal && activeModal !== modal) {
-			closeModal(activeModal);
+			returnTrigger = activeModalTrigger || trigger;
+			window.clearTimeout(modalTimer);
+			hideModal(activeModal);
+			activeModal = null;
+			activeModalTrigger = null;
 		}
 
 		removeBackdrop();
@@ -278,7 +295,7 @@
 		reserveModalScrollbar();
 		document.body.classList.add('whale-modal-open');
 		activeModal = modal;
-		activeModalTrigger = trigger;
+		activeModalTrigger = returnTrigger;
 
 		activeBackdrop = document.createElement('div');
 		activeBackdrop.className = 'whale-modal-backdrop';
