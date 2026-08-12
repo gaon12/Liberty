@@ -1,14 +1,17 @@
 /* ToC */
 .Whale .content-wrapper .whale-content .whale-content-main .toc {
-	display: inline-block;
+	display: block;
+	width: ~"min(100%, 32rem)";
 	min-width: 18rem;
 	max-width: 100%;
-	padding: 0.8rem 0.9rem 0.9rem;
+	padding: 0;
+	overflow: hidden;
 	border: 1px solid var(--whale-border-color);
-	border-radius: var(--whale-radius);
-	background-color: var(--whale-surface-muted-color);
+	border-radius: var(--whale-radius-sm);
+	background-color: var(--whale-surface-elevated-color);
+	box-shadow: 0 1px 2px rgba(25, 43, 54, 0.08);
 	font-size: 0.95rem;
-	line-height: 1.6;
+	line-height: 1.5;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .toc .toctitle {
@@ -16,11 +19,12 @@
 	align-items: center;
 	justify-content: space-between;
 	gap: 1rem;
-	margin-bottom: 0.45rem;
-	padding: 0 0 0.55rem;
+	min-height: 2.75rem;
+	margin: 0;
+	padding: 0.55rem 0.65rem 0.55rem 0.85rem;
 	border: 0;
 	border-bottom: 1px solid var(--whale-border-color);
-	background-color: transparent;
+	background-color: var(--whale-surface-muted-color);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .toc .toctitle h2 {
@@ -46,8 +50,19 @@
 	justify-content: center;
 	width: 2rem;
 	height: 2rem;
+	border-radius: var(--whale-radius-sm);
 	color: inherit;
 	cursor: pointer;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main .toc .toctogglelabel:hover {
+	background-color: var(--whale-hover-color);
+	color: var(--whale-main-color);
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main .toc .toctogglelabel:focus-visible {
+	outline: 0;
+	box-shadow: inset 0 0 0 2px var(--whale-main-color);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .toc .toctogglelabel::before {
@@ -82,7 +97,7 @@
 
 .Whale .content-wrapper .whale-content .whale-content-main .toc > ul {
 	margin: 0;
-	padding: 0;
+	padding: 0.6rem 0.65rem 0.7rem;
 	border: 0;
 	border-radius: 0;
 }
@@ -93,12 +108,16 @@
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .toc li {
-	margin: 0.12rem 0;
+	margin: 0.08rem 0;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .toc a {
+	display: block;
+	padding: 0.2rem 0.35rem;
+	border-radius: 4px;
 	color: var(--whale-link-color);
 	text-decoration: none;
+	transition: background-color 0.14s ease, color 0.14s ease;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .toc .tocnumber {
@@ -112,8 +131,14 @@
 
 .Whale .content-wrapper .whale-content .whale-content-main .toc a:hover,
 .Whale .content-wrapper .whale-content .whale-content-main .toc a:focus {
+	background-color: var(--whale-hover-color);
 	color: var(--whale-link-hover-color);
+	outline: 0;
 	text-decoration: none;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main .toc a:focus-visible {
+	box-shadow: inset 0 0 0 2px var(--whale-main-color);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .toc a:hover .toctext,
@@ -217,7 +242,9 @@
 	margin-bottom: 0.85rem;
 }
 
-body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .mw-parser-output > div {
+/* Preserve the homepage's actual component hierarchy. Only the outer column
+   grid is flattened; its hero and information panels get their own surfaces. */
+body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .mw-parser-output > div:last-child {
 	border: 0 !important;
 	border-radius: 0 !important;
 	background-color: transparent !important;
@@ -226,9 +253,13 @@ body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .m
 }
 
 body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .mw-parser-output > p + div {
-	margin-bottom: 1rem !important;
-	padding: 1.4rem 1rem !important;
-	border-bottom: 1px solid var(--whale-border-color) !important;
+	margin: 0 0 1.25rem !important;
+	padding: 1.35rem 1.5rem !important;
+	border: 1px solid var(--whale-border-color) !important;
+	border-left: 4px solid var(--whale-main-color) !important;
+	border-radius: var(--whale-radius-sm) !important;
+	background-color: var(--whale-surface-elevated-color) !important;
+	box-shadow: none !important;
 }
 
 body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .mw-parser-output > p + div > p {
@@ -245,7 +276,7 @@ body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .m
 }
 
 body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .mw-parser-output > p + div > div:last-child {
-	margin-top: 0.5rem !important;
+	margin-top: 0.85rem !important;
 	padding: 0 !important;
 	border-radius: 0 !important;
 	background-color: transparent !important;
@@ -265,24 +296,58 @@ body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .m
 	background-image: none !important;
 }
 
-body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .mw-parser-output [style*="border-left"] {
+body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .mw-parser-output > div:last-child > div > div [style*="border-left"] {
 	border: 0 !important;
 	border-left: 3px solid var(--whale-main-color) !important;
 }
 
 body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .mw-parser-output > div:last-child {
-	gap: 0.75rem !important;
+	gap: 1rem !important;
 	padding: 0 !important;
 	background-color: transparent !important;
 	color: var(--whale-text-color) !important;
 }
 
 body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .mw-parser-output > div:last-child > div > div {
-	margin-bottom: 0.75rem !important;
-	padding: 1rem 1.1rem !important;
+	margin-bottom: 1rem !important;
+	padding: 0 !important;
+	overflow: hidden !important;
 	border: 1px solid var(--whale-border-color) !important;
-	border-radius: var(--whale-radius) !important;
+	border-radius: var(--whale-radius-sm) !important;
 	background-color: var(--whale-surface-elevated-color) !important;
+	box-shadow: none !important;
+}
+
+body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .mw-parser-output > div:last-child > div > div .whale-section-container {
+	margin: 0 !important;
+}
+
+body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .mw-parser-output > div:last-child > div > div .whale-section-heading {
+	min-height: 3rem;
+	margin: 0 !important;
+	padding: 0.7rem 0.9rem !important;
+	border: 0 !important;
+	border-bottom: 1px solid var(--whale-border-color) !important;
+	border-radius: 0 !important;
+	background-color: var(--whale-surface-muted-color) !important;
+	color: var(--whale-text-color) !important;
+	font-size: 1.08rem;
+	font-weight: 650;
+	line-height: 1.4;
+}
+
+body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .mw-parser-output > div:last-child > div > div .whale-section-heading:hover {
+	background-color: var(--whale-hover-color) !important;
+}
+
+body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .mw-parser-output > div:last-child > div > div .whale-section-body {
+	margin: 0 !important;
+	padding: 0.9rem 1rem 1rem !important;
+	background-color: var(--whale-surface-elevated-color) !important;
+}
+
+body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .mw-parser-output > div:last-child > div > div .whale-section-body > :last-child {
+	margin-bottom: 0 !important;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main ul {
@@ -299,12 +364,12 @@ body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .m
 
 .Whale .content-wrapper .whale-content .whale-content-main blockquote {
 	margin: 1rem 0;
-	padding: 0.35rem 0.85rem;
+	padding: 0.75rem 1rem;
 	border: 0;
-	border-left: 3px solid var(--whale-border-strong-color);
-	border-radius: 0;
-	background-color: transparent;
-	color: var(--whale-content-muted-color);
+	border-left: 4px solid var(--whale-main-color);
+	border-radius: 0 var(--whale-radius-sm) var(--whale-radius-sm) 0;
+	background-color: var(--whale-surface-muted-color);
+	color: var(--whale-text-color);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main blockquote > :last-child {
@@ -312,14 +377,24 @@ body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .m
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main code,
-.Whale .content-wrapper .whale-content .whale-content-main kbd,
 .Whale .content-wrapper .whale-content .whale-content-main samp {
 	padding: 0.12em 0.32em;
 	border: 1px solid var(--whale-border-color);
-	border-radius: 0.2rem;
+	border-radius: 4px;
 	background-color: var(--whale-code-background);
 	font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
 	font-size: 0.9em;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main kbd {
+	padding: 0.12em 0.38em;
+	border: 1px solid var(--whale-border-strong-color);
+	border-radius: 4px;
+	background-color: var(--whale-text-color);
+	box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.18);
+	color: var(--whale-surface-elevated-color);
+	font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+	font-size: 0.85em;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main pre {
@@ -327,7 +402,7 @@ body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .m
 	padding: 0.9rem 1rem;
 	overflow: auto;
 	border-color: var(--whale-border-color);
-	border-radius: var(--whale-radius);
+	border-radius: var(--whale-radius-sm);
 	background-color: var(--whale-code-background);
 	line-height: 1.55;
 }
@@ -420,6 +495,50 @@ body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .m
 	width: auto;
 	margin: 0;
 }
+
+/* Normalize legacy MediaWiki result and validation messages as status panels. */
+.Whale .content-wrapper .whale-content .whale-content-main .mw-message-box,
+.Whale .content-wrapper .whale-content .whale-content-main .errorbox,
+.Whale .content-wrapper .whale-content .whale-content-main .warningbox,
+.Whale .content-wrapper .whale-content .whale-content-main .successbox,
+.Whale .content-wrapper .whale-content .whale-content-main .permissions-errors {
+	display: block;
+	width: 100%;
+	margin: 1rem 0;
+	padding: 0.8rem 1rem;
+	border: 1px solid var(--whale-border-color);
+	border-left: 4px solid var(--whale-main-color);
+	border-radius: var(--whale-radius-sm);
+	background-color: var(--whale-surface-elevated-color);
+	box-shadow: 0 1px 2px rgba(25, 43, 54, 0.06);
+	color: var(--whale-text-color);
+	font-size: 0.95rem;
+	line-height: 1.55;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main .mw-message-box-error,
+.Whale .content-wrapper .whale-content .whale-content-main .errorbox,
+.Whale .content-wrapper .whale-content .whale-content-main .permissions-errors {
+	border-left-color: var(--whale-danger-color);
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main .mw-message-box-warning,
+.Whale .content-wrapper .whale-content .whale-content-main .warningbox {
+	border-left-color: #b7791f;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main .mw-message-box-success,
+.Whale .content-wrapper .whale-content .whale-content-main .successbox {
+	border-left-color: #2f855a;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main .mw-message-box > :last-child,
+.Whale .content-wrapper .whale-content .whale-content-main .errorbox > :last-child,
+.Whale .content-wrapper .whale-content .whale-content-main .warningbox > :last-child,
+.Whale .content-wrapper .whale-content .whale-content-main .successbox > :last-child,
+.Whale .content-wrapper .whale-content .whale-content-main .permissions-errors > :last-child {
+	margin-bottom: 0;
+}
 /* Special Pages End */
 
 /* Search results */
@@ -436,8 +555,8 @@ html .suggestions-special {
 }
 
 html .suggestions-result-current {
-	background-color: var(--whale-main-color, #7568e8);
-	color: #fff;
+	background-color: var(--whale-main-color, #0b67d1);
+	color: var(--whale-main-contrast-color, #fff);
 }
 /* Search results End */
 
@@ -571,53 +690,108 @@ body.whale-dark.Whale .content-wrapper .whale-content .whale-content-main .whale
 /* Left ToC End */
 
 /* Input */
-/* The OOUI selector is a horrible hack for the new Recent Changes Filters in MW 1.32+ */
-select,
-input:not([type="button"]):not([type="checkbox"]):not([type="submit"]):not([class="oo-ui-inputWidget-input"]) {
+/* Keep generic MediaWiki controls inside article content so they cannot
+   override the navigation and modal component rules loaded before this file. */
+.Whale .content-wrapper .whale-content .whale-content-main select:not(.oo-ui-inputWidget-input):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-input),
+.Whale .content-wrapper .whale-content .whale-content-main textarea:not(.oo-ui-inputWidget-input):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-input),
+.Whale .content-wrapper .whale-content .whale-content-main input:not([type="button"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not(.oo-ui-inputWidget-input):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-input):not(.whale-form-control):not(.whale-search-input) {
 	display: inline-block;
-	padding: 0.2rem 0.4rem;
-	font-size: 1rem;
+	min-height: var(--whale-control-height-sm);
+	padding: 0.42rem 0.7rem;
+	font-size: 0.95rem;
 	line-height: 1.5;
-	color: #55595c;
-	background-color: #fff;
+	color: var(--whale-text-color);
+	background-color: var(--whale-surface-elevated-color);
 	background-image: none;
-	border: 1px solid #ccc;
+	border: 1px solid var(--whale-border-strong-color);
 	border-radius: var(--whale-radius-sm);
+	box-shadow: inset 0 1px 1px rgba(25, 43, 54, 0.04);
+	transition: background-color 0.14s ease, border-color 0.14s ease,
+		box-shadow 0.14s ease;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main textarea:not(.oo-ui-inputWidget-input):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-input) {
+	min-height: 7rem;
+	resize: vertical;
 }
 
 html input.oo-ui-inputWidget-input[type="search"] {
 	padding-left: 2.5em !important;
 }
 
-select:focus,
-input:not([type="button"]):not([type="checkbox"]):not([type="submit"]):focus {
-	border-color: var(--whale-main-color, #7568e8);
-	outline: 0;
-	box-shadow: 0 0 0 3px rgba(117, 104, 232, 0.18);
+.Whale .content-wrapper .whale-content .whale-content-main select:not(.oo-ui-inputWidget-input):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-input):hover,
+.Whale .content-wrapper .whale-content .whale-content-main textarea:not(.oo-ui-inputWidget-input):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-input):hover,
+.Whale .content-wrapper .whale-content .whale-content-main input:not([type="button"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not(.oo-ui-inputWidget-input):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-input):not(.whale-form-control):not(.whale-search-input):hover {
+	border-color: var(--whale-border-strong-color);
 }
 
-input[type="button"],
-input[type="submit"],
-button {
-	box-shadow: none;
-	display: inline-block;
-	padding: 0.2rem 1rem;
-	font-size: 1rem;
-	font-weight: 400;
+.Whale .content-wrapper .whale-content .whale-content-main select:not(.oo-ui-inputWidget-input):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-input):focus,
+.Whale .content-wrapper .whale-content .whale-content-main textarea:not(.oo-ui-inputWidget-input):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-input):focus,
+.Whale .content-wrapper .whale-content .whale-content-main input:not([type="button"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not(.oo-ui-inputWidget-input):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-input):not(.whale-form-control):not(.whale-search-input):focus {
+	background-color: var(--whale-surface-elevated-color);
+	border-color: var(--whale-main-color, #0b67d1);
+	outline: 0;
+	box-shadow: var(--whale-focus-ring);
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main select:not(.oo-ui-inputWidget-input):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-input):disabled,
+.Whale .content-wrapper .whale-content .whale-content-main textarea:not(.oo-ui-inputWidget-input):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-input):disabled,
+.Whale .content-wrapper .whale-content .whale-content-main input:not([type="button"]):not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not(.oo-ui-inputWidget-input):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-input):not(.whale-form-control):not(.whale-search-input):disabled {
+	background-color: var(--whale-surface-muted-color);
+	border-color: var(--whale-border-color);
+	color: var(--whale-content-muted-color);
+	cursor: not-allowed;
+	opacity: 0.75;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main input[type="button"]:not(.whale-btn):not(.oo-ui-buttonElement-button):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-button),
+.Whale .content-wrapper .whale-content .whale-content-main input[type="submit"]:not(.whale-btn):not(.oo-ui-buttonElement-button):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-button) {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: var(--whale-control-height-sm);
+	padding: 0.42rem 0.95rem;
+	border: 1px solid var(--whale-main-color, #0b67d1);
+	border-radius: var(--whale-radius-sm);
+	background-color: var(--whale-main-color, #0b67d1);
+	box-shadow: 0 1px 1px rgba(25, 43, 54, 0.08);
+	color: var(--whale-main-contrast-color, #fff);
+	cursor: pointer;
+	font-size: 0.95rem;
+	font-weight: 500;
 	line-height: 1.5;
 	text-align: center;
 	white-space: nowrap;
-	cursor: pointer;
-	border: 1px solid transparent;
-	border-radius: var(--whale-radius-sm);
-	color: #fff;
-	background-color: var(--whale-main-color, #7568e8);
+	transition: background-color 0.14s ease, border-color 0.14s ease,
+		box-shadow 0.14s ease;
 }
 
-input[type="button"]:hover,
-input[type="submit"]:hover,
-button:hover {
-	background-color: var(--whale-second-color, #5f57cf);
+.Whale .content-wrapper .whale-content .whale-content-main input[type="button"]:not(.whale-btn):not(.oo-ui-buttonElement-button):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-button):not(:disabled):hover,
+.Whale .content-wrapper .whale-content .whale-content-main input[type="submit"]:not(.whale-btn):not(.oo-ui-buttonElement-button):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-button):not(:disabled):hover {
+	border-color: var(--whale-second-color, #0958d9);
+	background-color: var(--whale-second-color, #0958d9);
+	color: var(--whale-second-contrast-color, #fff);
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main input[type="button"]:not(.whale-btn):not(.oo-ui-buttonElement-button):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-button):focus-visible,
+.Whale .content-wrapper .whale-content .whale-content-main input[type="submit"]:not(.whale-btn):not(.oo-ui-buttonElement-button):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-button):focus-visible {
+	outline: 0;
+	box-shadow: var(--whale-focus-ring);
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main input[type="button"]:not(.whale-btn):not(.oo-ui-buttonElement-button):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-button):not(:disabled):active,
+.Whale .content-wrapper .whale-content .whale-content-main input[type="submit"]:not(.whale-btn):not(.oo-ui-buttonElement-button):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-button):not(:disabled):active {
+	box-shadow: inset 0 2px 3px rgba(25, 43, 54, 0.2);
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main input[type="button"]:not(.whale-btn):not(.oo-ui-buttonElement-button):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-button):disabled,
+.Whale .content-wrapper .whale-content .whale-content-main input[type="submit"]:not(.whale-btn):not(.oo-ui-buttonElement-button):not([class*="cdx-"]):not([class*="ve-ui-"]):not(.mw-ui-button):disabled {
+	background-color: var(--whale-surface-muted-color);
+	border-color: var(--whale-border-color);
+	box-shadow: none;
+	color: var(--whale-content-muted-color);
+	cursor: not-allowed;
+	opacity: 0.65;
 }
 
 #wpDestFile {

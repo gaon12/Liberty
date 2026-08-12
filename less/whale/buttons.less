@@ -1,19 +1,20 @@
 /* Button */
 
 .whale-btn {
+	position: relative;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	box-shadow: none;
-	border-radius: var(--whale-radius-sm);
 	border: 1px solid var(--whale-border-strong-color);
+	border-radius: var(--whale-radius-sm);
+	box-shadow: 0 1px 1px rgba(25, 43, 54, 0.08);
 	cursor: pointer;
 	font-size: 0.95rem;
 	font-weight: 500;
-	gap: 0.35rem;
+	gap: 0.4rem;
 	line-height: 1.5;
 	min-height: var(--whale-control-height-sm);
-	padding: 0.45rem 0.9rem;
+	padding: 0.42rem 0.95rem;
 	text-align: center;
 	user-select: none;
 	vertical-align: middle;
@@ -28,16 +29,12 @@
 }
 
 .whale-btn:focus-visible {
-	outline: 2px solid rgba(63, 127, 196, 0.35);
-	outline-offset: 2px;
+	outline: 0;
+	box-shadow: var(--whale-focus-ring);
 }
 
-.whale-btn.disabled,
-.whale-btn:disabled,
-fieldset:disabled .whale-btn {
-	cursor: not-allowed;
-	opacity: 0.65;
-	pointer-events: none;
+.whale-btn:active {
+	box-shadow: inset 0 2px 3px rgba(25, 43, 54, 0.18);
 }
 
 .whale-btn-block {
@@ -52,7 +49,7 @@ fieldset:disabled .whale-btn {
 .whale-btn-primary {
 	background-color: var(--whale-main-color);
 	border-color: var(--whale-main-color);
-	color: #fff;
+	color: var(--whale-main-contrast-color);
 }
 
 .whale-btn-primary:hover,
@@ -60,11 +57,11 @@ fieldset:disabled .whale-btn {
 .whale-btn-primary:active {
 	background-color: var(--whale-second-color);
 	border-color: var(--whale-second-color);
-	color: #fff;
+	color: var(--whale-second-contrast-color);
 }
 
 .whale-btn-secondary {
-	background-color: var(--whale-surface-color);
+	background-color: var(--whale-surface-elevated-color);
 	border-color: var(--whale-border-strong-color);
 	color: var(--whale-text-color);
 }
@@ -73,22 +70,34 @@ fieldset:disabled .whale-btn {
 .whale-btn-secondary:focus,
 .whale-btn-secondary:active {
 	background-color: var(--whale-hover-color);
-	border-color: var(--whale-border-strong-color);
-	color: var(--whale-text-color);
+	border-color: var(--whale-main-color);
+	color: var(--whale-main-color);
 }
 
 .whale-btn-success {
-	background-color: var(--whale-main-color, #7568e8);
-	border-color: var(--whale-main-color, #7568e8);
-	color: #fff;
+	background-color: var(--whale-main-color, #0b67d1);
+	border-color: var(--whale-main-color, #0b67d1);
+	color: var(--whale-main-contrast-color, #fff);
 }
 
 .whale-btn-success:hover,
 .whale-btn-success:focus,
 .whale-btn-success:active {
-	background-color: var(--whale-second-color, #5f57cf);
-	border-color: var(--whale-second-color, #5f57cf);
-	color: #fff;
+	background-color: var(--whale-second-color, #0958d9);
+	border-color: var(--whale-second-color, #0958d9);
+	color: var(--whale-second-contrast-color, #fff);
+}
+
+.whale-btn.disabled,
+.whale-btn:disabled,
+fieldset:disabled .whale-btn {
+	background-color: var(--whale-surface-muted-color);
+	border-color: var(--whale-border-color);
+	box-shadow: none;
+	color: var(--whale-content-muted-color);
+	cursor: not-allowed;
+	opacity: 0.72;
+	pointer-events: none;
 }
 
 .whale-btn-group {
@@ -99,6 +108,12 @@ fieldset:disabled .whale-btn {
 
 .whale-btn-group > .whale-btn {
 	position: relative;
+}
+
+.whale-btn-group > .whale-btn:hover,
+.whale-btn-group > .whale-btn:focus-visible,
+.whale-btn-group > .whale-btn:active {
+	z-index: 1;
 }
 
 .whale-btn-group > .whale-btn + .whale-btn,
@@ -115,18 +130,18 @@ fieldset:disabled .whale-btn {
 
 .whale-btn-group > .whale-btn:first-child:not(:last-child),
 .whale-btn-group > .whale-btn-group:first-child:not(:last-child) > .whale-btn {
-	border-bottom-left-radius: var(--whale-radius);
+	border-bottom-left-radius: var(--whale-radius-sm);
 	border-bottom-right-radius: 0;
-	border-top-left-radius: var(--whale-radius);
+	border-top-left-radius: var(--whale-radius-sm);
 	border-top-right-radius: 0;
 }
 
 .whale-btn-group > .whale-btn:last-child:not(:first-child),
 .whale-btn-group > .whale-btn-group:last-child:not(:first-child) > .whale-btn {
 	border-bottom-left-radius: 0;
-	border-bottom-right-radius: var(--whale-radius);
+	border-bottom-right-radius: var(--whale-radius-sm);
 	border-top-left-radius: 0;
-	border-top-right-radius: var(--whale-radius);
+	border-top-right-radius: var(--whale-radius-sm);
 }
 
 .whale-search-actions:last-child > .whale-btn,

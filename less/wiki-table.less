@@ -18,13 +18,15 @@
 .Whale .content-wrapper .whale-content .whale-content-main table.infobox {
 	width: auto;
 	background: var(--whale-table-background);
-	border: none;
-	border-radius: var(--whale-radius);
+	border: 1px solid var(--whale-table-border-color);
+	border-radius: var(--whale-radius-sm);
 	border-collapse: separate;
 	border-spacing: 0;
 	float: none;
 	margin: 0.8rem 0;
 	padding: 0;
+	overflow: hidden;
+	box-shadow: 0 1px 2px rgba(25, 43, 54, 0.06);
 	color: var(--whale-text-color);
 }
 
@@ -36,8 +38,8 @@
 
 .Whale .content-wrapper .whale-content .whale-content-main table caption {
 	font-size: 1.2rem;
-	padding: 0.2rem 0;
-	font-weight: bold;
+	padding: 0.45rem 0.25rem 0.6rem;
+	font-weight: 650;
 	text-align: center;
 }
 
@@ -49,6 +51,18 @@
 	cursor: pointer;
 	padding-right: 1.5rem;
 	position: relative;
+	transition: background-color 0.14s ease, color 0.14s ease;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main table.whale-sortable th.whale-sortable-header:hover,
+.Whale .content-wrapper .whale-content .whale-content-main table.whale-sortable th.whale-sortable-header:focus-visible {
+	background-color: var(--whale-hover-color);
+	color: var(--whale-main-color);
+	outline: 0;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main table.whale-sortable th.whale-sortable-header:focus-visible {
+	box-shadow: inset 0 0 0 2px var(--whale-main-color);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main table.whale-sortable th.whale-sortable-header::after {
@@ -74,6 +88,8 @@
 
 .Whale .content-wrapper .whale-content .whale-content-main table.wikitable th {
 	background-color: var(--whale-table-header-background);
+	font-size: 0.95rem;
+	font-weight: 600;
 	text-align: center;
 	word-break: keep-all;
 }
@@ -84,31 +100,48 @@
 
 .Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > th,
 .Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > td {
-	border: 1px solid var(--whale-table-border-color);
-	padding: 0.3rem 0.6rem;
+	padding: 0.6rem 0.8rem;
+	border: 0;
+	border-right: 1px solid var(--whale-table-border-color);
+	border-bottom: 1px solid var(--whale-table-border-color);
+	line-height: 1.5;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > :last-child {
+	border-right: 0;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr:last-child > th,
+.Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr:last-child > td {
+	border-bottom: 0;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main table.wikitable tbody tr:hover > td {
+	background-color: var(--whale-hover-color);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main table.infobox tr > th,
 .Whale .content-wrapper .whale-content .whale-content-main table.infobox tr > td {
+	padding: 0.55rem 0.75rem;
 	border: 0;
-	padding: 0.3rem 0.6rem;
-	border-top: 1px solid var(--whale-table-border-color);
 	border-right: 1px solid var(--whale-table-border-color);
+	border-bottom: 1px solid var(--whale-table-border-color);
+	line-height: 1.5;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main table.infobox tr > th:first-child,
 .Whale .content-wrapper .whale-content .whale-content-main table.infobox tr > td:first-child {
-	border-left: 1px solid var(--whale-table-border-color);
+	border-left: 0;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main table.infobox tr > th:last-child,
 .Whale .content-wrapper .whale-content .whale-content-main table.infobox tr > td:last-child {
-	border-right: 1px solid var(--whale-table-border-color);
+	border-right: 0;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main table.infobox tr:last-child > th,
 .Whale .content-wrapper .whale-content .whale-content-main table.infobox tr:last-child > td {
-	border-bottom: 1px solid var(--whale-table-border-color);
+	border-bottom: 0;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main table.infobox tr:first-child > th:nth-child( 1 ),
@@ -178,6 +211,8 @@
 
 .Whale .content-wrapper .whale-content .whale-content-main table.infobox th {
 	background-color: var(--whale-table-header-background);
+	font-size: 0.95rem;
+	font-weight: 600;
 	text-align: center;
 	word-break: keep-all;
 }

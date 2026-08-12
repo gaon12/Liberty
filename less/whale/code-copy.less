@@ -4,21 +4,23 @@
 	border: 1px solid var(--whale-border-color);
 	border-radius: var(--whale-radius-sm);
 	background-color: var(--whale-code-background);
+	box-shadow: 0 1px 2px rgba(25, 43, 54, 0.06);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .whale-code-block > pre {
 	margin: 0;
-	padding: 0.85rem 1rem;
+	padding: 1rem 1.1rem;
 	border: 0;
 	border-radius: 0;
 	background: transparent;
+	line-height: 1.6;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .whale-code-toolbar {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	min-height: 2rem;
+	min-height: 2.25rem;
 	border-bottom: 1px solid var(--whale-border-color);
 	background-color: var(--whale-surface-muted-color);
 }
@@ -27,21 +29,33 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 2rem;
-	padding: 0.2rem 0.65rem;
+	min-height: 2.25rem;
+	padding: 0.25rem 0.75rem;
 	border: 0;
 	border-left: 1px solid var(--whale-border-color);
 	border-radius: 0;
 	background-color: transparent;
 	box-shadow: none;
 	color: var(--whale-content-muted-color);
-	font-size: 0.8rem;
+	font-size: 0.8125rem;
 	font-weight: 500;
 	line-height: 1.2;
+	transition: background-color 0.14s ease, color 0.14s ease,
+		box-shadow 0.14s ease;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .whale-code-copy:hover,
 .Whale .content-wrapper .whale-content .whale-content-main .whale-code-copy:focus-visible {
 	background-color: var(--whale-hover-color);
 	color: var(--whale-main-color);
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main .whale-code-copy:focus-visible {
+	outline: 0;
+	box-shadow: inset 0 0 0 2px var(--whale-main-color);
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main .whale-code-copy:active {
+	background-color: var(--whale-accent-soft-color);
+	box-shadow: inset 0 2px 3px rgba(25, 43, 54, 0.16);
 }
