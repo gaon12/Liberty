@@ -904,6 +904,16 @@ assertIncludes(
 	'env(safe-area-inset-bottom)',
 	'Reference modal mobile safe area',
 );
+assertIncludes(
+	styles,
+	'.whale-reference-modal.is-open',
+	'Reference modal mobile open state',
+);
+assertIncludes(
+	styles,
+	'overflow: hidden',
+	'Reference modal viewport containment',
+);
 const modalCloseBlock = getRuleBlock(
 	styles,
 	'.whale-modal-close',
