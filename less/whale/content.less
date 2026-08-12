@@ -519,13 +519,17 @@ body.whale-font-scale-x-large .Whale .content-wrapper .whale-content .whale-cont
 	border-bottom: 1px solid var(--whale-border-color);
 	box-shadow: none;
 	color: #11181f;
-	cursor: pointer;
+	cursor: default;
 	scroll-margin-top: 4.5rem;
 	transition: background-color 0.16s ease, color 0.16s ease;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .whale-section-heading:hover {
-	background-color: rgba(117, 104, 232, 0.06);
+	background-color: transparent;
+}
+
+.Whale .content-wrapper .whale-content .whale-content-main .whale-section-heading:hover .mw-headline {
+	color: var(--whale-main-color);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .whale-section-heading .mw-headline {
@@ -543,7 +547,7 @@ body.whale-font-scale-x-large .Whale .content-wrapper .whale-content .whale-cont
 	margin-left: auto;
 	overflow: hidden;
 	font-size: 0.82rem;
-	font-weight: 700;
+	font-weight: 400;
 	line-height: 1;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -562,7 +566,7 @@ body.whale-font-scale-x-large .Whale .content-wrapper .whale-content .whale-cont
 
 .Whale .content-wrapper .whale-content .whale-content-main .whale-section-heading.is-collapsed,
 .Whale .content-wrapper .whale-content .whale-content-main .whale-section-container.is-collapsed .whale-section-heading {
-	color: #9a9fa4;
+	color: inherit;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .whale-section-container.is-collapsed {
@@ -587,8 +591,9 @@ body.whale-font-scale-x-large .Whale .content-wrapper .whale-content .whale-cont
 	align-items: center;
 	justify-content: center;
 	flex: 0 0 auto;
-	width: 1.35rem;
-	height: 1.35rem;
+	width: 1.75rem;
+	height: 1.75rem;
+	margin: -0.2rem 0 -0.2rem -0.3rem;
 	padding: 0;
 	border: 0;
 	border-radius: 0;
@@ -601,10 +606,10 @@ body.whale-font-scale-x-large .Whale .content-wrapper .whale-content .whale-cont
 .Whale .content-wrapper .whale-content .whale-content-main .whale-section-toggle::before {
 	box-sizing: border-box;
 	display: block;
-	width: 0.55rem;
-	height: 0.55rem;
-	border-right: 2px solid currentColor;
-	border-bottom: 2px solid currentColor;
+	width: 0.5rem;
+	height: 0.5rem;
+	border-right: 1.5px solid currentColor;
+	border-bottom: 1.5px solid currentColor;
 	content: "";
 	transform: translateY(-0.08rem) rotate(45deg);
 	transition: transform 0.16s ease;

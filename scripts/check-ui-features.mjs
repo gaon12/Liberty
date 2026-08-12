@@ -363,7 +363,7 @@ assertIncludes(
 );
 assertIncludes(
 	styles,
-	'border-right: 2px solid currentColor',
+	'border-right: 1.5px solid currentColor',
 	'Section collapse toggle style',
 );
 assertIncludes(
@@ -387,7 +387,16 @@ assertIncludes(
 	'background-color: transparent',
 	'Section toggle should read as a heading affordance',
 );
-assertIncludes(styles, 'cursor: pointer', 'Clickable section heading');
+const sectionHeadingBlock = getRuleBlock(
+	styles,
+	'.Whale .content-wrapper .whale-content .whale-content-main .whale-section-heading',
+	'Section heading',
+);
+assertIncludes(
+	sectionHeadingBlock,
+	'cursor: default',
+	'Section heading pointer restraint',
+);
 const sectionToggleBlock = styles.match(
 	/\.whale-section-toggle\s*\{(?<block>[\s\S]*?)\n\}/,
 )?.groups?.block;
@@ -397,6 +406,11 @@ if (!sectionToggleBlock) {
 if (/border-radius:\s*999px;/.test(sectionToggleBlock)) {
 	throw new Error('Section toggles should not render as legacy round pills.');
 }
+assertIncludes(
+	sectionToggleBlock,
+	'cursor: pointer',
+	'Clickable section toggle',
+);
 assertIncludes(
 	mediaWikiStyles,
 	'min-width: 18rem',
@@ -608,7 +622,7 @@ assertIncludes(
 	'.whale-content-main .mw-parser-output',
 	'Article reading typography',
 );
-assertIncludes(mediaWikiStyles, 'line-height: 1.65', 'Article reading rhythm');
+assertIncludes(mediaWikiStyles, 'line-height: 1.6', 'Article reading rhythm');
 assertIncludes(
 	mediaWikiStyles,
 	'.whale-content-main blockquote',
@@ -618,6 +632,16 @@ assertIncludes(
 	mediaWikiStyles,
 	'[style*="border-left"]',
 	'Main-page inline band neutralization',
+);
+assertIncludes(
+	mediaWikiStyles,
+	'background-color: transparent !important',
+	'Main-page flat outer surfaces',
+);
+assertIncludes(
+	mediaWikiStyles,
+	'> div:last-child > div > div',
+	'Main-page information panel targeting',
 );
 assertIncludes(
 	mediaWikiStyles,
