@@ -1,13 +1,13 @@
 a,
 a:visited {
-	color: #0066d9;
+	color: var(--whale-link-color, #1769aa);
 	text-decoration: none;
 	transition: color 0.16s ease;
 }
 
 a.new,
 a.new:visited {
-	color: #b32424;
+	color: var(--whale-danger-color, #a33d48);
 }
 
 a:hover,
@@ -25,7 +25,7 @@ a:hover,
 a:focus,
 .plainlinks a.external:hover,
 .plainlinks a.external:focus {
-	color: #004ea8;
+	color: var(--whale-link-hover-color, #125486);
 }
 
 a.new:hover,
@@ -63,12 +63,12 @@ a.external:before {
 
 .plainlinks a.external,
 .plainlinks a.external:visited {
-	color: #0066d9;
+	color: var(--whale-link-color, #1769aa);
 }
 
 .plainlinks a.external:hover,
 .plainlinks a.external:focus {
-	color: #004ea8;
+	color: var(--whale-link-hover-color, #125486);
 }
 
 .plainlinks a.external:before {

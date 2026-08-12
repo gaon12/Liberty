@@ -7,7 +7,7 @@
 }
 
 .Whale .whale-nav-wrapper {
-	min-height: 48px;
+	min-height: var(--whale-nav-height);
 	z-index: 1001;
 	background-color: var(--whale-surface-color);
 	background-image: none;
@@ -19,8 +19,8 @@
 	display: flex;
 	align-items: center;
 	flex-wrap: nowrap;
-	min-height: 48px;
-	padding: 0 10px;
+	min-height: var(--whale-nav-height);
+	padding: 0 12px;
 	border: 0;
 	border-radius: 0;
 }
@@ -29,7 +29,7 @@
 	display: inline-flex;
 	align-items: center;
 	flex: 0 1 auto;
-	height: 48px;
+	height: var(--whale-nav-height);
 	width: auto;
 	max-width: 12rem;
 	padding: 0;
@@ -81,11 +81,11 @@
 	box-sizing: border-box;
 	display: inline-flex;
 	align-items: center;
-	height: 32px;
+	height: var(--whale-control-height-sm);
 	color: var(--whale-text-color);
-	font-size: 0.92rem;
+	font-size: 0.95rem;
 	font-weight: 500;
-	padding: 0 0.6rem;
+	padding: 0 0.7rem;
 	line-height: 1.4rem;
 	text-decoration: none;
 	border: 0;
@@ -125,7 +125,7 @@
 	align-items: center;
 	flex: 0 0 auto;
 	gap: 0.2rem;
-	min-height: 48px;
+	min-height: var(--whale-nav-height);
 	margin: 0 0.1rem 0 0.55rem;
 	padding: 0;
 	list-style: none;
@@ -139,7 +139,7 @@
 .Whale .whale-nav-wrapper .whale-navbar .whale-search-group {
 	display: inline-flex;
 	align-items: stretch;
-	height: 34px;
+	height: 40px;
 	min-width: 0;
 	overflow: hidden;
 	background-color: var(--whale-surface-elevated-color);
@@ -152,8 +152,8 @@
 
 .Whale .whale-nav-wrapper .whale-navbar .whale-search-input {
 	box-sizing: border-box;
-	font-size: 0.9rem;
-	height: 34px;
+	font-size: 0.95rem;
+	height: 40px;
 	line-height: 1.5;
 	min-width: 0;
 	width: 18rem;
@@ -175,7 +175,7 @@
 	display: inline-flex;
 	align-items: stretch;
 	flex: 0 0 auto;
-	height: 34px;
+	height: 40px;
 }
 
 .Whale .whale-nav-wrapper .whale-navbar .whale-search-form .whale-btn {
@@ -185,8 +185,8 @@
 	border-radius: 0;
 	display: inline-flex;
 	justify-content: center;
-	height: 34px;
-	min-width: 2.05rem;
+	height: 40px;
+	min-width: 2.5rem;
 	color: var(--whale-content-muted-color);
 	padding: 0;
 	line-height: 1;
@@ -210,8 +210,8 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 2.25rem;
-	height: 2.25rem;
+	width: 2.5rem;
+	height: 2.5rem;
 	margin-left: 0.55rem;
 	padding: 0;
 	border: 0;
@@ -273,7 +273,7 @@ body.whale-dark.Whale .whale-theme-toggle-when-dark {
 	flex: 0 0 auto;
 	display: flex;
 	align-items: center;
-	height: 48px;
+	height: var(--whale-nav-height);
 	padding-left: 0.55rem;
 }
 
@@ -281,7 +281,7 @@ body.whale-dark.Whale .whale-theme-toggle-when-dark {
 .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-login .logout-btn {
 	display: inline-flex;
 	align-items: center;
-	height: 48px;
+	height: var(--whale-nav-height);
 }
 
 .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-login button.none-outline {
@@ -326,7 +326,7 @@ body.whale-dark.Whale .whale-theme-toggle-when-dark {
 	height: 2rem;
 	border-radius: 50%;
 	margin: 0;
-	border: 1px solid #e1e8ed;
+	border: 1px solid var(--whale-border-color);
 }
 
 .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-login .profile-img-fallback {

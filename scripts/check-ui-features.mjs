@@ -278,8 +278,8 @@ const liveRecentHeaderBlock = getRuleBlock(
 );
 assertIncludes(
 	liveRecentHeaderBlock,
-	'min-height: 2.7rem',
-	'Compact live recent header',
+	'min-height: 3rem',
+	'Comfortable live recent header',
 );
 assertIncludes(
 	liveRecentHeaderBlock,
@@ -467,7 +467,16 @@ assertIncludes(
 	'Article TOC collapse state',
 );
 assertIncludes(mediaWikiStyles, 'display: none', 'Article TOC collapse state');
-assertIncludes(mediaWikiStyles, 'color: #0066d9', 'Article TOC link color');
+const tocLinkBlock = getRuleBlock(
+	mediaWikiStyles,
+	'.Whale .content-wrapper .whale-content .whale-content-main .toc a',
+	'Article TOC link',
+);
+assertIncludes(
+	tocLinkBlock,
+	'color: var(--whale-link-color)',
+	'Article TOC link color token',
+);
 assertIncludes(
 	mediaWikiStyles,
 	'.mw-heading h2.whale-section-heading',
@@ -528,13 +537,21 @@ assertIncludes(
 	'Content link hover underline',
 );
 assertIncludes(wikiStyles, 'a,\na:visited', 'Visited document link color');
-assertIncludes(styles, 'color: #0066d9', 'Document link color');
+assertIncludes(
+	styles,
+	'color: var(--whale-link-color)',
+	'Document link color token',
+);
 assertIncludes(
 	wikiStyles,
 	'a.new,\na.new:visited',
 	'Missing document link color',
 );
-assertIncludes(styles, 'color: #b32424', 'Missing document link color');
+assertIncludes(
+	styles,
+	'color: var(--whale-danger-color)',
+	'Missing document link color token',
+);
 assertIncludes(
 	styles,
 	'.whale-content-main p a:visited',
@@ -628,7 +645,11 @@ const navbarLinkBlock = getRuleBlock(
 	'.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link',
 	'Navbar link',
 );
-assertIncludes(navbarLinkBlock, 'height: 32px', 'Navbar link height clamp');
+assertIncludes(
+	navbarLinkBlock,
+	'height: var(--whale-control-height-sm)',
+	'Navbar link control height',
+);
 assertIncludes(
 	navbarLinkBlock,
 	'border-radius: var(--whale-radius-sm)',
@@ -636,7 +657,7 @@ assertIncludes(
 );
 assertIncludes(navbarLinkBlock, 'font-weight: 500', 'Navbar menu weight');
 assertIncludes(styles, '.whale-icon-random', 'Navbar random icon sizing');
-assertIncludes(styles, 'width: 2.4rem', 'Mobile navbar icon target sizing');
+assertIncludes(styles, 'width: 2.75rem', 'Mobile navbar icon target sizing');
 assertIncludes(
 	mediaWikiStyles,
 	'background-color: var(--whale-surface-muted-color)',
@@ -652,7 +673,21 @@ assertIncludes(
 	'.whale-content-main .mw-parser-output',
 	'Article reading typography',
 );
-assertIncludes(mediaWikiStyles, 'line-height: 1.6', 'Article reading rhythm');
+const parserOutputBlock = getRuleBlock(
+	mediaWikiStyles,
+	'.Whale .content-wrapper .whale-content .whale-content-main .mw-parser-output',
+	'Article parser output',
+);
+assertIncludes(
+	parserOutputBlock,
+	'font-size: inherit',
+	'Article font scale inheritance',
+);
+assertIncludes(
+	parserOutputBlock,
+	'line-height: inherit',
+	'Article reading rhythm',
+);
 assertIncludes(
 	mediaWikiStyles,
 	'.whale-content-main blockquote',
@@ -700,7 +735,7 @@ assertIncludes(
 );
 assertIncludes(
 	mediaWikiStyles,
-	'border-radius: var(--whale-radius-sm) !important',
+	'border-radius: var(--whale-radius) !important',
 	'Main-page information panel corners',
 );
 assertIncludes(
