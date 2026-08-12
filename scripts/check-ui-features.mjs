@@ -269,6 +269,8 @@ const styles = readLessWithImports('less/default.less');
 const wikiStyles = read('less/wiki.less');
 const tableStyles = read('less/wiki-table.less');
 const mediaWikiStyles = read('less/only-mw.less');
+const buttonStyles = read('less/whale/buttons.less');
+const dropdownStyles = read('less/whale/dropdown.less');
 const bottomToolsStyles = read('less/whale/bottom-tools.less');
 const liveRecentStyles = read('less/whale/live-recent.less');
 const liveRecentHeaderBlock = getRuleBlock(
@@ -530,7 +532,27 @@ assertIncludes(
 	'Login modal link alignment',
 );
 assertIncludes(styles, 'display: grid', 'Login modal link alignment');
-assertIncludes(styles, 'height: 2.75rem', 'Login modal button sizing');
+assertIncludes(styles, 'height: 3rem', 'Login modal button sizing');
+const sharedButtonBlock = getRuleBlock(
+	buttonStyles,
+	'.whale-btn',
+	'Shared button',
+);
+assertIncludes(
+	sharedButtonBlock,
+	'min-height: var(--whale-control-height-sm)',
+	'Shared button control height',
+);
+const dropdownItemBlock = getRuleBlock(
+	dropdownStyles,
+	'.whale-dropdown-item',
+	'Dropdown item',
+);
+assertIncludes(
+	dropdownItemBlock,
+	'min-height: 2.5rem',
+	'Comfortable dropdown target height',
+);
 assertIncludes(
 	styles,
 	'.Whale .content-wrapper .whale-content .whale-content-main p a:hover',
@@ -1084,7 +1106,7 @@ assertIncludes(
 );
 assertIncludes(
 	styles,
-	'~"calc(100dvh - 11rem)"',
+	'~"calc(100dvh - 12rem)"',
 	'Reference modal scroll limit',
 );
 assertIncludes(
