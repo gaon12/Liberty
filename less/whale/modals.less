@@ -83,19 +83,51 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 
 .Whale .whale-login-modal .whale-modal-header {
 	justify-content: flex-start;
-	min-height: 3.75rem;
-	padding: 0.8rem 3.75rem 0.8rem 1.25rem;
-	background-color: var(--whale-surface-elevated-color);
+	min-height: 5.4rem;
+	padding: 1.1rem 4rem 1.1rem 1.4rem;
+	border-bottom: 0;
+	background-color: var(--whale-surface-muted-color);
 }
 
 .Whale .whale-login-modal .whale-modal-title {
 	margin: 0;
 	padding: 0;
 	color: var(--whale-text-color, #252a30);
-	font-size: 1.2rem;
+	font-size: 1.35rem;
 	font-weight: 650;
 	line-height: 1.25;
 	text-align: left;
+}
+
+.Whale .whale-login-heading {
+	display: flex;
+	align-items: center;
+	gap: 0.85rem;
+}
+
+.Whale .whale-login-heading-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: 2.65rem;
+	height: 2.65rem;
+	border: 1px solid var(--whale-border-color);
+	border-radius: 50%;
+	background-color: var(--whale-surface-elevated-color);
+	color: var(--whale-main-color);
+}
+
+.Whale .whale-login-heading-icon .whale-icon {
+	width: 1.25rem;
+	height: 1.25rem;
+}
+
+.Whale .whale-login-subtitle {
+	margin: 0.2rem 0 0;
+	color: var(--whale-content-muted-color);
+	font-size: 0.875rem;
+	line-height: 1.4;
 }
 
 .Whale .whale-short-url-modal .whale-modal-header,
@@ -367,14 +399,14 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 }
 
 .Whale .whale-login-modal .whale-modal-dialog {
-	margin-top: 1.1rem;
+	margin-top: ~"min(10vh, 5rem)";
 }
 
 .Whale .whale-login-modal .whale-modal-content {
 	overflow: hidden;
 	border: 1px solid var(--whale-border-strong-color);
-	border-radius: var(--whale-radius-sm);
-	box-shadow: var(--whale-shadow-md);
+	border-radius: 0.65rem;
+	box-shadow: 0 1rem 3rem rgba(15, 30, 44, 0.24);
 }
 
 .Whale .whale-login-modal .whale-modal-content::before {
@@ -383,13 +415,13 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 }
 
 .Whale .whale-login-modal .whale-modal-body {
-	padding: 1.25rem 1.4rem 1.4rem;
+	padding: 1.35rem 1.4rem 1.5rem;
 	background-color: var(--whale-surface-elevated-color, #fff);
 }
 
 .Whale .whale-login-modal .whale-login-form {
 	display: grid;
-	gap: 0.75rem;
+	gap: 0.9rem;
 }
 
 .Whale .whale-login-modal .whale-form-field {
@@ -432,18 +464,68 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 	display: block;
 	width: 100%;
 	box-sizing: border-box;
-	height: 2.75rem;
+	height: 2.9rem;
 	border: 1px solid var(--whale-border-strong-color, #c5ccd3);
 	border-radius: var(--whale-radius-sm, 0.3rem);
 	background-color: var(--whale-surface-elevated-color, #fff);
 	color: var(--whale-text-color, #252a30);
 	font-size: 0.95rem;
 	line-height: 1.5;
-	padding: 0.48rem 0.75rem;
+	padding: 0.48rem 2.9rem 0.48rem 2.55rem;
 	margin: 0;
 	box-shadow: inset 0 1px 1px rgba(25, 43, 54, 0.04);
 	transition: background-color 0.14s ease, border-color 0.14s ease,
 		box-shadow 0.14s ease;
+}
+
+.Whale .whale-login-modal .whale-login-input-group {
+	position: relative;
+}
+
+.Whale .whale-login-modal .whale-login-field-icon {
+	position: absolute;
+	top: 50%;
+	left: 0.85rem;
+	z-index: 1;
+	display: inline-flex;
+	color: var(--whale-content-muted-color);
+	transform: translateY(-50%);
+	pointer-events: none;
+}
+
+.Whale .whale-login-modal .whale-login-field-icon .whale-icon,
+.Whale .whale-login-modal .whale-login-password-toggle .whale-icon {
+	width: 1.05rem;
+	height: 1.05rem;
+}
+
+.Whale .whale-login-modal .whale-login-password-toggle {
+	position: absolute;
+	top: 50%;
+	right: 0.3rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.35rem;
+	height: 2.35rem;
+	padding: 0;
+	border: 0;
+	border-radius: var(--whale-radius-sm);
+	background: transparent;
+	color: var(--whale-content-muted-color);
+	cursor: pointer;
+	transform: translateY(-50%);
+}
+
+.Whale .whale-login-modal .whale-login-password-toggle:hover,
+.Whale .whale-login-modal .whale-login-password-toggle:focus-visible {
+	background-color: var(--whale-hover-color);
+	color: var(--whale-main-color);
+	outline: 0;
+}
+
+.Whale .whale-login-modal .whale-login-password-toggle:focus-visible {
+	box-shadow: var(--whale-focus-ring);
 }
 
 .Whale .whale-login-modal .whale-form-control:focus {
@@ -457,7 +539,28 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 	position: relative;
 	display: flex;
 	align-items: center;
-	min-height: 2.5rem;
+	min-height: 2rem;
+}
+
+.Whale .whale-login-modal .whale-login-options {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+	min-height: 2rem;
+}
+
+.Whale .whale-login-modal .whale-login-options > a {
+	color: var(--whale-main-color);
+	font-size: 0.85rem;
+	text-decoration: none;
+}
+
+.Whale .whale-login-modal .whale-login-options > a:hover,
+.Whale .whale-login-modal .whale-login-options > a:focus-visible {
+	color: var(--whale-second-color);
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
 }
 
 .Whale .whale-login-modal .whale-login-checkbox {
@@ -542,11 +645,16 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 }
 
 .Whale .whale-login-modal .whale-btn-primary {
-	height: 2.75rem;
+	height: 2.9rem;
 	background: var(--whale-main-color);
 	border-color: var(--whale-main-color);
 	font-size: 1rem;
 	font-weight: 600;
+}
+
+.Whale .whale-login-modal .whale-login-submit:disabled {
+	cursor: wait;
+	opacity: 0.72;
 }
 
 .Whale .whale-login-modal .whale-btn-primary:hover,
@@ -560,7 +668,9 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 0.2rem 0.65rem;
-	margin-top: 0.1rem;
+	margin-top: 0;
+	padding-top: 0.75rem;
+	border-top: 1px solid var(--whale-border-color);
 }
 
 .Whale .whale-login-modal .whale-login-links a {
@@ -624,6 +734,30 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 }
 
 @media screen and (max-width: 40rem) {
+	.Whale .whale-login-modal {
+		display: none;
+		align-items: flex-end;
+	}
+
+	.Whale .whale-login-modal.is-open {
+		display: flex !important;
+		overflow: hidden;
+	}
+
+	.Whale .whale-login-modal .whale-modal-dialog {
+		width: 100%;
+		margin: auto 0 0;
+	}
+
+	.Whale .whale-login-modal .whale-modal-content {
+		max-height: ~"calc(100dvh - 1rem)";
+		padding-bottom: env(safe-area-inset-bottom);
+		border-right: 0;
+		border-bottom: 0;
+		border-left: 0;
+		border-radius: 0.75rem 0.75rem 0 0;
+	}
+
 	.Whale .whale-reference-modal {
 		display: none;
 		align-items: flex-end;

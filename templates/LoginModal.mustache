@@ -5,30 +5,47 @@
 		<div class="whale-modal-content">
 			<div class="whale-modal-header">
 				<button type="button" class="whale-modal-close" data-whale-dismiss="modal" aria-label="{{close-label}}"><span aria-hidden="true">&times;</span></button>
-				<h4 class="whale-modal-title" id="whale-login-modal-label">{{title}}</h4>
+				<div class="whale-login-heading">
+					<span class="whale-login-heading-icon" aria-hidden="true">{{{ html-lock-icon }}}</span>
+					<div>
+						<h2 class="whale-modal-title" id="whale-login-modal-label">{{title}}</h2>
+						<p class="whale-login-subtitle" id="whale-login-modal-description">{{subtitle}}</p>
+					</div>
+				</div>
 			</div>
 			<div class="whale-modal-body">
-				<div id="whale-login-alert" class="whale-alert whale-alert-hidden whale-alert-danger" role="alert" aria-label="{{alert-label}}"></div>
-				<form id="whale-login-form" name="userlogin" class="whale-login-form" method="post">
+				<div id="whale-login-alert" class="whale-alert whale-alert-hidden whale-alert-danger" role="alert" aria-live="assertive" aria-label="{{alert-label}}" tabindex="-1"></div>
+				<form id="whale-login-form" name="userlogin" class="whale-login-form" method="post" action="{{form-action}}" data-error-message="{{error-message}}" aria-describedby="whale-login-modal-description">
 					<div class="whale-form-field">
 						<label for="wpName1" class="whale-form-label">{{name-label}}</label>
-						<input class="loginText whale-form-control" id="wpName1" tabindex="1" placeholder="{{name-placeholder}}" value="" name="lgname" autocomplete="username">
+						<div class="whale-login-input-group">
+							<span class="whale-login-field-icon" aria-hidden="true">{{{ html-user-icon }}}</span>
+							<input class="loginText whale-form-control" id="wpName1" placeholder="{{name-placeholder}}" value="" name="wpName" autocomplete="username" autocapitalize="none" spellcheck="false" required data-whale-modal-autofocus>
+						</div>
 					</div>
 					<div class="whale-form-field">
 						<label for="wpPassword1" class="whale-form-label">{{password-label}}</label>
-						<input class="loginPassword whale-form-control" id="wpPassword1" tabindex="2" placeholder="{{password-placeholder}}" type="password" name="lgpassword" autocomplete="current-password">
+						<div class="whale-login-input-group">
+							<span class="whale-login-field-icon" aria-hidden="true">{{{ html-lock-icon }}}</span>
+							<input class="loginPassword whale-form-control" id="wpPassword1" placeholder="{{password-placeholder}}" type="password" name="wpPassword" autocomplete="current-password" required>
+							<button type="button" class="whale-login-password-toggle" aria-controls="wpPassword1" aria-pressed="false" aria-label="{{show-password-label}}" data-show-label="{{show-password-label}}" data-hide-label="{{hide-password-label}}">{{{ html-eye-icon }}}</button>
+						</div>
 					</div>
-					<div class="whale-login-checkbox">
-						<input id="wpRemember" tabindex="3" type="checkbox" value="1" name="wpRemember">
-						<label for="wpRemember">{{remember-label}}</label>
+					<div class="whale-login-options">
+						<div class="whale-login-checkbox">
+							<input id="wpRemember" type="checkbox" value="1" name="wpRemember">
+							<label for="wpRemember">{{remember-label}}</label>
+						</div>
+						{{{ forgot-html }}}
 					</div>
-					<input class="whale-btn whale-btn-primary whale-btn-block" type="submit" value="{{login-label}}" tabindex="4">
+					<button class="whale-btn whale-btn-primary whale-btn-block whale-login-submit" type="submit">
+						<span class="whale-login-submit-label">{{login-label}}</span>
+						<span class="whale-login-submit-pending" hidden>{{working-label}}</span>
+					</button>
 					<div class="whale-login-links">
 						{{{ join-html }}}
-						{{{ forgot-html }}}
 						{{{ alternate-html }}}
 					</div>
-					<input type="hidden" name="action" value="login">
 				</form>
 			</div>
 		</div>

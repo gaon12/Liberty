@@ -705,6 +705,17 @@ assertIncludes(
 	'whale-btn-primary whale-btn-block',
 	'Primary login action',
 );
+assertIncludes(loginTemplate, 'whale-login-subtitle', 'Login modal context');
+assertIncludes(
+	loginTemplate,
+	'whale-login-password-toggle',
+	'Password visibility control',
+);
+assertIncludes(
+	loginTemplate,
+	'data-whale-modal-autofocus',
+	'Login modal initial focus',
+);
 
 const headingAnchors = read('js/heading-anchors.js');
 assertIncludes(headingAnchors, 'showCopyAlert', 'Heading anchor copy feedback');
@@ -782,7 +793,7 @@ assertIncludes(
 );
 
 const navTemplate = read('templates/Nav.mustache');
-assertIncludes(navTemplate, 'width="258" height="64"', 'Navbar logo');
+assertNotIncludes(navTemplate, 'width="258" height="64"', 'Navbar logo ratio');
 const navbarWrapperBlock = getRuleBlock(
 	styles,
 	'.Whale .whale-nav-wrapper',
@@ -804,6 +815,17 @@ const navbarLogoBlock = getRuleBlock(
 	'Navbar logo',
 );
 assertIncludes(navbarLogoBlock, 'max-height: 1.9rem', 'Navbar logo size');
+assertIncludes(navbarLogoBlock, 'height: 1.9rem', 'Navbar logo scaling');
+assertIncludes(
+	navbarLogoBlock,
+	'object-fit: contain',
+	'Navbar logo containment',
+);
+assertIncludes(
+	navbarLogoBlock,
+	'object-position: left center',
+	'Navbar logo alignment',
+);
 assertIncludes(
 	navTemplate,
 	'whale-navbar-notifications',

@@ -14,6 +14,7 @@ const tests = [
 	'check-toc-utils.mjs',
 	'check-theme-toggle.mjs',
 	'check-runtime-contracts.mjs',
+	'check-login-security.mjs',
 	'check-recovery.mjs',
 	'check-legacy-dependencies.mjs',
 	'check-ui-features.mjs',
