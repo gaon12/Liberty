@@ -1355,6 +1355,28 @@ if (
 const skinTemplate = read('templates/skin.mustache');
 const referenceTemplate = read('templates/ReferenceModal.mustache');
 assertIncludes(skinTemplate, 'whale-content-no-sidebar', 'No-sidebar layout');
+const articleEndIndex = skinTemplate.indexOf('</article>');
+const categoryTemplateIndex = skinTemplate.indexOf('{{{ html-categories }}}');
+if (
+	articleEndIndex === -1 ||
+	categoryTemplateIndex === -1 ||
+	categoryTemplateIndex < articleEndIndex
+) {
+	throw new Error(
+		'Article categories should be mounted after the document body.',
+	);
+}
+const categoryBlock = getRuleBlock(
+	mediaWikiStyles,
+	'.Whale .content-wrapper .whale-content .whale-content-main .catlinks',
+	'Article category panel',
+);
+assertIncludes(categoryBlock, 'margin: 1.5rem 0 0', 'Category separation');
+assertIncludes(
+	categoryBlock,
+	'background-color: var(--whale-surface-muted-color)',
+	'Category metadata surface',
+);
 const bottomToolsTemplateIndex = skinTemplate.indexOf('id="whale-bottombtn"');
 const contentSectionEndIndex = skinTemplate.indexOf('</section>');
 if (

@@ -437,20 +437,24 @@ body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .m
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .catlinks {
-	border: 0;
-	border-top: 1px solid var(--whale-border-color);
-	padding: 0.6rem 0;
+	clear: both;
+	display: block;
+	width: auto;
+	margin: 1.5rem 0 0;
+	padding: 0.75rem 0.9rem;
+	border: 1px solid var(--whale-border-color);
+	border-inline-start: 3px solid var(--whale-main-color);
+	border-radius: var(--whale-radius-sm);
+	background-color: var(--whale-surface-muted-color);
+	color: var(--whale-content-muted-color);
+	font-size: 0.9rem;
+	line-height: 1.5;
 	box-shadow: none;
-	margin-bottom: 0.8rem;
-	border-radius: 0;
-	background-color: transparent;
-	display: inline-block;
-	width: 100%;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .catlinks ul {
 	padding: 0;
-	margin-left: 0.5rem;
+	margin-inline-start: 0.5rem;
 	list-style: none;
 	display: inline;
 }
@@ -459,13 +463,13 @@ body.page-Main_Page.Whale .content-wrapper .whale-content .whale-content-main .m
 	margin: 0;
 	display: inline-block;
 	padding: 0 0.5em;
-	border-left: 1px solid #a2a9b1;
+	border-inline-start: 1px solid var(--whale-border-strong-color);
 	line-height: 1.25em;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .catlinks ul > li:first-child {
-	padding-left: 0.25em;
-	border-left: 0;
+	padding-inline-start: 0.25em;
+	border-inline-start: 0;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main .catlinks-allhidden,
