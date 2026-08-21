@@ -1,5 +1,5 @@
 (() => {
-	const RECOVERY_DELAY = 3000;
+	const RECOVERY_DELAYS = [3000, 6500];
 	const recoveryState = document.documentElement.dataset;
 	recoveryState.whaleResourceLoaderRecoveryScript = 'loaded';
 
@@ -77,7 +77,9 @@
 		}
 	};
 
-	window.setTimeout(() => {
-		recoverResourceLoader().catch(() => {});
-	}, RECOVERY_DELAY);
+	RECOVERY_DELAYS.forEach((delay) => {
+		window.setTimeout(() => {
+			recoverResourceLoader().catch(() => {});
+		}, delay);
+	});
 })();

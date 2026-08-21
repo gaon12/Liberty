@@ -27,3 +27,9 @@ if (source.includes('isRocketScript')) {
 		'Recovery must detect restored text/javascript placeholders after Rocket Loader finishes.',
 	);
 }
+
+if (!source.includes('RECOVERY_DELAYS = [3000, 6500]')) {
+	throw new Error(
+		'Recovery must recheck after Rocket Loader loses its transient runtime.',
+	);
+}
