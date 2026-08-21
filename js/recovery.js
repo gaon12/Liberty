@@ -85,11 +85,17 @@
 				textContent: snapshot.source,
 			});
 		}
+		recoveryState.whaleResourceLoaderRecovery = 'complete';
+	};
+	const recordRecoveryError = (error) => {
+		recoveryState.whaleResourceLoaderRecovery = 'failed';
+		recoveryState.whaleResourceLoaderRecoveryError =
+			error instanceof Error ? error.name : 'UnknownError';
 	};
 
 	RECOVERY_CHECKS.forEach(({ delay, force }) => {
 		window.setTimeout(() => {
-			recoverResourceLoader(force).catch(() => {});
+			recoverResourceLoader(force).catch(recordRecoveryError);
 		}, delay);
 	});
 })();

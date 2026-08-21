@@ -48,3 +48,10 @@ const layoutSource = readFileSync(resolve('js/layout.js'), 'utf8');
 if (!layoutSource.includes("dataset.whaleLayoutRuntime = 'ready'")) {
 	throw new Error('Layout must publish its healthy runtime marker.');
 }
+
+if (
+	!source.includes("whaleResourceLoaderRecovery = 'complete'") ||
+	!source.includes("whaleResourceLoaderRecovery = 'failed'")
+) {
+	throw new Error('Recovery must expose terminal success and failure states.');
+}
