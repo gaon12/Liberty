@@ -99,6 +99,10 @@
 				textContent: snapshot.source,
 			});
 		}
+		if (!window.mw?.loader) {
+			throw new Error('ResourceLoader startup did not initialize.');
+		}
+		await window.mw.loader.using(requiredModules);
 		recoveryState.whaleResourceLoaderRecovery = 'complete';
 	};
 	const recordRecoveryError = (error) => {

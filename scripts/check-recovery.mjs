@@ -55,7 +55,10 @@ if (!layoutSource.includes("dataset.whaleLayoutRuntime = 'ready'")) {
 
 if (
 	!source.includes("whaleResourceLoaderRecovery = 'complete'") ||
-	!source.includes("whaleResourceLoaderRecovery = 'failed'")
+	!source.includes("whaleResourceLoaderRecovery = 'failed'") ||
+	!source.includes('await window.mw.loader.using(requiredModules)')
 ) {
-	throw new Error('Recovery must expose terminal success and failure states.');
+	throw new Error(
+		'Recovery must await requested modules before exposing a terminal state.',
+	);
 }

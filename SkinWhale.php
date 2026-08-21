@@ -804,7 +804,7 @@ JS
 			'data-cfasync' => 'false',
 			'data-whale-recovery' => 'true',
 			'data-whale-modules' => implode( ',', $requiredModules ),
-			'src' => $scriptPath . '/skins/Whale/js/recovery.js?v=resource-loader-required-modules',
+			'src' => $scriptPath . '/skins/Whale/js/recovery.js?v=resource-loader-await-modules',
 		], '' );
 	}
 
