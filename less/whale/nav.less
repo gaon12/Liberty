@@ -9,10 +9,10 @@
 .Whale .whale-nav-wrapper {
 	min-height: var(--whale-nav-height);
 	z-index: 1001;
-	background-color: var(--whale-surface-elevated-color);
+	background-color: var(--whale-main-color);
 	background-image: none;
-	border-bottom: 1px solid var(--whale-border-color);
-	box-shadow: 0 2px 10px rgba(23, 50, 66, 0.08);
+	border-bottom: 1px solid var(--whale-second-color);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
 }
 
 .Whale .whale-nav-wrapper .whale-navbar {
@@ -20,7 +20,7 @@
 	align-items: center;
 	flex-wrap: nowrap;
 	min-height: var(--whale-nav-height);
-	padding: 0 1.25rem;
+	padding: 0 1rem;
 	border: 0;
 	border-radius: 0;
 }
@@ -31,20 +31,20 @@
 	flex: 0 1 auto;
 	height: var(--whale-nav-height);
 	width: auto;
-	max-width: 12rem;
+	max-width: 14rem;
 	padding: 0;
-	margin: 0 1.1rem 0 0;
+	margin: 0;
 	overflow: visible;
 }
 
 .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-brand-logo {
 	display: block;
 	width: auto;
-	height: 2.125rem;
-	min-width: 2.125rem;
-	min-height: 2.125rem;
+	height: auto;
+	min-width: 0;
+	min-height: 0;
 	max-width: 100%;
-	max-height: 2.125rem;
+	max-height: 1.9rem;
 	object-fit: contain;
 }
 
@@ -52,7 +52,7 @@
 	display: flex;
 	align-items: center;
 	flex: 0 0 auto;
-	gap: 0.25rem;
+	gap: 0;
 	padding-left: 0;
 	margin: 0;
 	list-style: none;
@@ -81,15 +81,15 @@
 	box-sizing: border-box;
 	display: inline-flex;
 	align-items: center;
-	height: var(--whale-control-height);
-	color: var(--whale-text-color);
-	font-size: 0.95rem;
+	height: var(--whale-nav-height);
+	color: #fff;
+	font-size: 1rem;
 	font-weight: 500;
-	padding: 0 0.75rem;
+	padding: 0.7rem 0.8rem;
 	line-height: 1.4rem;
 	text-decoration: none;
 	border: 0;
-	border-radius: var(--whale-radius-sm);
+	border-radius: 0;
 	background: transparent;
 	outline: 0;
 	transition: background-color 0.16s ease, color 0.16s ease;
@@ -97,8 +97,8 @@
 
 .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link:hover,
 .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link:focus {
-	background-color: var(--whale-hover-color);
-	color: var(--whale-main-color);
+	background-color: rgba(255, 255, 255, 0.14);
+	color: #fff;
 	text-decoration: none;
 }
 
@@ -115,7 +115,7 @@
 	order: 10;
 	flex: 0 0 auto;
 	margin-left: auto;
-	padding: 0.625rem 0;
+	padding: 0.4rem 0;
 	min-width: 0;
 }
 
@@ -142,22 +142,22 @@
 	height: var(--whale-control-height);
 	min-width: 0;
 	overflow: hidden;
-	background-color: var(--whale-surface-elevated-color);
-	border: 1px solid var(--whale-border-strong-color);
+	background-color: #fff;
+	border: 1px solid #ccc;
 	border-radius: var(--whale-radius-sm);
-	box-shadow: 0 1px 2px rgba(23, 50, 66, 0.04);
+	box-shadow: none;
 	vertical-align: middle;
 	transition: border-color 0.16s ease, box-shadow 0.16s ease;
 }
 
 .Whale .whale-nav-wrapper .whale-navbar .whale-search-input {
 	box-sizing: border-box;
-	font-size: 0.95rem;
+	font-size: 0.8rem;
 	height: var(--whale-control-height);
 	line-height: 1.5;
 	min-width: 0;
-	width: ~"clamp(18rem, 30vw, 26rem)";
-	padding: 0.25rem 0.8rem;
+	width: 10.8rem;
+	padding: 0.2rem 0.4rem;
 	background: transparent;
 	border: 0;
 }
@@ -191,7 +191,7 @@
 	padding: 0;
 	line-height: 1;
 	position: relative;
-	background-color: var(--whale-surface-muted-color);
+	background-color: #fff;
 }
 
 .Whale .whale-nav-wrapper .whale-navbar .whale-search-form #searchGoButton:hover,
@@ -203,7 +203,7 @@
 }
 
 .Whale .whale-nav-wrapper .whale-navbar .whale-search-form #mw-searchButton {
-	min-width: 2.75rem;
+	min-width: var(--whale-control-height);
 	background-color: var(--whale-main-color);
 	border-left-color: var(--whale-main-color);
 	color: var(--whale-main-contrast-color);
@@ -231,16 +231,16 @@
 	margin-left: 0.55rem;
 	padding: 0;
 	border: 0;
-	border-radius: var(--whale-radius-sm);
-	background-color: transparent;
-	color: var(--whale-content-muted-color);
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 0.14);
+	color: #fff;
 	cursor: pointer;
 }
 
 .Whale .whale-nav-wrapper .whale-navbar .whale-theme-toggle:hover,
 .Whale .whale-nav-wrapper .whale-navbar .whale-theme-toggle:focus {
-	background-color: var(--whale-hover-color);
-	color: var(--whale-main-color);
+	background-color: rgba(255, 255, 255, 0.24);
+	color: #fff;
 	outline: 0;
 }
 
@@ -309,7 +309,7 @@ body.whale-dark.Whale .whale-theme-toggle-when-dark {
 }
 
 .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-login .whale-icon {
-	color: var(--whale-content-muted-color);
+	color: #fff;
 	font-size: 1.5rem;
 	line-height: 1;
 }
@@ -361,14 +361,14 @@ body.whale-dark.Whale .whale-theme-toggle-when-dark {
 	justify-content: center;
 	width: 2rem;
 	height: 2rem;
-	border-radius: 50%;
+	border-radius: var(--whale-radius-sm);
 	margin: 0;
 	border: 1px solid var(--whale-border-color);
 }
 
 .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-login .profile-img-fallback {
-	background-color: var(--whale-surface-muted-color);
-	color: var(--whale-content-muted-color);
+	background-color: rgba(255, 255, 255, 0.16);
+	color: #fff;
 }
 
 .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-login .profile-img-fallback .whale-icon {

@@ -314,18 +314,24 @@ assertIncludes(
 );
 const liveRecentHeaderBlock = getRuleBlock(
 	liveRecentStyles,
-	'.Whale .content-wrapper .live-recent .live-recent-header',
-	'Live recent header',
+	'.Whale .content-wrapper .live-recent-tab',
+	'Live recent tabs',
 );
 assertIncludes(
 	liveRecentHeaderBlock,
-	'min-height: 3.25rem',
-	'Comfortable live recent header',
+	'min-height: 2.75rem',
+	'Comfortable live recent tabs',
 );
 assertIncludes(
 	liveRecentHeaderBlock,
-	'border-bottom: 1px solid var(--whale-border-color)',
-	'Live recent header divider',
+	'border-bottom: 0',
+	'Attached live recent tabs',
+);
+assertIncludes(liveRecentStyles, '[hidden]', 'Inactive live recent tab panel');
+assertIncludes(
+	read('templates/LiveRecent.mustache'),
+	'role="tablist"',
+	'Accessible live recent tabs',
 );
 assertNotIncludes(
 	liveRecentStyles,
@@ -402,7 +408,7 @@ assertIncludes(
 );
 assertIncludes(styles, '.whale-floating-toc.is-mobile', 'Stylesheet');
 const rootHtmlBlock = getRuleBlock(styles, 'html', 'Root viewport styles');
-assertIncludes(rootHtmlBlock, 'font-size: 16px', 'Readable root font size');
+assertIncludes(rootHtmlBlock, 'font-size: 15px', 'Liberty root font size');
 assertIncludes(
 	rootHtmlBlock,
 	'scrollbar-gutter: stable',
@@ -785,22 +791,20 @@ const navbarWrapperBlock = getRuleBlock(
 );
 assertIncludes(
 	navbarWrapperBlock,
-	'background-color: var(--whale-surface-elevated-color)',
-	'Navbar elevated surface',
+	'background-color: var(--whale-main-color)',
+	'Liberty navbar surface',
 );
 assertIncludes(
 	navbarWrapperBlock,
-	'border-bottom: 1px solid var(--whale-border-color)',
-	'Navbar divider',
+	'border-bottom: 1px solid var(--whale-second-color)',
+	'Liberty navbar divider',
 );
 const navbarLogoBlock = getRuleBlock(
 	styles,
 	'.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-brand-logo',
 	'Navbar logo',
 );
-assertIncludes(navbarLogoBlock, 'height: 2.125rem', 'Navbar logo size');
-assertIncludes(navbarLogoBlock, 'min-width: 2.125rem', 'Navbar logo size');
-assertIncludes(styles, 'margin: 0 1.1rem 0 0', 'Navbar brand spacing');
+assertIncludes(navbarLogoBlock, 'max-height: 1.9rem', 'Navbar logo size');
 assertIncludes(
 	navTemplate,
 	'whale-navbar-notifications',
@@ -824,14 +828,10 @@ const navbarLinkBlock = getRuleBlock(
 );
 assertIncludes(
 	navbarLinkBlock,
-	'height: var(--whale-control-height)',
-	'Navbar link control height',
+	'height: var(--whale-nav-height)',
+	'Liberty navbar link height',
 );
-assertIncludes(
-	navbarLinkBlock,
-	'border-radius: var(--whale-radius-sm)',
-	'Navbar restrained corner radius',
-);
+assertIncludes(navbarLinkBlock, 'color: #fff', 'Liberty navbar link contrast');
 assertIncludes(navbarLinkBlock, 'font-weight: 500', 'Navbar menu weight');
 assertIncludes(styles, '.whale-icon-random', 'Navbar random icon sizing');
 assertIncludes(styles, 'width: 2.75rem', 'Mobile navbar icon target sizing');
@@ -941,15 +941,15 @@ assertIncludes(
 	'background-color: var(--whale-code-background)',
 	'Article code treatment',
 );
-assertIncludes(styles, '--whale-canvas-color: #e5edf2', 'Page canvas token');
 assertIncludes(
 	styles,
-	'--whale-surface-color: #f2f6f8',
-	'Document surface token',
+	'--whale-canvas-color: #f5f5f5',
+	'Liberty page canvas token',
 );
+assertIncludes(styles, '--whale-surface-color: #fff', 'Document surface token');
 assertIncludes(
 	styles,
-	'--whale-surface-elevated-color: #f7fafb',
+	'--whale-surface-muted-color: #f5f8fa',
 	'Elevated surface token',
 );
 assertIncludes(styles, '--whale-table-background', 'Table color tokens');
@@ -973,26 +973,11 @@ const noticeBlock = getRuleBlock(
 	'.Whale .content-wrapper .whale-content .whale-content-header .whale-notice',
 	'Article notice',
 );
-assertIncludes(noticeBlock, 'margin: 1.5rem 1.75rem 0', 'Inset notice spacing');
+assertIncludes(noticeBlock, 'margin: 1rem', 'Liberty notice spacing');
 assertIncludes(
 	noticeBlock,
 	'border-radius: var(--whale-radius-sm)',
 	'Notice component corners',
-);
-const noticeHeadingGapBlock = getRuleBlock(
-	contentStyles,
-	'.Whale .content-wrapper .whale-content > .whale-content-header > .whale-notice + .whale-content-heading',
-	'Notice and article heading gap',
-);
-assertIncludes(
-	noticeHeadingGapBlock,
-	'margin-top: 0.75rem',
-	'Desktop notice and heading gap',
-);
-assertIncludes(
-	responsiveStyles,
-	'> .whale-notice + .whale-content-heading {\n\t\tmargin-top: 0.5rem',
-	'Responsive notice and heading gap',
 );
 assertIncludes(
 	styles,
@@ -1026,27 +1011,39 @@ assertIncludes(
 	'body.whale-auto-dark .Whale .content-wrapper .whale-content .whale-content-main table.wikitable tr > td',
 	'Auto dark table cell override',
 );
-assertIncludes(styles, '--whale-radius: 8px', 'Shared surface corner radius');
 assertIncludes(
 	styles,
-	'--whale-radius-sm: 6px',
+	'--whale-radius: 0.35rem',
+	'Liberty surface corner radius',
+);
+assertIncludes(
+	styles,
+	'--whale-radius-sm: 0.35rem',
 	'Shared control corner radius',
 );
-assertIncludes(styles, '--whale-layout-width: 1360px', 'Desktop layout width');
-assertIncludes(styles, '--whale-sidebar-width: 280px', 'Sidebar width token');
-assertIncludes(styles, '--whale-layout-gap: 20px', 'Desktop layout gap');
-assertIncludes(styles, '--whale-nav-height: 60px', 'Shared navigation height');
 assertIncludes(
 	styles,
-	'--whale-reading-size: 1.0625rem',
-	'Readable article size',
+	'--whale-layout-width: 1200px',
+	'Liberty desktop layout width',
 );
 assertIncludes(
 	styles,
-	'--whale-reading-leading: 1.72',
+	'--whale-sidebar-width: 240px',
+	'Liberty sidebar width token',
+);
+assertIncludes(styles, '--whale-layout-gap: 16px', 'Desktop layout gap');
+assertIncludes(
+	styles,
+	'--whale-nav-height: 2.8rem',
+	'Liberty navigation height',
+);
+assertIncludes(styles, '--whale-reading-size: 1rem', 'Readable article size');
+assertIncludes(
+	styles,
+	'--whale-reading-leading: 1.6',
 	'Readable article leading',
 );
-assertIncludes(styles, '--whale-link-color: #0969b5', 'Light link color token');
+assertIncludes(styles, '--whale-link-color: #0275d8', 'Light link color token');
 assertIncludes(styles, '--whale-link-color: #69b1ff', 'Dark link color token');
 assertIncludes(
 	styles,
@@ -1059,10 +1056,14 @@ assertIncludes(
 	'background-color: var(--whale-canvas-color)',
 	'Document canvas color',
 );
-assertIncludes(styles, '--whale-border-color: #cbd7de', 'Interface border');
 assertIncludes(
 	styles,
-	'--whale-shadow-sm: 0 1px 2px rgba(23, 50, 66, 0.1), 0 6px 18px rgba(23, 50, 66, 0.06)',
+	'--whale-border-color: #e1e8ed',
+	'Liberty interface border',
+);
+assertIncludes(
+	styles,
+	'--whale-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04)',
 	'Subtle surface elevation',
 );
 assertIncludes(
@@ -1317,19 +1318,14 @@ assertIncludes(
 	'Floating table of contents stack order',
 );
 assertIncludes(
+	contentStyles,
+	'float: right',
+	'Liberty article tools alignment',
+);
+assertNotIncludes(
 	skinTemplate,
 	'whale-content-heading',
-	'Compact article heading layout',
-);
-assertIncludes(
-	styles,
-	'.whale-content-title-group',
-	'Compact article heading layout',
-);
-assertIncludes(
-	styles,
-	'justify-content: space-between',
-	'Article heading and tools alignment',
+	'Removed redesign heading wrapper',
 );
 assertNotIncludes(styles, 'min-height: 204px', 'Legacy article header height');
 assertIncludes(skinTemplate, '{{>ReferenceModal}}', 'Reference modal partial');

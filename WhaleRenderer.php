@@ -494,7 +494,8 @@ class WhaleRenderer {
 				$mode . '-live-recent-article-list',
 				$skin->msg( 'recentchanges' )->text(),
 				'sync',
-				implode( '|', $articleNamespaces )
+				implode( '|', $articleNamespaces ),
+				true
 			),
 		];
 
@@ -503,7 +504,8 @@ class WhaleRenderer {
 				$mode . '-live-recent-talk-list',
 				$skin->msg( 'whale-recent-discussions' )->text(),
 				'comments',
-				implode( '|', $talkNamespaces )
+				implode( '|', $talkNamespaces ),
+				false
 			);
 		}
 
@@ -551,20 +553,28 @@ class WhaleRenderer {
 	}
 
 	/**
-	 * @return array<string,string>
+	 * @return array<string,string|bool>
 	 */
 	private function getLiveRecentFeedData(
 		string $listId,
 		string $heading,
 		string $icon,
-		string $namespaces
+		string $namespaces,
+		bool $isActive
 	): array {
 		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+		$tabId = $listId . '-tab';
+		$panelId = $listId . '-panel';
 
 		return [
 			'list-id' => $listId,
+			'tab-id' => $tabId,
+			'panel-id' => $panelId,
 			'heading' => $heading,
 			'namespaces' => $namespaces,
+			'is-active' => $isActive,
+			'aria-selected' => $isActive ? 'true' : 'false',
+			'tab-index' => $isActive ? '0' : '-1',
 			'html-icon' => $this->renderIcon( $icon ),
 			'html-more-link' => $linkRenderer->makeKnownLink(
 				SpecialPage::getTitleFor( 'Recentchanges' ),

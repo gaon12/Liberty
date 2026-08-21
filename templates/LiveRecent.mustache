@@ -1,17 +1,21 @@
 {{#data-whale-live-recent}}
 {{#has-live-recent}}
 <div class="{{classes}}" data-live-recent-mode="{{mode}}" data-limit="{{limit}}" data-refresh-interval="{{refresh-ms}}" style="{{style}}">
-	{{#feeds}}
-		<section class="live-recent-feed" data-namespaces="{{namespaces}}">
-			<header class="live-recent-header">
+	<div class="live-recent-tabs" role="tablist">
+		{{#feeds}}
+			<button type="button" class="live-recent-tab{{#is-active}} is-active{{/is-active}}" id="{{tab-id}}" role="tab" aria-controls="{{panel-id}}" aria-selected="{{aria-selected}}" tabindex="{{tab-index}}">
 				{{{ html-icon }}}
-				<h2 class="live-recent-title">{{heading}}</h2>
-				{{{ html-more-link }}}
-			</header>
+				<span>{{heading}}</span>
+			</button>
+		{{/feeds}}
+	</div>
+	{{#feeds}}
+		<section class="live-recent-feed{{#is-active}} is-active{{/is-active}}" id="{{panel-id}}" role="tabpanel" aria-labelledby="{{tab-id}}" data-namespaces="{{namespaces}}"{{^is-active}} hidden{{/is-active}}>
 			<div class="live-recent-progress" aria-hidden="true">
 				<span class="live-recent-progress-bar"></span>
 			</div>
 			<ul class="live-recent-list" id="{{list-id}}" aria-busy="true"></ul>
+			<footer class="live-recent-footer">{{{ html-more-link }}}</footer>
 		</section>
 	{{/feeds}}
 </div>

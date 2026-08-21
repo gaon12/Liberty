@@ -256,6 +256,62 @@
 
 		let relativeTimeInterval = null;
 		let running = false;
+		const tabs = [...root.querySelectorAll('[role="tab"]')];
+		let activeFeed = feeds.find((feed) => !feed.element.hidden) ?? feeds[0];
+
+		const selectFeed = (nextFeed, focusTab = false) => {
+			activeFeed = nextFeed;
+			feeds.forEach((feed) => {
+				const isActive = feed === nextFeed;
+				feed.element.hidden = !isActive;
+				feed.element.classList.toggle('is-active', isActive);
+			});
+			tabs.forEach((tab) => {
+				const isActive =
+					tab.getAttribute('aria-controls') === nextFeed.element.id;
+				tab.classList.toggle('is-active', isActive);
+				tab.setAttribute('aria-selected', String(isActive));
+				tab.tabIndex = isActive ? 0 : -1;
+				if (isActive && focusTab) {
+					tab.focus();
+				}
+			});
+
+			if (running && !nextFeed.loaded) {
+				refreshFeed(nextFeed, { showLoading: true });
+			}
+		};
+
+		tabs.forEach((tab, index) => {
+			tab.addEventListener('click', () => {
+				const nextFeed = feeds.find(
+					(feed) => feed.element.id === tab.getAttribute('aria-controls'),
+				);
+				if (nextFeed) {
+					selectFeed(nextFeed);
+				}
+			});
+			tab.addEventListener('keydown', (event) => {
+				if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
+					return;
+				}
+				event.preventDefault();
+				const nextIndex =
+					event.key === 'Home'
+						? 0
+						: event.key === 'End'
+							? tabs.length - 1
+							: (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) %
+								tabs.length;
+				const nextFeed = feeds.find(
+					(feed) =>
+						feed.element.id === tabs[nextIndex].getAttribute('aria-controls'),
+				);
+				if (nextFeed) {
+					selectFeed(nextFeed, true);
+				}
+			});
+		});
 
 		const stop = () => {
 			if (!running) {
@@ -267,9 +323,6 @@
 			relativeTimeInterval = null;
 			feeds.forEach((feed) => {
 				stopProgress(feed);
-				feed.list.replaceChildren();
-				feed.list.setAttribute('aria-busy', 'true');
-				feed.loaded = false;
 			});
 		};
 
@@ -288,9 +341,7 @@
 				updateRelativeTimes(root);
 			}, RELATIVE_TIME_INTERVAL);
 
-			feeds.forEach((feed) => {
-				refreshFeed(feed, { showLoading: true });
-			});
+			refreshFeed(activeFeed, { showLoading: true });
 		};
 
 		return { start, stop };

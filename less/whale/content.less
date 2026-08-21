@@ -4,8 +4,8 @@
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) var(--whale-sidebar-width);
 	gap: var(--whale-layout-gap);
-	margin-top: ~"calc(var(--whale-nav-height) + 16px)";
-	padding: 0 12px 1.5rem;
+	margin-top: ~"calc(var(--whale-nav-height) + 0.53rem)";
+	padding: 0 0 1rem;
 	z-index: 0;
 }
 
@@ -18,29 +18,27 @@
 	min-width: 0;
 	margin: 0;
 	padding: 0;
-	background-color: var(--whale-surface-elevated-color);
-	border: 1px solid var(--whale-border-color);
-	border-radius: var(--whale-radius);
-	box-shadow: var(--whale-shadow-sm);
+	background-color: transparent;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header {
 	display: flow-root;
-	border: 0;
-	border-bottom: 1px solid var(--whale-border-color);
+	border: 1px solid var(--whale-border-color);
 	border-radius: var(--whale-radius) var(--whale-radius) 0 0;
-	background-color: var(--whale-surface-elevated-color);
+	background-color: var(--whale-surface-muted-color);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .whale-notice {
 	background-color: var(--whale-notice-background-color);
-	border: 1px solid #91caff;
-	border-left: 4px solid var(--whale-main-color);
+	border: 1px solid #bce8f1;
 	border-radius: var(--whale-radius-sm);
 	color: var(--whale-notice-text-color);
-	margin: 1.5rem 1.75rem 0;
+	margin: 1rem;
 	position: relative;
-	padding: 0.9rem 3.25rem 0.9rem 1.1rem;
+	padding: 0.8rem 2.75rem 0.8rem 1rem;
 	font-size: 0.95rem;
 	line-height: 1.55;
 	overflow-wrap: anywhere;
@@ -140,8 +138,8 @@
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .content-tools {
-	flex: 0 0 auto;
-	padding: 0;
+	float: right;
+	padding: 1rem 1rem 0 0;
 	max-width: 100%;
 	text-align: right;
 }
@@ -150,30 +148,28 @@
 	display: inline-flex;
 	flex-wrap: wrap;
 	justify-content: flex-end;
-	gap: 0.3rem;
+	gap: 0;
 	max-width: 100%;
-	padding: 0.25rem;
-	border: 1px solid var(--whale-border-color);
-	border-radius: ~"calc(var(--whale-radius-sm) + 2px)";
-	background-color: var(--whale-surface-muted-color);
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background-color: transparent;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .content-tools .whale-btn-group > .whale-btn,
 .Whale .content-wrapper .whale-content .whale-content-header .content-tools .whale-btn-group > .whale-btn-group {
-	margin-left: 0;
-	border-radius: var(--whale-radius-sm);
+	margin-left: -1px;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .content-tools .whale-btn-group > .whale-btn:first-child {
 	margin-left: 0;
-	border-radius: var(--whale-radius-sm);
+	border-radius: var(--whale-radius-sm) 0 0 var(--whale-radius-sm);
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .content-tools .tools-btn {
 	font-size: 0.9rem;
 	min-height: var(--whale-control-height-sm);
-	padding: 0.42rem 0.75rem;
-	border-radius: var(--whale-radius-sm);
+	padding: 0.4rem 0.8rem;
 	background-color: var(--whale-control-background);
 }
 
@@ -236,12 +232,12 @@
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .title {
-	padding: 0;
+	padding: 1rem;
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .contentSub {
-	margin: 0.4rem 0 0;
-	padding: 0;
+	margin-top: -0.5rem;
+	padding: 0 1rem 1rem;
 	color: var(--whale-content-muted-color);
 	font-size: 0.95rem;
 	line-height: 1.5;
@@ -252,7 +248,7 @@
 }
 
 .Whale .content-wrapper .whale-content .whale-content-header .title > h1 {
-	color: var(--whale-text-color);
+	color: #000;
 	font-weight: 700;
 	font-size: 2rem;
 	letter-spacing: -0.025em;
@@ -265,10 +261,11 @@
 }
 
 .Whale .content-wrapper .whale-content .whale-content-main {
-	border: 0;
-	background-color: var(--whale-surface-elevated-color);
+	border-right: 1px solid var(--whale-border-color);
+	border-left: 1px solid var(--whale-border-color);
+	background-color: var(--whale-surface-color);
 	color: var(--whale-text-color);
-	padding: 1.6rem 1.75rem 1.8rem;
+	padding: 1rem;
 	overflow: visible;
 	overflow-wrap: anywhere;
 	font-size: var(--whale-reading-size);
