@@ -368,8 +368,13 @@ assertIncludes(
 	'live-recent-no-data-visual',
 	'Decorative live recent empty state styles',
 );
-assertIncludes(
+const liveRecentNoDataBlock = getRuleBlock(
 	liveRecentStyles,
+	'.Whale .content-wrapper .live-recent .live-recent-list .live-recent-no-data',
+	'Live recent empty state',
+);
+assertIncludes(
+	liveRecentNoDataBlock,
 	'border-bottom: 0',
 	'Undivided live recent empty state',
 );
