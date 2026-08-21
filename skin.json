@@ -1,6 +1,18 @@
 {
 	"name": "Whale",
-	"author": ["Librewiki developers", "..."],
+	"author": [
+		"Jeong Gaon",
+		"Librewiki developers",
+		"itsurea",
+		"well-made-plush",
+		"nessun",
+		"revi",
+		"zlzleking",
+		"katinor",
+		"Hoto Cocoa",
+		"nuxe",
+		"Jack Phoenix"
+	],
 	"url": "https://github.com/gaon12/Whale",
 	"descriptionmsg": "whale-desc",
 	"namemsg": "skinname-whale",

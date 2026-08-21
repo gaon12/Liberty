@@ -39,6 +39,24 @@ const getRuleBlock = (source, selector, label) => {
 };
 
 const skin = JSON.parse(read('skin.json'));
+const expectedSkinAuthors = [
+	'Jeong Gaon',
+	'Librewiki developers',
+	'itsurea',
+	'well-made-plush',
+	'nessun',
+	'revi',
+	'zlzleking',
+	'katinor',
+	'Hoto Cocoa',
+	'nuxe',
+	'Jack Phoenix',
+];
+if (JSON.stringify(skin.author) !== JSON.stringify(expectedSkinAuthors)) {
+	throw new Error(
+		'Skin authors should list Jeong Gaon first and preserve prior contributors.',
+	);
+}
 if (skin.config.WhaleEnableMobileFloatingToc !== true) {
 	throw new Error(
 		'Mobile floating TOC should be enabled by default in config.',
