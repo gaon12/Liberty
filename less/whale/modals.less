@@ -57,6 +57,11 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 	width: 30rem;
 }
 
+.whale-modal-compact {
+	width: ~"min(24rem, calc(100% - 2rem))";
+	margin-top: ~"min(16vh, 7rem)";
+}
+
 .whale-modal-content {
 	position: relative;
 	display: flex;
@@ -79,6 +84,30 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 	padding: 0.8rem 3.75rem 0.8rem 1.25rem;
 	border-bottom: 1px solid var(--whale-border-color, #d9dee3);
 	background-color: var(--whale-surface-elevated-color);
+}
+
+.Whale .whale-modal-heading {
+	display: flex;
+	align-items: center;
+	min-width: 0;
+	gap: 0.65rem;
+}
+
+.Whale .whale-modal-heading-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	background-color: var(--whale-surface-muted-color);
+	color: var(--whale-main-color);
+}
+
+.Whale .whale-modal-heading-icon .whale-icon {
+	width: 1rem;
+	height: 1rem;
 }
 
 .Whale .whale-login-modal .whale-modal-header {
@@ -132,13 +161,13 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 
 .Whale .whale-short-url-modal .whale-modal-header,
 .Whale .whale-external-link-modal .whale-modal-header {
-	min-height: 3.75rem;
-	padding: 0.8rem 3.75rem 0.8rem 1.25rem;
+	min-height: 3.35rem;
+	padding: 0.65rem 3.35rem 0.65rem 1rem;
 }
 
 .Whale .whale-reference-modal .whale-modal-header {
-	min-height: 3.75rem;
-	padding: 0.8rem 3.75rem 0.8rem 1.25rem;
+	min-height: 3.35rem;
+	padding: 0.65rem 3.35rem 0.65rem 1rem;
 	background-color: var(--whale-surface-elevated-color);
 }
 
@@ -148,14 +177,14 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 	flex: 1;
 	margin: 0;
 	color: var(--whale-text-color, #252a30);
-	font-size: 1.15rem;
+	font-size: 1.05rem;
 	font-weight: 650;
 	text-align: left;
 }
 
 .Whale .whale-reference-modal-dialog {
-	width: ~"min(46rem, calc(100% - 2rem))";
-	margin: 10vh auto 1.5rem;
+	width: ~"min(34rem, calc(100% - 2rem))";
+	margin: ~"min(14vh, 6rem)" auto 1.5rem;
 }
 
 .Whale .whale-reference-modal-content {
@@ -176,14 +205,14 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 
 .Whale .whale-reference-content {
 	min-height: 0;
-	max-height: ~"calc(100dvh - 12rem)";
+	max-height: ~"min(60vh, 28rem)";
 	overflow: auto;
 	overscroll-behavior: contain;
-	padding: 1.25rem 1.4rem 1.4rem;
+	padding: 1rem 1.1rem 1.1rem;
 	background-color: var(--whale-surface-elevated-color);
 	color: var(--whale-text-color, #252a30);
-	font-size: 1.05rem;
-	line-height: 1.7;
+	font-size: 0.95rem;
+	line-height: 1.65;
 	overflow-wrap: anywhere;
 }
 
@@ -217,7 +246,7 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 	display: flex;
 	justify-content: flex-end;
 	flex: 0 0 auto;
-	padding: 0.75rem 1.25rem;
+	padding: 0.6rem 1rem;
 	border-top: 1px solid var(--whale-border-color, #d9dee3);
 	background-color: var(--whale-surface-elevated-color);
 }
@@ -225,8 +254,8 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 .Whale .whale-reference-jump {
 	display: inline-flex;
 	align-items: center;
-	min-height: 2.5rem;
-	padding: 0.45rem 0.9rem;
+	min-height: 2.25rem;
+	padding: 0.35rem 0.75rem;
 	border: 1px solid var(--whale-border-strong-color);
 	border-radius: var(--whale-radius-sm);
 	background-color: var(--whale-surface-elevated-color);
@@ -261,40 +290,11 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 	line-height: 1.5;
 }
 
-.Whale .whale-short-url-card {
-	display: grid;
-	grid-template-columns: auto minmax(0, 1fr);
-	align-items: start;
-	gap: 0.85rem;
-	padding: 0;
-	border: 0;
-	border-radius: 0;
-	background-color: transparent;
-}
-
-.Whale .whale-short-url-icon {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 2.5rem;
-	height: 2.5rem;
-	border: 1px solid var(--whale-border-color);
-	border-radius: var(--whale-radius-sm);
-	background-color: var(--whale-surface-muted-color);
-	color: var(--whale-main-color);
-}
-
-.Whale .whale-short-url-icon .whale-icon {
-	width: 1.25rem;
-	height: 1.25rem;
-	margin: 0;
-}
-
 .Whale .whale-short-url-copy-row {
 	display: flex;
 	align-items: stretch;
 	gap: 0;
-	margin-top: 0.75rem;
+	margin-top: 0.65rem;
 }
 
 .Whale .whale-short-url-copy-row .whale-short-url-value {
@@ -396,6 +396,10 @@ body.whale-modal-open .Whale .whale-nav-wrapper.whale-navbar-fixed {
 .whale-modal-body {
 	position: relative;
 	padding: 1.25rem;
+}
+
+.Whale .whale-short-url-modal .whale-modal-body {
+	padding: 1rem;
 }
 
 .Whale .whale-login-modal .whale-modal-dialog {

@@ -314,10 +314,13 @@
 			modal.classList.add('is-open');
 			activeBackdrop?.classList.add('is-open');
 			modal.dataset.whaleModalState = 'open';
-			(
+			const autofocusTarget =
 				modal.querySelector('[data-whale-modal-autofocus]') ||
-				modal.querySelector(FOCUSABLE_SELECTOR)
-			)?.focus();
+				modal.querySelector(FOCUSABLE_SELECTOR);
+			autofocusTarget?.focus();
+			if (autofocusTarget?.matches?.('[readonly]')) {
+				autofocusTarget.select?.();
+			}
 		});
 	};
 

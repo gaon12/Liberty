@@ -720,6 +720,7 @@ class WhaleRenderer {
 			'title' => $skin->msg( 'whale-reference-title' )->text(),
 			'jump-label' => $skin->msg( 'whale-reference-jump' )->text(),
 			'close-label' => $skin->msg( 'close' )->text(),
+			'html-icon' => $this->renderIcon( 'file' ),
 		];
 	}
 

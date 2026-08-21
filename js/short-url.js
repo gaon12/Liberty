@@ -22,6 +22,12 @@
 
 	whale.ready(() => {
 		document.addEventListener('click', async (event) => {
+			const value = whale.closest(event.target, '.whale-short-url-value');
+			if (value) {
+				value.select();
+				return;
+			}
+
 			const button = whale.closest(event.target, '.whale-short-url-copy');
 			if (!button) {
 				return;

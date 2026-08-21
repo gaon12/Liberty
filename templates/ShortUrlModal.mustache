@@ -1,24 +1,22 @@
 {{#data-whale-short-url}}
 {{#has-short-url}}
 <div class="whale-modal whale-modal-fade whale-short-url-modal" id="whale-short-url-modal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="whale-short-url-modal-label" aria-hidden="true">
-	<div class="whale-modal-dialog whale-modal-sm">
+	<div class="whale-modal-dialog whale-modal-compact">
 		<div class="whale-modal-content">
 			<div class="whale-modal-header">
-				<h4 class="whale-modal-title" id="whale-short-url-modal-label">{{modal-title}}</h4>
+				<div class="whale-modal-heading">
+					<span class="whale-modal-heading-icon">{{{ html-icon }}}</span>
+					<h2 class="whale-modal-title" id="whale-short-url-modal-label">{{modal-title}}</h2>
+				</div>
 				<button type="button" class="whale-modal-close" data-whale-dismiss="modal" aria-label="{{close-label}}"><span aria-hidden="true">&times;</span></button>
 			</div>
 			<div class="whale-modal-body">
-				<div class="whale-short-url-card">
-					<div class="whale-short-url-icon">{{{ html-icon }}}</div>
-					<div class="whale-short-url-copy-area">
-						<p class="whale-short-url-description">{{description}}</p>
-						<div class="whale-short-url-copy-row">
-							<input class="whale-form-control whale-short-url-value" type="text" value="{{url}}" readonly>
-							<button type="button" class="whale-btn whale-btn-primary whale-short-url-copy">{{copy-label}}</button>
-						</div>
-						<p class="whale-short-url-status" data-whale-short-url-status aria-live="polite" hidden></p>
-					</div>
+				<p class="whale-short-url-description">{{description}}</p>
+				<div class="whale-short-url-copy-row">
+					<input class="whale-form-control whale-short-url-value" type="text" value="{{url}}" aria-label="{{modal-title}}" readonly data-whale-modal-autofocus>
+					<button type="button" class="whale-btn whale-btn-primary whale-short-url-copy">{{copy-label}}</button>
 				</div>
+				<p class="whale-short-url-status" data-whale-short-url-status role="status" aria-live="polite" hidden></p>
 			</div>
 		</div>
 	</div>

@@ -693,6 +693,16 @@ assertIncludes(
 	'whale-btn-primary whale-short-url-copy',
 	'Primary short URL copy action',
 );
+assertIncludes(
+	shortUrlTemplate,
+	'whale-modal-dialog whale-modal-compact',
+	'Compact short URL dialog',
+);
+assertIncludes(
+	shortUrlTemplate,
+	'data-whale-modal-autofocus',
+	'Short URL initial selection target',
+);
 const loginTemplate = read('templates/LoginModal.mustache');
 assertIncludes(
 	loginTemplate,
@@ -1376,10 +1386,16 @@ assertIncludes(
 	'tabindex="0" role="document"',
 	'Keyboard-scrollable reference content',
 );
+assertIncludes(styles, '~"min(60vh, 28rem)"', 'Reference modal scroll limit');
 assertIncludes(
 	styles,
-	'~"calc(100dvh - 12rem)"',
-	'Reference modal scroll limit',
+	'~"min(34rem, calc(100% - 2rem))"',
+	'Compact reference modal width',
+);
+assertIncludes(
+	referenceTemplate,
+	'whale-modal-heading-icon',
+	'Reference modal heading icon',
 );
 assertIncludes(
 	styles,
