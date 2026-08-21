@@ -21,3 +21,9 @@ if (
 if (!source.includes('window.mw?.loader')) {
 	throw new Error('Recovery must stop after ResourceLoader starts.');
 }
+
+if (source.includes('isRocketScript')) {
+	throw new Error(
+		'Recovery must detect restored text/javascript placeholders after Rocket Loader finishes.',
+	);
+}

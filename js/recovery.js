@@ -2,11 +2,8 @@
 	const RECOVERY_DELAY = 1200;
 	const recoveryState = document.documentElement.dataset;
 
-	const isRocketScript = (script) =>
-		/-text\/javascript$/.test(script.getAttribute('type') || '');
-
 	const isResourceLoaderScript = (script) => {
-		if (script.dataset.whaleRecovery === 'true' || !isRocketScript(script)) {
+		if (script.dataset.whaleRecovery === 'true') {
 			return false;
 		}
 

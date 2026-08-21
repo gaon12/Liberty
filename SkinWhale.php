@@ -798,7 +798,7 @@ JS
 		return Html::element( 'script', [
 			'data-cfasync' => 'false',
 			'data-whale-recovery' => 'true',
-			'src' => $scriptPath . '/skins/Whale/js/recovery.js?v=resource-loader-single-owner',
+			'src' => $scriptPath . '/skins/Whale/js/recovery.js?v=resource-loader-restored-types',
 		], '' );
 	}
 
