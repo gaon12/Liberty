@@ -76,10 +76,21 @@
 		document.body.classList.contains('whale-floating-toc-open');
 
 	const setMobileTocOpen = (open) => {
+		const toc = document.querySelector('.whale-floating-toc');
+		if (!open && toc?.contains(document.activeElement)) {
+			const trigger = document.getElementById('whale-scrolltoc');
+			if (trigger) {
+				trigger.focus({ preventScroll: true });
+			} else {
+				document.activeElement?.blur?.();
+			}
+		}
+
 		document.body.classList.toggle('whale-floating-toc-open', open);
-		document
-			.querySelector('.whale-floating-toc')
-			?.setAttribute('aria-hidden', String(!open));
+		if (toc) {
+			toc.inert = !open;
+			toc.setAttribute('aria-hidden', String(!open));
+		}
 		const backdrop = document.querySelector('.whale-floating-toc-backdrop');
 		if (backdrop) {
 			backdrop.hidden = !open;
@@ -317,6 +328,7 @@
 			? 'whale-floating-toc is-mobile'
 			: 'whale-floating-toc';
 		toc.setAttribute('aria-label', mw.message('whale-floating-toc').text());
+		toc.inert = shouldRenderMobile;
 		toc.setAttribute('aria-hidden', String(shouldRenderMobile));
 		toc.addEventListener('pointerover', (event) => {
 			if (shouldRenderDesktop && toc.contains(event.target)) {

@@ -56,6 +56,7 @@ class TestElement {
 		this.hidden = Boolean(options.hidden);
 		this.classList = new TestClassList(this);
 		this.ownText = '';
+		this.focused = false;
 
 		if (options.id) {
 			this.setAttribute('id', options.id);
@@ -66,6 +67,10 @@ class TestElement {
 		if (options.text) {
 			this.textContent = options.text;
 		}
+	}
+
+	focus() {
+		this.focused = true;
 	}
 
 	get className() {
@@ -362,6 +367,8 @@ const mountHeadings = (
 	],
 ) => {
 	const toolbar = new TestElement('div', { id: 'whale-bottombtn' });
+	const scrollToc = new TestElement('button', { id: 'whale-scrolltoc' });
+	toolbar.append(scrollToc);
 	const content = new TestElement('main', { className: 'whale-content-main' });
 	const mountedHeadings = {};
 	for (const heading of headings) {
@@ -370,7 +377,7 @@ const mountHeadings = (
 		content.append(node);
 	}
 	document.body.append(toolbar, content);
-	return { toolbar, ...mountedHeadings };
+	return { toolbar, scrollToc, ...mountedHeadings };
 };
 
 const runFloatingToc = ({ desktop, headings, tocItems }) => {
@@ -467,6 +474,7 @@ if (!mobileToc?.classList.contains('is-mobile') || !backdrop) {
 
 if (
 	mobileToc.getAttribute('aria-hidden') !== 'true' ||
+	mobileToc.inert !== true ||
 	backdrop.hidden !== true
 ) {
 	throw new Error('Mobile floating TOC should start closed.');
@@ -509,6 +517,7 @@ if (!mobileRun.document.body.classList.contains('whale-floating-toc-open')) {
 
 if (
 	mobileToc.getAttribute('aria-hidden') !== 'false' ||
+	mobileToc.inert !== false ||
 	backdrop.hidden !== false
 ) {
 	throw new Error(
@@ -517,13 +526,16 @@ if (
 }
 
 const mobileTocLink = mobileToc.querySelector('a');
+mobileRun.document.activeElement = mobileTocLink;
 mobileTocLink.dispatch('click', {
 	preventDefault: () => {},
 });
 if (
 	mobileRun.document.body.classList.contains('whale-floating-toc-open') ||
 	mobileToc.getAttribute('aria-hidden') !== 'true' ||
+	mobileToc.inert !== true ||
 	backdrop.hidden !== true ||
+	!mobileRun.scrollToc.focused ||
 	mobileRun.context.scrolledTo !== mobileRun.alpha
 ) {
 	throw new Error('Mobile TOC links should close the drawer and scroll.');
@@ -544,6 +556,7 @@ if (
 	!escapePrevented ||
 	mobileRun.document.body.classList.contains('whale-floating-toc-open') ||
 	mobileToc.getAttribute('aria-hidden') !== 'true' ||
+	mobileToc.inert !== true ||
 	backdrop.hidden !== true
 ) {
 	throw new Error('Escape should close the open mobile TOC drawer.');
