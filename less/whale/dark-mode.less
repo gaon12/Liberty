@@ -1343,3 +1343,40 @@ body.whale-reduce-motion .Whale .content-wrapper .whale-content .whale-content-m
 body.whale-reduce-motion .Whale .content-wrapper .whale-content .whale-content-main .whale-category-blur {
 	transition: none;
 }
+
+/* Liberty keeps its blue navigation identity in every color scheme. */
+body.whale-dark .Whale .whale-nav-wrapper,
+body.whale-dark.Whale .whale-nav-wrapper,
+body.whale-auto-dark .Whale .whale-nav-wrapper,
+body.whale-auto-dark.Whale .whale-nav-wrapper {
+	background-color: var(--whale-main-color);
+	border-color: var(--whale-second-color);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);
+}
+
+body.whale-dark .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-link,
+body.whale-dark.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-link,
+body.whale-auto-dark .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-link,
+body.whale-auto-dark.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-link,
+body.whale-dark .Whale .whale-nav-wrapper .whale-navbar .whale-theme-toggle,
+body.whale-dark.Whale .whale-nav-wrapper .whale-navbar .whale-theme-toggle,
+body.whale-auto-dark .Whale .whale-nav-wrapper .whale-navbar .whale-theme-toggle,
+body.whale-auto-dark.Whale .whale-nav-wrapper .whale-navbar .whale-theme-toggle,
+body.whale-dark .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-login .whale-icon,
+body.whale-dark.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-login .whale-icon,
+body.whale-auto-dark .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-login .whale-icon,
+body.whale-auto-dark.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-login .whale-icon {
+	color: #fff;
+}
+
+body.whale-dark .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-link:hover,
+body.whale-dark .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-link:focus,
+body.whale-dark.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-link:hover,
+body.whale-dark.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-link:focus,
+body.whale-auto-dark .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-link:hover,
+body.whale-auto-dark .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-link:focus,
+body.whale-auto-dark.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-link:hover,
+body.whale-auto-dark.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-link:focus {
+	background-color: rgba(255, 255, 255, 0.14);
+	color: #fff;
+}

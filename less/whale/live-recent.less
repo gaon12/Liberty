@@ -12,6 +12,7 @@
 	color: var(--whale-content-muted-color); font-weight: 500;
 }
 .Whale .content-wrapper .live-recent-tab + .live-recent-tab { border-left: 0; border-radius: 0 var(--whale-radius) 0 0; }
+.Whale .content-wrapper .live-recent-tab:only-child { grid-column-start: 1; grid-column-end: -1; border-radius: var(--whale-radius) var(--whale-radius) 0 0; }
 .Whale .content-wrapper .live-recent-tab:hover,
 .Whale .content-wrapper .live-recent-tab:focus,
 .Whale .content-wrapper .live-recent-tab.is-active { background-color: var(--whale-surface-color); color: var(--whale-text-color); }
