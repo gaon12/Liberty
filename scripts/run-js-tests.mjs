@@ -13,7 +13,6 @@ const tests = [
 	'check-short-url-copy.mjs',
 	'check-toc-utils.mjs',
 	'check-theme-toggle.mjs',
-	'check-recovery.mjs',
 	'check-legacy-dependencies.mjs',
 	'check-ui-features.mjs',
 	'check-floating-toc-behavior.mjs',

@@ -199,20 +199,14 @@ assertIncludes(
 	'Idempotent code block controls',
 );
 
-const recovery = read('js/recovery.js');
 const liveRecent = read('js/live-recent.js');
-assertIncludes(
-	recovery,
-	'live-recent-no-data-text',
-	'Recovery live recent empty state',
-);
 assertIncludes(
 	liveRecent,
 	'live-recent-no-data-text',
 	'Live recent empty state',
 );
 assertNotIncludes(
-	`${recovery}\n${liveRecent}`,
+	liveRecent,
 	'live-recent-no-data-visual',
 	'Decorative live recent empty state',
 );
@@ -278,6 +272,11 @@ assertIncludes(
 	skinPhp,
 	`'<script data-cfasync="false"'`,
 	'Rocket Loader bypass attribute',
+);
+assertNotIncludes(
+	skinPhp,
+	'renderRocketLoaderRecoveryScript',
+	'Obsolete ResourceLoader replay fallback',
 );
 
 const styles = readLessWithImports('less/default.less');
