@@ -1,5 +1,8 @@
 (() => {
-	const RECOVERY_DELAYS = [3000, 6500];
+	const RECOVERY_CHECKS = [
+		{ delay: 3000, force: false },
+		{ delay: 6500, force: true },
+	];
 	const recoveryState = document.documentElement.dataset;
 	recoveryState.whaleResourceLoaderRecoveryScript = 'loaded';
 
@@ -41,8 +44,12 @@
 		evaluateSource(source);
 	};
 
-	const recoverResourceLoader = async () => {
-		if (window.mw?.loader || recoveryState.whaleResourceLoaderRecovery) {
+	const recoverResourceLoader = async (force) => {
+		if (
+			recoveryState.whaleLayoutRuntime === 'ready' ||
+			recoveryState.whaleResourceLoaderRecovery ||
+			(!force && window.mw?.loader)
+		) {
 			return;
 		}
 
@@ -77,9 +84,9 @@
 		}
 	};
 
-	RECOVERY_DELAYS.forEach((delay) => {
+	RECOVERY_CHECKS.forEach(({ delay, force }) => {
 		window.setTimeout(() => {
-			recoverResourceLoader().catch(() => {});
+			recoverResourceLoader(force).catch(() => {});
 		}, delay);
 	});
 })();

@@ -1,4 +1,6 @@
 (() => {
+	document.documentElement.dataset.whaleLayoutRuntime = 'ready';
+
 	const getMenuOwner = (toggle) =>
 		toggle.closest('.whale-dropdown, .whale-btn-group');
 

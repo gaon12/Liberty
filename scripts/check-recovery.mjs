@@ -28,8 +28,16 @@ if (source.includes('isRocketScript')) {
 	);
 }
 
-if (!source.includes('RECOVERY_DELAYS = [3000, 6500]')) {
+if (
+	!source.includes('{ delay: 6500, force: true }') ||
+	!source.includes("recoveryState.whaleLayoutRuntime === 'ready'")
+) {
 	throw new Error(
-		'Recovery must recheck after Rocket Loader loses its transient runtime.',
+		'Recovery must force a recheck unless the Whale layout runtime is ready.',
 	);
+}
+
+const layoutSource = readFileSync(resolve('js/layout.js'), 'utf8');
+if (!layoutSource.includes("dataset.whaleLayoutRuntime = 'ready'")) {
+	throw new Error('Layout must publish its healthy runtime marker.');
 }
