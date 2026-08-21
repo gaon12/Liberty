@@ -200,13 +200,13 @@
 		const logo = document.querySelector('.whale-navbar-brand-logo');
 		const brand = logo?.closest('.whale-navbar-brand');
 		if (!logo || !brand) {
-			return;
+			return false;
 		}
 
 		try {
 			await logo.decode?.();
 			if (!logo.naturalWidth || !logo.naturalHeight) {
-				return;
+				return false;
 			}
 
 			const scale = Math.min(
@@ -218,7 +218,7 @@
 			const canvas = document.createElement('canvas');
 			const context = canvas.getContext('2d', { willReadFrequently: true });
 			if (!context) {
-				return;
+				return false;
 			}
 
 			canvas.width = width;
@@ -243,7 +243,7 @@
 			}
 
 			if (right < left || bottom < top) {
-				return;
+				return false;
 			}
 
 			left = Math.max(0, left - 1);
@@ -256,7 +256,7 @@
 			const heightRatio = visibleHeight / height;
 
 			if (widthRatio > 0.94 && heightRatio > 0.94) {
-				return;
+				return true;
 			}
 
 			const naturalAspect = logo.naturalWidth / logo.naturalHeight;
@@ -277,9 +277,20 @@
 				String(-(top / height) / heightRatio),
 			);
 			brand.classList.add('whale-navbar-brand-normalized');
+			return true;
 		} catch {
 			// Cross-origin and malformed images retain the safe contain fallback.
+			return false;
 		}
+	};
+	const initBrandLogo = async () => {
+		if (await normalizeBrandLogo()) {
+			return;
+		}
+
+		// Deferred script loaders can briefly race image decoding. Retry once after
+		// the current loading work settles, then retain the safe contain fallback.
+		window.setTimeout(normalizeBrandLogo, 250);
 	};
 
 	const MODAL_TRANSITION_MS = 300;
@@ -478,7 +489,7 @@
 	};
 
 	whale.ready(() => {
-		normalizeBrandLogo();
+		initBrandLogo();
 		initContentSkeleton();
 		initReadingProgress();
 
