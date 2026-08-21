@@ -4,7 +4,19 @@
 		{ delay: 6500, force: true },
 	];
 	const recoveryState = document.documentElement.dataset;
+	const requiredModules = (
+		document.currentScript?.dataset.whaleModules || 'skins.whale.layoutjs'
+	)
+		.split(',')
+		.filter(Boolean);
 	recoveryState.whaleResourceLoaderRecoveryScript = 'loaded';
+	const hasHealthyRuntime = () =>
+		Boolean(
+			window.mw?.loader &&
+				requiredModules.every(
+					(moduleName) => window.mw.loader.getState(moduleName) === 'ready',
+				),
+		);
 
 	const isResourceLoaderScript = (script) => {
 		if (script.dataset.whaleRecovery === 'true') {
@@ -46,7 +58,7 @@
 
 	const recoverResourceLoader = async (force) => {
 		if (
-			recoveryState.whaleLayoutRuntime === 'ready' ||
+			hasHealthyRuntime() ||
 			recoveryState.whaleResourceLoaderRecovery ||
 			(!force && window.mw?.loader)
 		) {
@@ -73,8 +85,10 @@
 		scripts.forEach((script) => {
 			script.remove();
 		});
-		// A failed startup can leave RLQ.push bound to its discarded module
-		// registry. Queue bootstrap callbacks for the fresh startup instead.
+		// Discard the partial loader and its callback queue before evaluating a
+		// fresh startup. Keeping either registry reimplements core modules.
+		delete window.mw;
+		delete window.mediaWiki;
 		window.RLQ = [];
 
 		for (const snapshot of snapshots) {

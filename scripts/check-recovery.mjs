@@ -5,12 +5,16 @@ const source = readFileSync(resolve('js/recovery.js'), 'utf8');
 const removalIndex = source.indexOf('scripts.forEach((script) => {');
 const replayIndex = source.indexOf('for (const snapshot of snapshots)');
 const queueResetIndex = source.indexOf('window.RLQ = []');
+const loaderResetIndex = source.indexOf('delete window.mw');
 
 if (
 	removalIndex === -1 ||
+	loaderResetIndex === -1 ||
 	queueResetIndex === -1 ||
 	replayIndex === -1 ||
 	removalIndex > queueResetIndex ||
+	removalIndex > loaderResetIndex ||
+	loaderResetIndex > queueResetIndex ||
 	queueResetIndex > replayIndex
 ) {
 	throw new Error(
@@ -37,10 +41,10 @@ if (source.includes('isRocketScript')) {
 
 if (
 	!source.includes('{ delay: 6500, force: true }') ||
-	!source.includes("recoveryState.whaleLayoutRuntime === 'ready'")
+	!source.includes('requiredModules.every')
 ) {
 	throw new Error(
-		'Recovery must force a recheck unless the Whale layout runtime is ready.',
+		'Recovery must force a recheck unless every requested module is ready.',
 	);
 }
 
