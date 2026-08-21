@@ -191,8 +191,6 @@ class SkinWhale extends SkinMustache {
 			$out->addMeta( 'twitter:creator', "@$wgXAccount" );
 		}
 
-		$out->addModules( $this->getWhaleClientModules() );
-
 		// @codingStandardsIgnoreStart
 		$out->addInlineStyle(
 			".Whale {
@@ -289,6 +287,11 @@ class SkinWhale extends SkinMustache {
 		$modules = [
 			'skins.whale.layoutjs'
 		];
+		$title = $this->getTitle();
+		$action = $this->getRequest()->getVal( 'action', 'view' );
+		if ( $action === 'view' && $title && $title->getNamespace() !== NS_SPECIAL ) {
+			$modules[] = 'skins.whale.articlejs';
+		}
 		if ( $this->getWhaleAdClient() !== '' ) {
 			$modules[] = 'skins.whale.ads';
 		}

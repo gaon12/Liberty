@@ -1431,11 +1431,11 @@ assertIncludes(
 );
 assertIncludes(codeCopy, 'createCopyToolbar', 'Code block toolbar structure');
 if (
-	!skin.ResourceModules['skins.whale.layoutjs'].scripts.includes(
+	!skin.ResourceModules['skins.whale.articlejs'].scripts.includes(
 		'js/code-copy.js',
 	)
 ) {
-	throw new Error('Layout resources should load code block copy controls.');
+	throw new Error('Article resources should load code block copy controls.');
 }
 assertIncludes(
 	skinTemplate,
@@ -1490,6 +1490,19 @@ assertIncludes(
 );
 assertIncludes(hooksPhp, 'getWhaleClientModules', 'Client module loader hook');
 assertIncludes(hooksPhp, '$out->addModules', 'Client module loader hook');
+if ('scripts' in skin.ValidSkinNames.whale.args[0]) {
+	throw new Error('Skin defaults should not eagerly load every client module.');
+}
+assertIncludes(
+	skinPhp,
+	"'skins.whale.articlejs'",
+	'View-page article module boundary',
+);
+assertNotIncludes(
+	skinPhp.slice(0, skinPhp.indexOf('public function getWhaleClientModules')),
+	'$out->addModules',
+	'Skin initialization should defer client modules to BeforePageDisplay',
+);
 assertIncludes(
 	hooksPhp,
 	"$preferences['whale-ads-belowarticle']",
