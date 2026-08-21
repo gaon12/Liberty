@@ -273,10 +273,10 @@ assertIncludes(
 	`'<script data-cfasync="false"'`,
 	'Rocket Loader bypass attribute',
 );
-assertNotIncludes(
-	skinPhp,
-	'renderRocketLoaderRecoveryScript',
-	'Obsolete ResourceLoader replay fallback',
+assertIncludes(
+	read('js/recovery.js'),
+	'scripts.forEach((script) => {',
+	'Race-free ResourceLoader recovery',
 );
 
 const styles = readLessWithImports('less/default.less');

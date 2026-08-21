@@ -418,6 +418,7 @@ class SkinWhale extends SkinMustache {
 		if ( is_string( $scriptsHtml ) || ( is_object( $scriptsHtml ) && method_exists( $scriptsHtml, '__toString' ) ) ) {
 			$data['html-scripts'] = $this->disableRocketLoaderForScripts( (string)$scriptsHtml );
 		}
+		$data['html-whale-rocket-loader-recovery'] = $this->renderRocketLoaderRecoveryScript();
 		return $data;
 	}
 
@@ -788,6 +789,17 @@ class SkinWhale extends SkinMustache {
 }());
 JS
 		);
+	}
+
+	private function renderRocketLoaderRecoveryScript(): string {
+		global $wgScriptPath;
+
+		$scriptPath = is_string( $wgScriptPath ?? null ) ? rtrim( $wgScriptPath, '/' ) : '';
+		return Html::element( 'script', [
+			'data-cfasync' => 'false',
+			'data-whale-recovery' => 'true',
+			'src' => $scriptPath . '/skins/Whale/js/recovery.js?v=resource-loader-single-owner',
+		], '' );
 	}
 
 	/**
