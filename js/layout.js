@@ -256,6 +256,7 @@
 			const heightRatio = visibleHeight / height;
 
 			if (widthRatio > 0.94 && heightRatio > 0.94) {
+				brand.classList.add('whale-navbar-brand-plain');
 				return true;
 			}
 

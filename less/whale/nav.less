@@ -27,6 +27,12 @@
 
 .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-brand {
 	--whale-logo-target-height: 2.25rem;
+	// Safe initial bounds for the deployed logo. Runtime alpha analysis replaces
+	// these values when available and restores contain sizing for plain artwork.
+	--whale-logo-visible-aspect: 4.13;
+	--whale-logo-image-height-factor: 2.143;
+	--whale-logo-image-left-factor: -0.03;
+	--whale-logo-image-top-factor: -0.561;
 	display: inline-flex;
 	align-items: center;
 	position: relative;
@@ -51,6 +57,7 @@
 	object-position: left center;
 }
 
+.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-brand:not(.whale-navbar-brand-plain),
 .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-brand.whale-navbar-brand-normalized {
 	flex: 0 0 auto;
 	width: calc(var(--whale-logo-target-height) * var(--whale-logo-visible-aspect));
@@ -58,6 +65,7 @@
 	overflow: hidden;
 }
 
+.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-brand:not(.whale-navbar-brand-plain) .whale-navbar-brand-logo,
 .Whale .whale-nav-wrapper .whale-navbar .whale-navbar-brand-normalized .whale-navbar-brand-logo {
 	position: absolute;
 	top: calc(var(--whale-logo-target-height) * var(--whale-logo-image-top-factor));
