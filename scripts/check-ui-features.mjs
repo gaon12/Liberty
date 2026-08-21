@@ -842,8 +842,16 @@ const navbarLogoBlock = getRuleBlock(
 	'.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-brand-logo',
 	'Navbar logo',
 );
-assertIncludes(navbarLogoBlock, 'max-height: 1.9rem', 'Navbar logo size');
-assertIncludes(navbarLogoBlock, 'height: 1.9rem', 'Navbar logo scaling');
+assertIncludes(
+	navbarLogoBlock,
+	'max-height: var(--whale-logo-target-height)',
+	'Navbar logo size',
+);
+assertIncludes(
+	navbarLogoBlock,
+	'height: var(--whale-logo-target-height)',
+	'Navbar logo scaling',
+);
 assertIncludes(
 	navbarLogoBlock,
 	'object-fit: contain',
@@ -853,6 +861,13 @@ assertIncludes(
 	navbarLogoBlock,
 	'object-position: left center',
 	'Navbar logo alignment',
+);
+assertIncludes(layout, 'normalizeBrandLogo', 'Transparent logo normalization');
+assertIncludes(layout, 'getImageData', 'Transparent logo alpha bounds');
+assertIncludes(
+	styles,
+	'.whale-navbar-brand.whale-navbar-brand-normalized',
+	'Normalized navbar logo frame',
 );
 assertIncludes(
 	navTemplate,

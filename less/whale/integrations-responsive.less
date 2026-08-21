@@ -331,12 +331,13 @@
 
 @media screen and (max-width: 397px) {
 	.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-brand {
+		--whale-logo-target-height: 1.65rem;
 		max-width: 7rem;
 	}
 
 	.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-brand-logo {
-		height: 1.5rem;
-		max-height: 1.5rem;
+		height: var(--whale-logo-target-height);
+		max-height: var(--whale-logo-target-height);
 	}
 
 	.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-menu .whale-navbar-item .whale-navbar-link::after {

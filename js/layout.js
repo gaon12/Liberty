@@ -194,6 +194,94 @@
 		window.addEventListener('load', clear, { once: true });
 	};
 
+	const LOGO_SAMPLE_SIZE = 256;
+	const LOGO_ALPHA_THRESHOLD = 8;
+	const normalizeBrandLogo = async () => {
+		const logo = document.querySelector('.whale-navbar-brand-logo');
+		const brand = logo?.closest('.whale-navbar-brand');
+		if (!logo || !brand) {
+			return;
+		}
+
+		try {
+			await logo.decode?.();
+			if (!logo.naturalWidth || !logo.naturalHeight) {
+				return;
+			}
+
+			const scale = Math.min(
+				1,
+				LOGO_SAMPLE_SIZE / Math.max(logo.naturalWidth, logo.naturalHeight),
+			);
+			const width = Math.max(1, Math.round(logo.naturalWidth * scale));
+			const height = Math.max(1, Math.round(logo.naturalHeight * scale));
+			const canvas = document.createElement('canvas');
+			const context = canvas.getContext('2d', { willReadFrequently: true });
+			if (!context) {
+				return;
+			}
+
+			canvas.width = width;
+			canvas.height = height;
+			context.drawImage(logo, 0, 0, width, height);
+			const pixels = context.getImageData(0, 0, width, height).data;
+			let left = width;
+			let top = height;
+			let right = -1;
+			let bottom = -1;
+
+			for (let y = 0; y < height; y++) {
+				for (let x = 0; x < width; x++) {
+					if (pixels[(y * width + x) * 4 + 3] <= LOGO_ALPHA_THRESHOLD) {
+						continue;
+					}
+					left = Math.min(left, x);
+					top = Math.min(top, y);
+					right = Math.max(right, x);
+					bottom = Math.max(bottom, y);
+				}
+			}
+
+			if (right < left || bottom < top) {
+				return;
+			}
+
+			left = Math.max(0, left - 1);
+			top = Math.max(0, top - 1);
+			right = Math.min(width - 1, right + 1);
+			bottom = Math.min(height - 1, bottom + 1);
+			const visibleWidth = right - left + 1;
+			const visibleHeight = bottom - top + 1;
+			const widthRatio = visibleWidth / width;
+			const heightRatio = visibleHeight / height;
+
+			if (widthRatio > 0.94 && heightRatio > 0.94) {
+				return;
+			}
+
+			const naturalAspect = logo.naturalWidth / logo.naturalHeight;
+			brand.style.setProperty(
+				'--whale-logo-visible-aspect',
+				String(visibleWidth / visibleHeight),
+			);
+			brand.style.setProperty(
+				'--whale-logo-image-height-factor',
+				String(1 / heightRatio),
+			);
+			brand.style.setProperty(
+				'--whale-logo-image-left-factor',
+				String(-((left / width) * naturalAspect) / heightRatio),
+			);
+			brand.style.setProperty(
+				'--whale-logo-image-top-factor',
+				String(-(top / height) / heightRatio),
+			);
+			brand.classList.add('whale-navbar-brand-normalized');
+		} catch {
+			// Cross-origin and malformed images retain the safe contain fallback.
+		}
+	};
+
 	const MODAL_TRANSITION_MS = 300;
 	const FOCUSABLE_SELECTOR = [
 		'a[href]',
@@ -390,6 +478,7 @@
 	};
 
 	whale.ready(() => {
+		normalizeBrandLogo();
 		initContentSkeleton();
 		initReadingProgress();
 
