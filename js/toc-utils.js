@@ -1,4 +1,8 @@
 (() => {
+	if (window.whale?.tocUtils) {
+		return;
+	}
+
 	const normalizeText = (text) => text?.trim().replace(/\s+/g, ' ') || '';
 
 	const formatTocNumber = (number) => {

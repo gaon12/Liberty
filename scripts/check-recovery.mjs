@@ -56,6 +56,7 @@ if (!layoutSource.includes("dataset.whaleLayoutRuntime = 'ready'")) {
 if (
 	!source.includes("whaleResourceLoaderRecovery = 'complete'") ||
 	!source.includes("whaleResourceLoaderRecovery = 'failed'") ||
+	!source.includes('whaleResourceLoaderRecoveryMessage') ||
 	!source.includes('await window.mw.loader.using(requiredModules)')
 ) {
 	throw new Error(

@@ -31,6 +31,7 @@ if (
 }
 
 runInNewContext(readFileSync(resolve('js/toc-utils.js'), 'utf8'), context);
+runInNewContext(readFileSync(resolve('js/toc-utils.js'), 'utf8'), context);
 
 if (
 	!Object.isFrozen(context.window.whale) ||

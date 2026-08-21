@@ -109,6 +109,9 @@
 		recoveryState.whaleResourceLoaderRecovery = 'failed';
 		recoveryState.whaleResourceLoaderRecoveryError =
 			error instanceof Error ? error.name : 'UnknownError';
+		recoveryState.whaleResourceLoaderRecoveryMessage =
+			error instanceof Error ? error.message.slice(0, 160) : 'Unknown error';
+		console.error('Whale ResourceLoader recovery failed.', error);
 	};
 
 	RECOVERY_CHECKS.forEach(({ delay, force }) => {
