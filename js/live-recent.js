@@ -1,6 +1,7 @@
 (() => {
 	const DEFAULT_REFRESH_INTERVAL = 60 * 1000;
 	const RELATIVE_TIME_INTERVAL = 30 * 1000;
+	const SKELETON_ROW_LIMIT = 3;
 	const feedCache = new Map();
 	const relativeTimeFormatter = new Intl.RelativeTimeFormat(
 		mw.config.get('wgUserLanguage') || document.documentElement.lang || 'ko',
@@ -151,7 +152,11 @@
 	const showSkeletonRows = (feed) => {
 		feed.list.classList.remove('live-recent-list-no-data');
 		feed.list.setAttribute('aria-busy', 'true');
-		fillRows(feed.list, Math.min(feed.limit, 3), createPlaceholderRow);
+		fillRows(
+			feed.list,
+			Math.min(feed.limit, SKELETON_ROW_LIMIT),
+			createPlaceholderRow,
+		);
 	};
 
 	const showNoDataRows = (feed) => {

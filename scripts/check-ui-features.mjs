@@ -212,7 +212,7 @@ assertIncludes(
 );
 assertIncludes(
 	liveRecent,
-	'Math.min(feed.limit, 3)',
+	'SKELETON_ROW_LIMIT = 3',
 	'Bounded live recent skeleton height',
 );
 
