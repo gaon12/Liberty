@@ -1124,26 +1124,9 @@ class WhaleRenderer {
 	}
 
 	private function getLatestRevisionId( Title $title ): int {
-		$db = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
-		$row = $db->selectRow(
-			'page',
-			[ 'page_latest' ],
-			[
-				'page_namespace' => $title->getNamespace(),
-				'page_title' => $title->getDBkey(),
-			],
-			__METHOD__
-		);
-		if ( $row ) {
-			$latest = $row->page_latest ?? null;
-			if ( is_numeric( $latest ) && (int)$latest > 0 ) {
-				return (int)$latest;
-			}
-		}
+		$revision = MediaWikiServices::getInstance()->getRevisionLookup()->getRevisionByTitle( $title );
 
-		$wikiPage = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $title );
-
-		return $wikiPage->getLatest();
+		return $revision?->getId() ?? 0;
 	}
 
 	private function renderIcon( ?string $icon ): string {

@@ -1176,6 +1176,11 @@ assertIncludes(
 );
 assertIncludes(
 	rendererPhp,
+	'getRevisionLookup()->getRevisionByTitle( $title )',
+	'MediaWiki revision service for short URLs',
+);
+assertIncludes(
+	rendererPhp,
 	'WhaleAvatar::createDataUri',
 	'Login avatar rendering',
 );

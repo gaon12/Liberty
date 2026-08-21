@@ -393,6 +393,10 @@ namespace MediaWiki {
 			return new WikiPageFactory();
 		}
 
+		public function getRevisionLookup(): Revision\RevisionLookup {
+			return new Revision\RevisionLookup();
+		}
+
 		public function getRestrictionStore(): RestrictionStore {
 			return new RestrictionStore();
 		}
@@ -682,11 +686,21 @@ namespace MediaWiki\Content {
 }
 
 namespace MediaWiki\Revision {
+	class RevisionLookup {
+		public function getRevisionByTitle( \MediaWiki\Title\Title $title ): ?RevisionRecord {
+			return null;
+		}
+	}
+
 	class RevisionRecord {
 		public const RAW = 1;
 
 		public function getContent( int $audience ): ?\MediaWiki\Content\Content {
 			return null;
+		}
+
+		public function getId(): int {
+			return 0;
 		}
 	}
 }
