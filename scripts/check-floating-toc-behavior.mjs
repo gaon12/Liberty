@@ -338,9 +338,7 @@ const createContext = ({ desktop, targetByHref = {} }) => {
 		},
 	};
 
-	runInNewContext(read('js/toc-utils.js'), context);
-	context.whale = {
-		...context.window.whale,
+	context.window.whale = {
 		getAnchorTarget: (href) => targetByHref[href] || null,
 		getNavHeight: () => 0,
 		rafThrottle: (callback) => callback,
@@ -348,8 +346,10 @@ const createContext = ({ desktop, targetByHref = {} }) => {
 		scrollToTarget: (target) => {
 			context.scrolledTo = target;
 		},
+		tocUtils: null,
 	};
-	context.window.whale = context.whale;
+	context.whale = context.window.whale;
+	runInNewContext(read('js/toc-utils.js'), context);
 
 	return { context, document, readyCallbacks };
 };

@@ -4,8 +4,15 @@
 	}
 
 	let apiPromise = null;
+	const requireFunction = (value, name) => {
+		if (typeof value !== 'function') {
+			throw new TypeError(`${name} must be a function.`);
+		}
+		return value;
+	};
 
 	const ready = (callback) => {
+		requireFunction(callback, 'callback');
 		if (document.readyState === 'loading') {
 			document.addEventListener('DOMContentLoaded', callback, { once: true });
 			return;
@@ -15,6 +22,7 @@
 	};
 
 	const rafThrottle = (callback) => {
+		requireFunction(callback, 'callback');
 		let scheduled = false;
 
 		return (...args) => {
@@ -99,6 +107,9 @@
 	};
 
 	const copyText = async (text) => {
+		if (typeof text !== 'string') {
+			throw new TypeError('text must be a string.');
+		}
 		if (navigator.clipboard?.writeText) {
 			try {
 				await navigator.clipboard.writeText(text);
@@ -112,6 +123,10 @@
 	};
 
 	const onMediaChange = (mediaQuery, callback) => {
+		if (!mediaQuery || typeof mediaQuery !== 'object') {
+			throw new TypeError('mediaQuery must be an object.');
+		}
+		requireFunction(callback, 'callback');
 		if (typeof mediaQuery.addEventListener === 'function') {
 			mediaQuery.addEventListener('change', callback);
 			return;
@@ -130,7 +145,7 @@
 			? target.closest(selector)
 			: target?.parentElement?.closest(selector) || null;
 
-	window.whale = {
+	const whaleApi = Object.seal({
 		ready,
 		rafThrottle,
 		getAnchorTarget,
@@ -140,5 +155,12 @@
 		onMediaChange,
 		getApi,
 		closest,
-	};
+		tocUtils: null,
+	});
+	Object.defineProperty(window, 'whale', {
+		configurable: false,
+		enumerable: true,
+		value: whaleApi,
+		writable: false,
+	});
 })();

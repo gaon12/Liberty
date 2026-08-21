@@ -62,14 +62,21 @@
 		return [number, normalizeText(clone.textContent)].filter(Boolean).join(' ');
 	};
 
-	window.whale = {
-		...(window.whale || {}),
-		tocUtils: {
-			formatTocNumber,
-			getLinkText,
-			getTargetText,
-			getTocLevel,
-			getTocNumber,
-		},
-	};
+	const tocUtils = Object.freeze({
+		formatTocNumber,
+		getLinkText,
+		getTargetText,
+		getTocLevel,
+		getTocNumber,
+	});
+	if (!window.whale) {
+		Object.defineProperty(window, 'whale', {
+			configurable: false,
+			enumerable: true,
+			value: Object.seal({ tocUtils: null }),
+			writable: false,
+		});
+	}
+	window.whale.tocUtils = tocUtils;
+	Object.freeze(window.whale);
 })();
