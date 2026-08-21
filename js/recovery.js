@@ -73,6 +73,9 @@
 		scripts.forEach((script) => {
 			script.remove();
 		});
+		// A failed startup can leave RLQ.push bound to its discarded module
+		// registry. Queue bootstrap callbacks for the fresh startup instead.
+		window.RLQ = [];
 
 		for (const snapshot of snapshots) {
 			await replayScript({
