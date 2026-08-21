@@ -578,7 +578,7 @@ class WhaleRenderer {
 			'html-icon' => $this->renderIcon( $icon ),
 			'html-more-link' => $linkRenderer->makeKnownLink(
 				SpecialPage::getTitleFor( 'Recentchanges' ),
-				new HtmlArmor( '<span class="whale-sr-only">' .
+				new HtmlArmor( '<span>' .
 					$this->skin->msg( 'whale-view-more' )->escaped() .
 					'</span>' . $this->renderIcon( 'angle-right' ) ),
 				[ 'class' => 'live-recent-more' ]

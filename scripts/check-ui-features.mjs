@@ -205,10 +205,15 @@ assertIncludes(
 	'live-recent-no-data-text',
 	'Live recent empty state',
 );
-assertNotIncludes(
+assertIncludes(
 	liveRecent,
 	'live-recent-no-data-visual',
 	'Decorative live recent empty state',
+);
+assertIncludes(
+	liveRecent,
+	'Math.min(feed.limit, 3)',
+	'Bounded live recent skeleton height',
 );
 
 const skinPhp = read('SkinWhale.php');
@@ -333,9 +338,22 @@ assertIncludes(
 	'Accessible live recent tabs',
 );
 assertNotIncludes(
+	read('WhaleRenderer.php').slice(
+		read('WhaleRenderer.php').indexOf("'html-more-link'"),
+		read('WhaleRenderer.php').indexOf("'html-more-link'") + 500,
+	),
+	'whale-sr-only',
+	'Visible live recent more label',
+);
+assertIncludes(
 	liveRecentStyles,
 	'live-recent-no-data-visual',
 	'Decorative live recent empty state styles',
+);
+assertIncludes(
+	liveRecentStyles,
+	'border-bottom: 0',
+	'Undivided live recent empty state',
 );
 assertIncludes(styles, 'color-scheme: light dark', 'Stylesheet');
 assertIncludes(styles, 'body.whale-dark,', 'Stylesheet');

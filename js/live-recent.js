@@ -36,10 +36,15 @@
 	const createPlaceholderRow = () => {
 		const listItem = document.createElement('li');
 		const placeholder = document.createElement('span');
+		const title = document.createElement('span');
+		const time = document.createElement('span');
 
 		listItem.className = 'live-recent-row live-recent-empty';
-		placeholder.className = 'recent-item recent-item-placeholder is-loading';
-		placeholder.textContent = '\u00a0';
+		listItem.setAttribute('aria-hidden', 'true');
+		placeholder.className = 'recent-item recent-item-placeholder';
+		title.className = 'recent-item-placeholder-title is-loading';
+		time.className = 'recent-item-placeholder-time is-loading';
+		placeholder.append(title, time);
 		listItem.append(placeholder);
 
 		return listItem;
@@ -47,13 +52,21 @@
 
 	const createNoDataRow = () => {
 		const listItem = document.createElement('li');
+		const visual = document.createElement('span');
+		const paper = document.createElement('span');
+		const bubble = document.createElement('span');
 		const text = document.createElement('span');
 
 		listItem.className = 'live-recent-no-data';
+		visual.className = 'live-recent-no-data-visual';
+		visual.setAttribute('aria-hidden', 'true');
+		paper.className = 'live-recent-no-data-paper';
+		bubble.className = 'live-recent-no-data-bubble';
 		text.className = 'live-recent-no-data-text';
 		text.textContent = mw.message('whale-live-recent-no-data').text();
 
-		listItem.append(text);
+		visual.append(paper, bubble);
+		listItem.append(visual, text);
 
 		return listItem;
 	};
@@ -138,7 +151,7 @@
 	const showSkeletonRows = (feed) => {
 		feed.list.classList.remove('live-recent-list-no-data');
 		feed.list.setAttribute('aria-busy', 'true');
-		fillRows(feed.list, feed.limit, createPlaceholderRow);
+		fillRows(feed.list, Math.min(feed.limit, 3), createPlaceholderRow);
 	};
 
 	const showNoDataRows = (feed) => {
