@@ -1,6 +1,7 @@
 (() => {
-	const RECOVERY_DELAY = 1200;
+	const RECOVERY_DELAY = 3000;
 	const recoveryState = document.documentElement.dataset;
+	recoveryState.whaleResourceLoaderRecoveryScript = 'loaded';
 
 	const isResourceLoaderScript = (script) => {
 		if (script.dataset.whaleRecovery === 'true') {
