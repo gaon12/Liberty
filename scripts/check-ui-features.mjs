@@ -842,6 +842,16 @@ const navbarLogoBlock = getRuleBlock(
 	'.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-brand-logo',
 	'Navbar logo',
 );
+const navbarBrandBlock = getRuleBlock(
+	styles,
+	'.Whale .whale-nav-wrapper .whale-navbar .whale-navbar-brand',
+	'Navbar brand',
+);
+assertIncludes(
+	navbarBrandBlock,
+	'margin-inline-end: 0.65rem',
+	'Navbar logo and menu spacing',
+);
 assertIncludes(
 	navbarLogoBlock,
 	'max-height: var(--whale-logo-target-height)',
